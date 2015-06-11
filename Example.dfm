@@ -36,10 +36,10 @@ object frmExample: TfrmExample
     Caption = '현금영수증 관련 기능'
     TabOrder = 36
     object Label3: TLabel
-      Left = 112
-      Top = 30
-      Width = 120
-      Height = 13
+      Left = 114
+      Top = 22
+      Width = 131
+      Height = 15
       Caption = '문서관리번호(MgtKey) :'
     end
     object GroupBox8: TGroupBox
@@ -392,7 +392,7 @@ object frmExample: TfrmExample
     object Label4: TLabel
       Left = 16
       Top = 13
-      Width = 48
+      Width = 60
       Height = 13
       Caption = '임시저장'
     end
