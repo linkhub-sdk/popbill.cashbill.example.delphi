@@ -7,7 +7,7 @@ uses
   StdCtrls, TypInfo, Popbill, PopbillCashbill, ExtCtrls;
 
 const
-        //연동아이디
+        //링크아이디
         LinkID = 'TESTER';
 
         //파트너 통신용 비밀키
@@ -20,13 +20,9 @@ type
     Label2: TLabel;
     btnJoinMember: TButton;
     btnGetPopbillURL_LOGIN: TButton;
-    btnGetBalance: TButton;
-    btnUnitCost: TButton;
     btnGetPopbillURL_CHRG: TButton;
-    btnGetPartnerBalance: TButton;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
-    GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     txtMgtKey: TEdit;
     btnCheckMgtkeyInUse: TButton;
@@ -59,8 +55,29 @@ type
     GroupBox9: TGroupBox;
     GroupBox10: TGroupBox;
     GroupBox11: TGroupBox;
-    GroupBox12: TGroupBox;
     Label4: TLabel;
+    btnGetBalance: TButton;
+    btnCheckID: TButton;
+    btnCheckIsMember: TButton;
+    btnGetPartnerBalance: TButton;
+    GroupBox3: TGroupBox;
+    btnRegistContact: TButton;
+    btnListContact: TButton;
+    btnUpdateContact: TButton;
+    GroupBox13: TGroupBox;
+    btnGetCorpInfo: TButton;
+    btnUpdateCorpInfo: TButton;
+    btnGetUnitCost: TButton;
+    GroupBox14: TGroupBox;
+    Panel2: TPanel;
+    btnRegistIssue: TButton;
+    btnCancelIssue_ri: TButton;
+    btnDelete_ri: TButton;
+    Shape1: TShape;
+    Shape2: TShape;
+    Shape3: TShape;
+    Shape4: TShape;
+    Shape5: TShape;
     procedure FormCreate(Sender: TObject);
     procedure btnRegisterClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
@@ -89,6 +106,15 @@ type
     procedure btnGetDetailInfoClick(Sender: TObject);
     procedure btnGetLogsClick(Sender: TObject);
     procedure btnGetInfosClick(Sender: TObject);
+    procedure btnCheckIDClick(Sender: TObject);
+    procedure btnRegistContactClick(Sender: TObject);
+    procedure btnUpdateContactClick(Sender: TObject);
+    procedure btnCancelIssue_riClick(Sender: TObject);
+    procedure btnDelete_riClick(Sender: TObject);
+    procedure btnRegistIssueClick(Sender: TObject);
+    procedure btnGetCorpInfoClick(Sender: TObject);
+    procedure btnUpdateCorpInfoClick(Sender: TObject);
+    procedure btnListContactClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -107,6 +133,11 @@ begin
         cashbillService.IsTest := true;
 end;
 
+Function BoolToStr(b:Boolean):String;
+begin 
+    if b = true then BoolToStr:='True'; 
+    if b = false then BoolToStr:='False'; 
+end;
 
 procedure TfrmExample.btnGetPopbillURL_LOGINClick(Sender: TObject);
 var
@@ -233,6 +264,32 @@ begin
     if condition then result := trueVal else result := falseVal;
 end;
 
+procedure TfrmExample.btnUpdateCorpInfoClick(Sender: TObject);
+var
+        corpInfo : TCorpInfo;
+        response : TResponse;
+begin
+        corpInfo := TCorpInfo.Create;
+
+        corpInfo.ceoname := '대표자명';
+        corpInfo.corpName := '링크허브';
+        corpInfo.addr := '서울특별시 강남구 영동대로 517';
+        corpInfo.bizType := '업태';
+        corpInfo.bizClass := '업종';
+
+        try
+                response := cashbillService.UpdateCorpInfo(txtCorpNum.text,corpInfo,txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+
+end;
+
 procedure TfrmExample.btnGetBalanceClick(Sender: TObject);
 var
         balance : Double;
@@ -262,7 +319,7 @@ begin
                 end;
         end;
 
-        ShowMessage(' 발행단가 : '+ FloatToStr(unitcost));
+        ShowMessage('현금영수증 발행단가 : '+ FloatToStr(unitcost));
 
 end;
 
@@ -757,6 +814,215 @@ begin
         end;
 
         ShowMessage(tmp);
+end;
+
+procedure TfrmExample.btnCheckIDClick(Sender: TObject);
+var
+        response : TResponse;
+begin
+        try
+                response := cashbillService.CheckID(txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+
+
+end;
+
+procedure TfrmExample.btnRegistContactClick(Sender: TObject);
+var
+        response : TResponse;
+        joinInfo : TJoinContact;
+begin
+        joinInfo.id := 'test_201509173';
+        joinInfo.pwd := 'thisispassword';
+        joinInfo.personName := '담당자성명';
+        joinInfo.tel := '070-7510-3710';
+        joinInfo.hp := '010-1111-2222';
+        joinInfo.fax := '02-6442-9700';
+        joinInfo.email := 'test@test.com';
+        joinInfo.searchAllAllowYN := false;
+        joinInfo.mgrYN     := false;
+
+        try
+                response := cashbillService.RegistContact(txtCorpNum.text,joinInfo,txtUserID.text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+end;
+
+
+procedure TfrmExample.btnUpdateContactClick(Sender: TObject);
+var
+        contactInfo : TContactInfo;
+        response : TResponse;
+begin
+        contactInfo := TContactInfo.Create;
+
+        contactInfo.personName := '테스트 담당자';
+        contactInfo.tel := '070-7510-3710';
+        contactInfo.hp := '010-4324-1111';
+        contactInfo.email := 'test@test.com';
+        contactInfo.fax := '02-6442-9799';
+        contactInfo.searchAllAllowYN := true;
+        contactInfo.mgrYN := false;
+
+        try
+                response := cashbillService.UpdateContact(txtCorpNum.text,contactInfo,txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+end;
+
+
+procedure TfrmExample.btnCancelIssue_riClick(Sender: TObject);
+var
+        response : TResponse;
+begin
+       try
+                response := cashbillService.CancelIssue(txtCorpNum.text,txtMgtKey.Text,'발행취소 메모', txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+
+end;
+
+procedure TfrmExample.btnDelete_riClick(Sender: TObject);
+var
+        response : TResponse;
+begin
+       try
+                response := cashbillService.Delete(txtCorpNum.text,txtMgtKey.Text,txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+end;
+
+procedure TfrmExample.btnRegistIssueClick(Sender: TObject);
+var
+        cashbill : TCashbill;
+        response : TResponse;
+        memo : String;
+begin
+        cashbill := TCashbill.Create;
+
+        cashbill.MgtKey := txtMgtKey.Text;             // [필수] 문서 관리번호 1~24자리 기재. 영문, 숫자 , '-', '_'중 기재
+        cashbill.tradeType := '승인거래';              // 승인거래, 취소거래 중 기재
+//      cashbill.orgConfirmNum := 'E95069345';         // [취소거래시 필수] 취소거래시 원본현금영수증 국세청 승인번호 기재        
+        cashbill.franchiseCorpNum := txtCorpNum.Text;  // [필수] 발행자 사업자 번호
+        cashbill.franchiseCorpName := '발행자상호';
+        cashbill.franchiseCEOName := '발행자 대표자';
+        cashbill.franchiseAddr := '발행자 주소';
+        cashbill.franchiseTEL := '07075103710';
+
+        cashbill.tradeUsage := '소득공제용';           // [필수] 현금영수증 형태, 소득공제용, 지출증빙용 중 기재
+        cashbill.identityNum := '01043245117';         // [필수] 거래처 식별번호
+        cashbill.customerName := '고객명';
+        cashbill.orderNumber := '주문번호';
+        cashbill.email := 'test@test.com';
+        cashbill.hp := '010-111-222';
+        cashbill.fax := '777-444-333';
+        cashbill.itemName := '항목명';
+        cashbill.serviceFee := '0';                  // [필수] 봉사료
+        cashbill.supplycost := '10000';              // [필수] 공급가액
+        cashbill.tax := '1000';                      // [필수] 세액
+        cashbill.totalAmount := '11000';             // [필수] 합계금액
+
+        cashbill.taxationType := '과세';             // [필수] 과세, 비과세 중 기재
+        cashbill.smssendYN := False;                 // 알림문자 전송여부
+
+        try
+                memo := '즉시발행 현금영수증 메모';
+                response := cashbillService.RegistIssue(txtCorpNum.text, cashbill, memo, txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+end;
+
+procedure TfrmExample.btnGetCorpInfoClick(Sender: TObject);
+var
+        corpInfo : TCorpInfo;
+        tmp : string;
+begin
+        try
+                corpInfo := cashbillService.GetCorpInfo(txtCorpNum.text, txtUserID.Text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        tmp := 'CorpName : ' + corpInfo.CorpName + #13;
+        tmp := tmp + 'CeoName : ' + corpInfo.CeoName + #13;
+        tmp := tmp + 'BizType : ' + corpInfo.BizType + #13;
+        tmp := tmp + 'BizClass : ' + corpInfo.BizClass + #13;
+        tmp := tmp + 'Addr : ' + corpInfo.Addr + #13;
+
+        ShowMessage(tmp);
+end;
+
+procedure TfrmExample.btnListContactClick(Sender: TObject);
+var
+        InfoList : TContactInfoList;
+        tmp : string;
+        i : Integer;
+begin
+
+        try
+                InfoList := cashbillService.ListContact(txtCorpNum.text,txtUserID.text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+        tmp := 'id | email | hp | personName | searchAllAlloyYN | tel | fax | mgrYN | regDT' + #13;
+        for i := 0 to Length(InfoList) -1 do
+        begin
+            tmp := tmp + InfoList[i].id + ' | ';
+            tmp := tmp + InfoList[i].email + ' | ';
+            tmp := tmp + InfoList[i].hp + ' | ';
+            tmp := tmp + InfoList[i].personName + ' | ';
+            tmp := tmp + BoolToStr(InfoList[i].searchAllAllowYN) + ' | ';
+            tmp := tmp + InfoList[i].tel + ' | ';
+            tmp := tmp + InfoList[i].fax + ' | ';
+            tmp := tmp + BoolToStr(InfoList[i].mgrYN) + ' | ';
+            tmp := tmp + InfoList[i].regDT + #13;
+        end;
+
+        ShowMessage(tmp);
+
 end;
 
 end.
