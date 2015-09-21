@@ -17,21 +17,23 @@ object frmExample: TfrmExample
   object Label1: TLabel
     Left = 28
     Top = 22
-    Width = 66
+    Width = 133
     Height = 13
-    Caption = '사업자번호 :'
+    AutoSize = False
+    Caption = '팝빌회원 사업자번호 :'
   end
   object Label2: TLabel
-    Left = 244
+    Left = 292
     Top = 22
-    Width = 66
+    Width = 109
     Height = 13
-    Caption = '팝빌아이디 :'
+    AutoSize = False
+    Caption = '팝빌회원 아이디 :'
   end
   object GroupBox7: TGroupBox
     Left = 24
     Top = 248
-    Width = 673
+    Width = 705
     Height = 481
     Caption = '현금영수증 관련 기능'
     TabOrder = 32
@@ -43,7 +45,7 @@ object frmExample: TfrmExample
       Caption = '문서관리번호(MgtKey) :'
     end
     object GroupBox8: TGroupBox
-      Left = 12
+      Left = 36
       Top = 240
       Width = 132
       Height = 155
@@ -51,7 +53,7 @@ object frmExample: TfrmExample
       TabOrder = 0
     end
     object GroupBox9: TGroupBox
-      Left = 157
+      Left = 181
       Top = 239
       Width = 131
       Height = 156
@@ -59,7 +61,7 @@ object frmExample: TfrmExample
       TabOrder = 1
     end
     object GroupBox10: TGroupBox
-      Left = 300
+      Left = 324
       Top = 239
       Width = 209
       Height = 193
@@ -67,7 +69,7 @@ object frmExample: TfrmExample
       TabOrder = 2
     end
     object GroupBox11: TGroupBox
-      Left = 520
+      Left = 544
       Top = 239
       Width = 128
       Height = 130
@@ -296,7 +298,7 @@ object frmExample: TfrmExample
     end
   end
   object txtCorpNum: TEdit
-    Left = 104
+    Left = 160
     Top = 18
     Width = 105
     Height = 21
@@ -305,7 +307,7 @@ object frmExample: TfrmExample
     Text = '1234567890'
   end
   object txtUserID: TEdit
-    Left = 320
+    Left = 400
     Top = 18
     Width = 105
     Height = 21
@@ -358,7 +360,7 @@ object frmExample: TfrmExample
     OnClick = btnCheckMgtkeyInUseClick
   end
   object btnGetInfo: TButton
-    Left = 46
+    Left = 70
     Top = 509
     Width = 113
     Height = 25
@@ -367,7 +369,7 @@ object frmExample: TfrmExample
     OnClick = btnGetInfoClick
   end
   object btnGetInfos: TButton
-    Left = 46
+    Left = 70
     Top = 541
     Width = 113
     Height = 25
@@ -376,7 +378,7 @@ object frmExample: TfrmExample
     OnClick = btnGetInfosClick
   end
   object btnGetLogs: TButton
-    Left = 46
+    Left = 70
     Top = 573
     Width = 113
     Height = 25
@@ -385,7 +387,7 @@ object frmExample: TfrmExample
     OnClick = btnGetLogsClick
   end
   object btnGetDetailInfo: TButton
-    Left = 46
+    Left = 70
     Top = 605
     Width = 113
     Height = 25
@@ -394,7 +396,7 @@ object frmExample: TfrmExample
     OnClick = btnGetDetailInfoClick
   end
   object btnSendEmail: TButton
-    Left = 190
+    Left = 214
     Top = 510
     Width = 113
     Height = 25
@@ -403,7 +405,7 @@ object frmExample: TfrmExample
     OnClick = btnSendEmailClick
   end
   object btnSendSMS: TButton
-    Left = 190
+    Left = 214
     Top = 542
     Width = 113
     Height = 25
@@ -412,7 +414,7 @@ object frmExample: TfrmExample
     OnClick = btnSendSMSClick
   end
   object btnSendFAX: TButton
-    Left = 190
+    Left = 214
     Top = 574
     Width = 113
     Height = 25
@@ -421,7 +423,7 @@ object frmExample: TfrmExample
     OnClick = btnSendFAXClick
   end
   object btnGetPopUpURL: TButton
-    Left = 335
+    Left = 359
     Top = 512
     Width = 187
     Height = 25
@@ -430,7 +432,7 @@ object frmExample: TfrmExample
     OnClick = btnGetPopUpURLClick
   end
   object btnGetPrintURL: TButton
-    Left = 335
+    Left = 359
     Top = 544
     Width = 187
     Height = 25
@@ -439,7 +441,7 @@ object frmExample: TfrmExample
     OnClick = btnGetPrintURLClick
   end
   object btnGetEPrintURL: TButton
-    Left = 335
+    Left = 359
     Top = 576
     Width = 187
     Height = 25
@@ -448,7 +450,7 @@ object frmExample: TfrmExample
     OnClick = btnGetEPrintURLClick
   end
   object btnGetMassPrintURL: TButton
-    Left = 335
+    Left = 359
     Top = 608
     Width = 187
     Height = 25
@@ -457,7 +459,7 @@ object frmExample: TfrmExample
     OnClick = btnGetMassPrintURLClick
   end
   object btnGetMailURL: TButton
-    Left = 335
+    Left = 359
     Top = 640
     Width = 187
     Height = 25
@@ -466,7 +468,7 @@ object frmExample: TfrmExample
     OnClick = btnGetMailURLClick
   end
   object btnGetURL_WRITE: TButton
-    Left = 551
+    Left = 575
     Top = 576
     Width = 113
     Height = 25
@@ -475,7 +477,7 @@ object frmExample: TfrmExample
     OnClick = btnGetURL_WRITEClick
   end
   object btnGetURL_TBOX: TButton
-    Left = 551
+    Left = 575
     Top = 512
     Width = 113
     Height = 25
@@ -484,7 +486,7 @@ object frmExample: TfrmExample
     OnClick = btnGetURL_TBOXClick
   end
   object btnGetURL_PBOX: TButton
-    Left = 551
+    Left = 575
     Top = 544
     Width = 113
     Height = 25
