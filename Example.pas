@@ -67,7 +67,6 @@ type
     GroupBox13: TGroupBox;
     btnGetCorpInfo: TButton;
     btnUpdateCorpInfo: TButton;
-    btnGetUnitCost: TButton;
     GroupBox14: TGroupBox;
     Panel2: TPanel;
     btnRegistIssue: TButton;
@@ -78,6 +77,7 @@ type
     Shape3: TShape;
     Shape4: TShape;
     Shape5: TShape;
+    btnGetUnitCost: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnRegisterClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
@@ -115,6 +115,8 @@ type
     procedure btnGetCorpInfoClick(Sender: TObject);
     procedure btnUpdateCorpInfoClick(Sender: TObject);
     procedure btnListContactClick(Sender: TObject);
+    procedure btnCheckIsMemberClick(Sender: TObject);
+    procedure btnGetUnitCostClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -269,7 +271,7 @@ begin
         corpInfo := TCorpInfo.Create;
 
         corpInfo.ceoname := '대표자명';         //대표자명
-        corpInfo.corpName := '링크허브_현금영수증';    // 회사명
+        corpInfo.corpName := '팝빌_수정';    // 회사명
         corpInfo.bizType := '업태';             // 업태
         corpInfo.bizClass := '업종';            // 업종
         corpInfo.addr := '서울특별시 강남구 영동대로 517';  // 주소
@@ -631,9 +633,14 @@ end;
 procedure TfrmExample.btnSendFAXClick(Sender: TObject);
 var
         response : TResponse;
+        sendNum : String;
+        receiveNum : String;
 begin
-       try
-                response := cashbillService.SendFAX(txtCorpNum.text,txtMgtKey.Text,'080-1234-2222','090-4321-1234' , txtUserID.Text);
+        sendNum := '070-7510-3710';     //팩스 발신번호
+        receiveNum := '070-111-222';    //팩스 수신번호
+
+        try
+                response := cashbillService.SendFAX(txtCorpNum.text,txtMgtKey.Text,sendNum,receiveNum, txtUserID.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -648,9 +655,16 @@ end;
 procedure TfrmExample.btnSendSMSClick(Sender: TObject);
 var
         response : TResponse;
+        sendNum : String;
+        receiveNum : String;
+        contents : String;
 begin
-       try
-                response := cashbillService.SendSMS(txtCorpNum.text,txtMgtKey.Text,'070-7510-3710','010-4324-5117','문자메시지 내용' , txtUserID.Text);
+        sendNum := '07075103710';       //발신번호
+        receiveNum := '010-111-222';    //수신번호
+        contents := '현금영수증이 발행되었습니다. 메일 확인바랍니다.';  //문자 메시지내용, 길이가 90byte 초과시 길이가 조정되어 전송됨.
+        
+        try
+                response := cashbillService.SendSMS(txtCorpNum.text,txtMgtKey.Text,sendNum, receiveNum, contents, txtUserID.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -665,9 +679,12 @@ end;
 procedure TfrmExample.btnSendEmailClick(Sender: TObject);
 var
         response : TResponse;
+        email : String;
 begin
-       try
-                response := cashbillService.SendEmail(txtCorpNum.text,txtMgtKey.Text,'test@test.com' , txtUserID.Text);
+        email := 'test@test.com';       //수신메일주소
+
+        try
+                response := cashbillService.SendEmail(txtCorpNum.text,txtMgtKey.Text,email, txtUserID.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
@@ -1022,5 +1039,38 @@ begin
 
 end;
 
+
+procedure TfrmExample.btnCheckIsMemberClick(Sender: TObject);
+var
+        response : TResponse;
+begin
+        try
+                response := cashbillService.CheckIsMember(txtCorpNum.text,LinkID);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage(IntToStr(response.code) + ' | ' +  response.Message);
+
+end;
+
+procedure TfrmExample.btnGetUnitCostClick(Sender: TObject);
+var
+        unitcost : Single;
+begin
+        try
+                unitcost := cashbillService.GetUnitCost(txtCorpNum.text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('현금영수증 발행단가 : '+ FloatToStr(unitcost));
+end;
 
 end.

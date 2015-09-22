@@ -246,7 +246,7 @@ object frmExample: TfrmExample
     TabOrder = 6
     object btnGetBalance: TButton
       Left = 12
-      Top = 20
+      Top = 23
       Width = 123
       Height = 25
       Caption = '잔여포인트 확인'
@@ -264,12 +264,12 @@ object frmExample: TfrmExample
     end
     object btnGetUnitCost: TButton
       Left = 12
-      Top = 52
-      Width = 123
+      Top = 56
+      Width = 124
       Height = 25
-      Caption = '요금 단가 확인'
+      Caption = '발행 단가 확인'
       TabOrder = 2
-      OnClick = btnGetBalanceClick
+      OnClick = btnGetUnitCostClick
     end
   end
   object GroupBox1: TGroupBox
@@ -290,11 +290,12 @@ object frmExample: TfrmExample
     end
     object btnCheckIsMember: TButton
       Left = 8
-      Top = 88
+      Top = 24
       Width = 105
       Height = 25
       Caption = '가입여부 확인'
       TabOrder = 1
+      OnClick = btnCheckIsMemberClick
     end
   end
   object txtCorpNum: TEdit
@@ -317,7 +318,7 @@ object frmExample: TfrmExample
   end
   object btnJoinMember: TButton
     Left = 41
-    Top = 88
+    Top = 155
     Width = 105
     Height = 25
     Caption = '회원 가입'
