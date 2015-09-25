@@ -362,7 +362,7 @@ var
         InUse : boolean;
 begin
         try
-                InUse := cashbillService.CheckMgtKey(txtCorpNum.text,txtMgtKey.Text);
+                InUse := cashbillService.CheckMgtKeyInUse(txtCorpNum.text,txtMgtKey.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
