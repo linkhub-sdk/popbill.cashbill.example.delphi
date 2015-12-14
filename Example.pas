@@ -135,6 +135,9 @@ begin
         
         //연동환경 설정값, true(테스트용), false(상업용)
         cashbillService.IsTest := true;
+
+        //Exception 처리 설정값 true(기본값)
+        cashbillService.IsThrowException := false;
 end;
 
 Function BoolToStr(b:Boolean):String;
@@ -185,7 +188,7 @@ begin
         cashbill := TCashbill.Create;
 
         cashbill.MgtKey := txtMgtKey.Text;             // [필수] 문서 관리번호 1~24자리 기재. 영문, 숫자 , '-', '_'중 기재
-        cashbill.tradeType := '승인거래';              // 승인거래, 취소거래 중 기재
+        cashbill.tradeType := '승인거래';              // [필수] 승인거래, 취소거래 중 기재
 //      cashbill.orgConfirmNum := 'E95069345';         // [취소거래시 필수] 취소거래시 원본현금영수증 국세청 승인번호 기재        
         cashbill.franchiseCorpNum := txtCorpNum.Text;  // [필수] 발행자 사업자 번호
         cashbill.franchiseCorpName := '발행자상호';
@@ -194,7 +197,8 @@ begin
         cashbill.franchiseTEL := '07075103710';
 
         cashbill.tradeUsage := '소득공제용';           // [필수] 현금영수증 형태, 소득공제용, 지출증빙용 중 기재
-        cashbill.identityNum := '01043245117';         // [필수] 거래처 식별번호
+        cashbill.identityNum := '01043245117';         // [필수] 거래처 식별번호, 거래유형(tradeUsage)이 '소득공제용'인 경우 (주민등록/휴대폰/카드)번호 기재
+                                                       // 거래유형(traseUsage)이 '지출증빙용'인 경우 사업자번호 기재
         cashbill.customerName := '고객명';
         cashbill.orderNumber := '주문번호';
         cashbill.email := 'test@test.com';
@@ -227,7 +231,7 @@ var
         response : TResponse;
         joinInfo : TJoinForm;
 begin
-        joinInfo.LinkID := LinkID; //파트너 아이디
+        joinInfo.LinkID := LinkID; // 링크 아이디
         joinInfo.CorpNum := '1231212312'; //사업자번호 '-' 제외.
         joinInfo.CEOName := '대표자성명';
         joinInfo.CorpName := '상호';
@@ -381,7 +385,7 @@ begin
         cashbill := TCashbill.Create;
 
         cashbill.MgtKey := txtMgtKey.Text;             // [필수] 문서 관리번호 1~24자리 기재. 영문, 숫자 , '-', '_'중 기재
-        cashbill.tradeType := '승인거래';              // 승인거래, 취소거래 중 기재
+        cashbill.tradeType := '승인거래';              // [필수] 승인거래, 취소거래 중 기재
 //      cashbill.orgConfirmNum := 'E95069345';         // [취소거래시 필수] 취소거래시 원본현금영수증 국세청 승인번호 기재        
         cashbill.franchiseCorpNum := txtCorpNum.Text;  // [필수] 발행자 사업자 번호
         cashbill.franchiseCorpName := '발행자상호_수정';
@@ -390,7 +394,8 @@ begin
         cashbill.franchiseTEL := '07075103710';
 
         cashbill.tradeUsage := '소득공제용';           // [필수] 현금영수증 형태, 소득공제용, 지출증빙용 중 기재
-        cashbill.identityNum := '01043245117';         // [필수] 거래처 식별번호
+        cashbill.identityNum := '01043245117';         // [필수] 거래처 식별번호, 거래유형(tradeUsage)이 '소득공제용'인 경우 (주민등록/휴대폰/카드)번호 기재
+                                                       // 거래유형(traseUsage)이 '지출증빙용'인 경우 사업자번호 기재
         cashbill.customerName := '고객명';
         cashbill.orderNumber := '주문번호';
         cashbill.email := 'test@test.com';
@@ -955,7 +960,8 @@ begin
         cashbill.franchiseTEL := '07075103710';
 
         cashbill.tradeUsage := '소득공제용';           // [필수] 현금영수증 형태, 소득공제용, 지출증빙용 중 기재
-        cashbill.identityNum := '01043245117';         // [필수] 거래처 식별번호
+        cashbill.identityNum := '01043245117';         // [필수] 거래처 식별번호, 거래유형(tradeUsage)이 '소득공제용'인 경우 (주민등록/휴대폰/카드)번호 기재
+                                                       // 거래유형(traseUsage)이 '지출증빙용'인 경우 사업자번호 기재
         cashbill.customerName := '고객명';
         cashbill.orderNumber := '주문번호';
         cashbill.email := 'test@test.com';
