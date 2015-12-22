@@ -1,6 +1,6 @@
 object frmExample: TfrmExample
-  Left = 244
-  Top = 189
+  Left = 592
+  Top = 172
   Width = 819
   Height = 792
   Caption = '팝빌 현금영수증 SDK '
@@ -11,6 +11,7 @@ object frmExample: TfrmExample
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -48,9 +49,18 @@ object frmExample: TfrmExample
       Left = 36
       Top = 240
       Width = 132
-      Height = 155
+      Height = 185
       Caption = '문서 정보'
       TabOrder = 0
+      object btnSearch: TButton
+        Left = 10
+        Top = 149
+        Width = 113
+        Height = 25
+        Caption = '문서 목록조회'
+        TabOrder = 0
+        OnClick = btnSearchClick
+      end
     end
     object GroupBox9: TGroupBox
       Left = 181

@@ -78,6 +78,7 @@ type
     Shape4: TShape;
     Shape5: TShape;
     btnGetUnitCost: TButton;
+    btnSearch: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnRegisterClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
@@ -117,6 +118,7 @@ type
     procedure btnListContactClick(Sender: TObject);
     procedure btnCheckIsMemberClick(Sender: TObject);
     procedure btnGetUnitCostClick(Sender: TObject);
+    procedure btnSearchClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -1077,6 +1079,99 @@ begin
         end;
 
         ShowMessage('현금영수증 발행단가 : '+ FloatToStr(unitcost));
+end;
+
+procedure TfrmExample.btnSearchClick(Sender: TObject);
+var
+        DType : String;
+        SDate : String;
+        EDate : String;
+        State : Array Of String;
+        TradeType : Array Of String;
+        TradeUsage : Array Of String;
+        TaxationType : Array Of String;
+        Page : Integer;
+        PerPage : Integer;
+        tmp : String;
+        i : integer;
+        SearchList : TCashbillSearchList;
+begin
+
+        DType := 'I';               // [필수] 일자유형 { R: 등록일자, W:작성일자, I:발행일자 }
+        SDate := '20150601';        // [필수] 검색 시작일자, 작성형태(yyyyMMdd)
+        EDate := '20151221';        // [필수] 검색 종료일자, 작성형태(yyyyMMdd)
+
+        SetLength(State, 3);        // 전송상태값 배열. 미기재시 전체조회, 문서상태 값 3자리의 배열, 2,3번째 자리 와일드 카드 사용가능
+        State[0] := '100';          // 전송상태값 테이블은 [현금영수증 연동매뉴얼 > 5.2 현금영수증 상태코드 테이블] 참조
+        State[1] := '2**';
+        State[2] := '3**';
+
+        SetLength(TradeType, 2);    // 현금영수증 형태 { N:일반 현금영수증 C:취소 현금영수증 }
+        TradeType[0] := 'N';
+        TradeType[1] := 'C';
+
+        SetLength(TradeUsage, 2);   // 거래용도 { P:소득공제용 C:지출증빙용 }
+        TradeUsage[0] := 'P';
+        TradeUsage[1] := 'C';
+
+        SetLength(TaxationType, 2); // 과세형태 { T:과세 N:비과세 }
+        TaxationType[0] := 'T';
+        TaxationType[1] := 'N';
+
+        Page := 1;                  // 페이지 번호, 기본값 1
+        PerPage := 15;              // 페이지당 검색갯수, 기본값 500, 최대 1000
+                
+        try
+                SearchList := cashbillService.Search(txtCorpNum.text,DType, SDate, EDate, State, TradeType, TradeUsage, TaxationType, Page, PerPage);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        tmp := 'code : '+IntToStr(SearchList.code) + #13;                               // 응답 결과코드
+        tmp := tmp + 'total : '+ IntToStr(SearchList.total) + #13;                      // 총 검색결과 건수
+        tmp := tmp + 'perPage : '+ IntToStr(SearchList.perPage) + #13;                  // 페이지당 검색개수
+        tmp := tmp + 'pageNum : '+ IntToStr(SearchList.pageNum) + #13;                  // 페이지 번호
+        tmp := tmp + 'pageCount : '+ IntToStr(SearchList.pageCount) + #13;              // 페이지 개수
+        tmp := tmp + 'message : '+ SearchList.message + #13#13;                         // 응답 메시지
+
+        tmp := tmp + 'itemKey | mgtKey | tradeDate | tradeUsage | issueDT | customerName | itemName | identityNum | taxationType | totalAmount | tradeType | stateCode | stateDT | confirmNum '
+                  +'| ntssendDT | ntsresult | ntsresultDT | ntsresultCode | ntsMessage | stateDT | printYN  ' + #13#13;
+        for i := 0 to Length(SearchList.list) -1 do
+        begin
+                tmp := tmp + SearchList.list[i].itemKey + ' | ';
+                tmp := tmp + SearchList.list[i].mgtKey +' | ';
+                tmp := tmp + SearchList.list[i].tradeDate + ' | ';
+                tmp := tmp + SearchList.list[i].tradeUsage + ' | ';
+                tmp := tmp + SearchList.list[i].issueDT + ' | ';
+                tmp := tmp + SearchList.list[i].customerName +' | ';
+                tmp := tmp + SearchList.list[i].itemName + ' | ';
+                tmp := tmp + SearchList.list[i].identityNum + ' | ';
+                tmp := tmp + SearchList.list[i].taxationType + ' | ';
+
+                tmp := tmp + SearchList.list[i].totalAmount + ' | ';
+                tmp := tmp + SearchList.list[i].tradeType + ' | ';
+                tmp := tmp + IntToStr(SearchList.list[i].stateCode) + ' | ';
+                tmp := tmp + SearchList.list[i].stateDT + ' | ';
+
+                tmp := tmp + SearchList.list[i].confirmNum + ' | ';
+
+                tmp := tmp + SearchList.list[i].ntssendDT + ' | ';
+                tmp := tmp + SearchList.list[i].ntsresult + ' | ';
+                tmp := tmp + SearchList.list[i].ntsresultDT + ' | ';
+                tmp := tmp + SearchList.list[i].ntsresultCode + ' | ';
+                tmp := tmp + SearchList.list[i].ntsresultMessage + ' | ';
+                tmp := tmp + SearchList.list[i].stateDT + ' | ';
+
+                tmp := tmp + IfThen(SearchList.list[i].printYN,'true','false') +#13;
+        end;
+
+
+
+        ShowMessage(tmp);
+
 end;
 
 end.
