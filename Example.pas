@@ -1092,6 +1092,7 @@ var
         TaxationType : Array Of String;
         Page : Integer;
         PerPage : Integer;
+        Order : String;
         tmp : String;
         i : integer;
         SearchList : TCashbillSearchList;
@@ -1120,9 +1121,10 @@ begin
 
         Page := 1;                  // 페이지 번호, 기본값 1
         PerPage := 15;              // 페이지당 검색갯수, 기본값 500, 최대 1000
-                
+        Order := 'D';               // 'D' : 내림차순 , 'A' : 오름차순
+
         try
-                SearchList := cashbillService.Search(txtCorpNum.text,DType, SDate, EDate, State, TradeType, TradeUsage, TaxationType, Page, PerPage);
+                SearchList := cashbillService.Search(txtCorpNum.text,DType, SDate, EDate, State, TradeType, TradeUsage, TaxationType, Page, PerPage,Order);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
