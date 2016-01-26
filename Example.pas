@@ -1168,6 +1168,7 @@ begin
                 tmp := tmp + SearchList.list[i].stateDT + ' | ';
 
                 tmp := tmp + IfThen(SearchList.list[i].printYN,'true','false') +#13;
+               
         end;
 
 
