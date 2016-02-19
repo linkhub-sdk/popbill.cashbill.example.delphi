@@ -224,8 +224,10 @@ begin
 
         try
                 response := cashbillService.Register(txtCorpNum.text, cashbill,txtUserID.Text);
+                cashbill.Free;
         except
                 on le : EPopbillException do begin
+                        cashbill.Free;
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
                         Exit;
                 end;
@@ -418,10 +420,13 @@ begin
 
         cashbill.taxationType := '과세';             // [필수] 과세, 비과세 중 기재
         cashbill.smssendYN := False;                 // 알림문자 전송여부
+
         try
                 response := cashbillService.Update(txtCorpNum.text, txtMgtKey.text, cashbill,txtUserID.Text);
+                cashbill.Free;
         except
                 on le : EPopbillException do begin
+                        cashbill.Free;
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
                         Exit;
                 end;
@@ -988,8 +993,10 @@ begin
         try
                 memo := '즉시발행 현금영수증 메모';
                 response := cashbillService.RegistIssue(txtCorpNum.text, cashbill, memo, txtUserID.Text);
+                cashbill.Free;
         except
                 on le : EPopbillException do begin
+                        cashbill.Free;
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
                         Exit;
                 end;
@@ -1178,10 +1185,9 @@ begin
                
         end;
 
-
+        SearchList.Free;
 
         ShowMessage(tmp);
-
 end;
 
 end.
