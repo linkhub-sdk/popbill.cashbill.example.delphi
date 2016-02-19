@@ -80,6 +80,7 @@ type
     btnGetUnitCost: TButton;
     btnSearch: TButton;
     procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender:TObject; var Action:TCloseAction);
     procedure btnRegisterClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
     procedure btnJoinMemberClick(Sender: TObject);
@@ -140,6 +141,12 @@ begin
 
         //Exception 처리 설정값 true(기본값)
         cashbillService.IsThrowException := false;
+end;
+
+procedure TfrmExample.FormClose(Sender: TObject; var Action:TCloseAction);
+begin
+        cashbillService.Free;
+        Action := caFree;
 end;
 
 Function BoolToStr(b:Boolean):String;
