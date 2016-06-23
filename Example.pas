@@ -79,6 +79,7 @@ type
     Shape5: TShape;
     btnGetUnitCost: TButton;
     btnSearch: TButton;
+    btnGetChargeInfo: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender:TObject; var Action:TCloseAction);
     procedure btnRegisterClick(Sender: TObject);
@@ -120,6 +121,7 @@ type
     procedure btnCheckIsMemberClick(Sender: TObject);
     procedure btnGetUnitCostClick(Sender: TObject);
     procedure btnSearchClick(Sender: TObject);
+    procedure btnGetChargeInfoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -1188,6 +1190,29 @@ begin
         SearchList.Free;
 
         ShowMessage(tmp);
+end;
+
+procedure TfrmExample.btnGetChargeInfoClick(Sender: TObject);
+var
+        chargeInfo : TCashbillChargeInfo;
+        tmp : String;
+begin
+
+        try
+                chargeInfo := cashbillService.GetChargeInfo(txtCorpNum.text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
+                        Exit;
+                end;
+        end;
+
+        tmp := 'unitCost (단가) : ' + chargeInfo.unitCost + #13;
+        tmp := tmp + 'chargeMethod (과금유형) : ' + chargeInfo.chargeMethod + #13;
+        tmp := tmp + 'rateSystem (과금제도) : ' + chargeInfo.rateSystem + #13;
+
+        ShowMessage(tmp);
+
 end;
 
 end.
