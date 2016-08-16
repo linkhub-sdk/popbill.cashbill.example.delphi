@@ -1106,6 +1106,7 @@ var
         TradeType : Array Of String;
         TradeUsage : Array Of String;
         TaxationType : Array Of String;
+        QString : String;
         Page : Integer;
         PerPage : Integer;
         Order : String;
@@ -1115,13 +1116,13 @@ var
 begin
 
         DType := 'I';               // [필수] 일자유형 { R: 등록일자, W:작성일자, I:발행일자 }
-        SDate := '20150601';        // [필수] 검색 시작일자, 작성형태(yyyyMMdd)
-        EDate := '20151221';        // [필수] 검색 종료일자, 작성형태(yyyyMMdd)
+        SDate := '20160701';        // [필수] 검색 시작일자, 작성형태(yyyyMMdd)
+        EDate := '20160831';        // [필수] 검색 종료일자, 작성형태(yyyyMMdd)
 
         SetLength(State, 3);        // 전송상태값 배열. 미기재시 전체조회, 문서상태 값 3자리의 배열, 2,3번째 자리 와일드 카드 사용가능
         State[0] := '100';          // 전송상태값 테이블은 [현금영수증 연동매뉴얼 > 5.2 현금영수증 상태코드 테이블] 참조
-        State[1] := '2**';
-        State[2] := '3**';
+        State[1] := '3**';
+        State[2] := '4**';
 
         SetLength(TradeType, 2);    // 현금영수증 형태 { N:일반 현금영수증 C:취소 현금영수증 }
         TradeType[0] := 'N';
@@ -1135,12 +1136,14 @@ begin
         TaxationType[0] := 'T';
         TaxationType[1] := 'N';
 
+        QString := '';          // 식별번호, 공백처리시 전체조회
+
         Page := 1;                  // 페이지 번호, 기본값 1
         PerPage := 15;              // 페이지당 검색갯수, 기본값 500, 최대 1000
         Order := 'D';               // 'D' : 내림차순 , 'A' : 오름차순
 
         try
-                SearchList := cashbillService.Search(txtCorpNum.text,DType, SDate, EDate, State, TradeType, TradeUsage, TaxationType, Page, PerPage,Order);
+                SearchList := cashbillService.Search(txtCorpNum.text,DType, SDate, EDate, State, TradeType, TradeUsage, TaxationType, QString, Page, PerPage,Order);
         except
                 on le : EPopbillException do begin
                         ShowMessage(IntToStr(le.code) + ' | ' +  le.Message);
