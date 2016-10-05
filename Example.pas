@@ -138,7 +138,7 @@ procedure TfrmExample.FormCreate(Sender: TObject);
 begin
         cashbillService := TCashbillService.Create(LinkID,SecretKey);
         
-        //연동환경 설정값, true(테스트용), false(상업용)
+        //연동환경 설정값, true(개발용), false(상업용)
         cashbillService.IsTest := true;
 
         //Exception 처리 설정값 true(기본값)
