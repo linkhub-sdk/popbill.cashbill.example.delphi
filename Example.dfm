@@ -81,7 +81,7 @@ object frmExample: TfrmExample
     object GroupBox11: TGroupBox
       Left = 544
       Top = 239
-      Width = 128
+      Width = 133
       Height = 130
       Caption = '기타 URL'
       TabOrder = 3
@@ -173,7 +173,7 @@ object frmExample: TfrmExample
   object GroupBox4: TGroupBox
     Left = 23
     Top = 49
-    Width = 770
+    Width = 763
     Height = 184
     Caption = '팝빌 기본 API'
     TabOrder = 7
@@ -181,7 +181,7 @@ object frmExample: TfrmExample
       Left = 301
       Top = 16
       Width = 163
-      Height = 129
+      Height = 157
       Caption = '팝빌 기본 URL'
       TabOrder = 0
     end
@@ -189,13 +189,13 @@ object frmExample: TfrmExample
       Left = 480
       Top = 16
       Width = 145
-      Height = 129
+      Height = 156
       Caption = '담당자 관련'
       TabOrder = 1
       object btnRegistContact: TButton
         Left = 11
         Top = 24
-        Width = 121
+        Width = 124
         Height = 25
         Caption = '담당자 추가'
         TabOrder = 0
@@ -204,7 +204,7 @@ object frmExample: TfrmExample
       object btnListContact: TButton
         Left = 11
         Top = 56
-        Width = 121
+        Width = 124
         Height = 25
         Caption = '담당자 목록 확인'
         TabOrder = 1
@@ -213,7 +213,7 @@ object frmExample: TfrmExample
       object btnUpdateContact: TButton
         Left = 11
         Top = 88
-        Width = 121
+        Width = 124
         Height = 25
         Caption = '담당자 정보 수정'
         TabOrder = 2
@@ -224,13 +224,13 @@ object frmExample: TfrmExample
       Left = 632
       Top = 16
       Width = 121
-      Height = 129
+      Height = 156
       Caption = '회사정보 관련'
       TabOrder = 2
       object btnGetCorpInfo: TButton
         Left = 12
         Top = 24
-        Width = 97
+        Width = 100
         Height = 25
         Caption = '회사정보 조회'
         TabOrder = 0
@@ -239,7 +239,7 @@ object frmExample: TfrmExample
       object btnUpdateCorpInfo: TButton
         Left = 12
         Top = 56
-        Width = 97
+        Width = 100
         Height = 25
         Caption = '회사정보 수정'
         TabOrder = 1
@@ -256,7 +256,7 @@ object frmExample: TfrmExample
     TabOrder = 6
     object btnGetBalance: TButton
       Left = 12
-      Top = 23
+      Top = 55
       Width = 123
       Height = 25
       Caption = '잔여포인트 확인'
@@ -274,7 +274,7 @@ object frmExample: TfrmExample
     end
     object btnGetUnitCost: TButton
       Left = 12
-      Top = 56
+      Top = 120
       Width = 124
       Height = 25
       Caption = '발행 단가 확인'
@@ -283,7 +283,7 @@ object frmExample: TfrmExample
     end
     object btnGetChargeInfo: TButton
       Left = 12
-      Top = 118
+      Top = 22
       Width = 125
       Height = 25
       Caption = '과금정보 확인'
@@ -295,7 +295,7 @@ object frmExample: TfrmExample
     Left = 33
     Top = 67
     Width = 127
-    Height = 126
+    Height = 154
     Caption = '회원정보'
     TabOrder = 5
     object btnCheckID: TButton
@@ -490,7 +490,7 @@ object frmExample: TfrmExample
   object btnGetURL_WRITE: TButton
     Left = 575
     Top = 576
-    Width = 113
+    Width = 117
     Height = 25
     Caption = '매출 작성'
     TabOrder = 29
@@ -499,7 +499,7 @@ object frmExample: TfrmExample
   object btnGetURL_TBOX: TButton
     Left = 575
     Top = 512
-    Width = 113
+    Width = 117
     Height = 25
     Caption = '임시 문서함'
     TabOrder = 30
@@ -508,7 +508,7 @@ object frmExample: TfrmExample
   object btnGetURL_PBOX: TButton
     Left = 575
     Top = 544
-    Width = 113
+    Width = 117
     Height = 25
     Caption = '발행 문서함'
     TabOrder = 31
