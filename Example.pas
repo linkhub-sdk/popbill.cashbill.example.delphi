@@ -2,8 +2,8 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/1059                  }
-{ - 업데이트 일자 : 2016-10-06                                                 }
-{ - 연동 기술지원 연락처 : 1600-8536 / 070-4304-2991 (정요한 대리)             }
+{ - 업데이트 일자 : 2017-02-22                                                 }
+{ - 연동 기술지원 연락처 : 1600-8536 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
 { <테스트 연동개발 준비사항>                                                   }
@@ -189,7 +189,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getPopbillURL(txtCorpNum.Text, txtUserID.Text, 'LOGIN');
+                resultURL := cashbillService.getPopbillURL(txtCorpNum.Text, 'LOGIN');
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -213,7 +213,7 @@ begin
         {**********************************************************************}
 
         try
-                response := cashbillService.Delete(txtCorpNum.text, txtMgtKey.Text, txtUserID.Text);
+                response := cashbillService.Delete(txtCorpNum.text, txtMgtKey.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -316,7 +316,7 @@ begin
         cashbill.smssendYN := False;
 
         try
-                response := cashbillService.Register(txtCorpNum.text, cashbill, txtUserID.Text);
+                response := cashbillService.Register(txtCorpNum.text, cashbill);
                 cashbill.Free;
         except
                 on le : EPopbillException do begin
@@ -429,7 +429,7 @@ begin
         corpInfo.addr := '서울특별시 강남구 영동대로 517';
 
         try
-                response := cashbillService.UpdateCorpInfo(txtCorpNum.text, corpInfo, txtUserID.Text);
+                response := cashbillService.UpdateCorpInfo(txtCorpNum.text, corpInfo);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -490,14 +490,14 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := cashbillService.getPopbillURL(txtCorpNum.Text, txtUserID.Text, 'CHRG');
+                resultURL := cashbillService.getPopbillURL(txtCorpNum.Text, 'CHRG');
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
                         Exit;
                 end;
         end;
-
+        
         ShowMessage('ResultURL is ' + #13 + resultURL);
 
 end;
@@ -632,7 +632,7 @@ begin
         cashbill.smssendYN := False;
 
         try
-                response := cashbillService.Update(txtCorpNum.text, txtMgtKey.text, cashbill,txtUserID.Text);
+                response := cashbillService.Update(txtCorpNum.text, txtMgtKey.text, cashbill);
                 cashbill.Free;
         except
                 on le : EPopbillException do begin
@@ -658,7 +658,7 @@ begin
         memo := '발행메모';
         
         try
-                response := cashbillService.Issue(txtCorpNum.text, txtMgtKey.Text, memo, txtUserID.Text);
+                response := cashbillService.Issue(txtCorpNum.text, txtMgtKey.Text, memo);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -685,7 +685,7 @@ begin
         memo := '발행취소 메모';
         
         try
-                response := cashbillService.CancelIssue(txtCorpNum.text, txtMgtKey.Text, memo, txtUserID.Text);
+                response := cashbillService.CancelIssue(txtCorpNum.text, txtMgtKey.Text, memo);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -759,7 +759,7 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := cashbillService.GetURL(txtCorpNum.Text, txtUserID.Text, 'TBOX');
+                resultURL := cashbillService.GetURL(txtCorpNum.Text, 'TBOX');
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -780,7 +780,7 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := cashbillService.GetURL(txtCorpNum.Text, txtUserID.Text, 'PBOX');
+                resultURL := cashbillService.GetURL(txtCorpNum.Text, 'PBOX');
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -801,7 +801,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.GetURL(txtCorpNum.Text, txtUserID.Text, 'WRITE');
+                resultURL := cashbillService.GetURL(txtCorpNum.Text, 'WRITE');
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -822,7 +822,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getPopupURL(txtCorpNum.Text, txtMgtKey.Text, txtUserID.Text);
+                resultURL := cashbillService.getPopupURL(txtCorpNum.Text, txtMgtKey.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -844,7 +844,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getPrintURL(txtCorpNum.Text, txtMgtKey.Text, txtUserID.Text);
+                resultURL := cashbillService.getPrintURL(txtCorpNum.Text, txtMgtKey.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -865,7 +865,7 @@ begin
        {**********************************************************************}
 
         try
-                resultURL := cashbillService.getEPrintURL(txtCorpNum.Text, txtMgtKey.Text, txtUserID.Text);
+                resultURL := cashbillService.getEPrintURL(txtCorpNum.Text, txtMgtKey.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -894,7 +894,7 @@ begin
         KeyList[3] := '20161004-04';
         
         try
-                resultURL := cashbillService.getMassPrintURL(txtCorpNum.text, KeyList, txtUserID.Text);
+                resultURL := cashbillService.getMassPrintURL(txtCorpNum.text, KeyList);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -915,7 +915,7 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := cashbillService.getMailURL(txtCorpNum.Text, txtMgtKey.Text, txtUserID.Text);
+                resultURL := cashbillService.getMailURL(txtCorpNum.Text, txtMgtKey.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -946,7 +946,7 @@ begin
         receiveNum := '070-111-222';
 
         try
-                response := cashbillService.SendFAX(txtCorpNum.text, txtMgtKey.Text, sendNum, receiveNum, txtUserID.Text);
+                response := cashbillService.SendFAX(txtCorpNum.text, txtMgtKey.Text, sendNum, receiveNum);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -982,7 +982,7 @@ begin
         contents := '현금영수증이 발행되었습니다. 메일 확인바랍니다.';
         
         try
-                response := cashbillService.SendSMS(txtCorpNum.text,txtMgtKey.Text, sendNum, receiveNum, contents, txtUserID.Text);
+                response := cashbillService.SendSMS(txtCorpNum.text,txtMgtKey.Text, sendNum, receiveNum, contents);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1007,7 +1007,7 @@ begin
         email := 'test@test.com';
 
         try
-                response := cashbillService.SendEmail(txtCorpNum.text, txtMgtKey.Text, email, txtUserID.Text);
+                response := cashbillService.SendEmail(txtCorpNum.text, txtMgtKey.Text, email);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1235,7 +1235,7 @@ begin
         joinInfo.mgrYN := false;
 
         try
-                response := cashbillService.RegistContact(txtCorpNum.text, joinInfo, txtUserID.text);
+                response := cashbillService.RegistContact(txtCorpNum.text, joinInfo);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1308,7 +1308,7 @@ begin
         memo := '발행취소 메모';
         
         try
-                response := cashbillService.CancelIssue(txtCorpNum.text, txtMgtKey.Text, memo, txtUserID.Text);
+                response := cashbillService.CancelIssue(txtCorpNum.text, txtMgtKey.Text, memo);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1331,7 +1331,7 @@ begin
         {**********************************************************************}
 
         try
-                response := cashbillService.Delete(txtCorpNum.text, txtMgtKey.Text, txtUserID.Text);
+                response := cashbillService.Delete(txtCorpNum.text, txtMgtKey.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1432,7 +1432,7 @@ begin
         memo := '즉시발행 현금영수증 메모';
                 
         try
-                response := cashbillService.RegistIssue(txtCorpNum.text, cashbill, memo, txtUserID.Text);
+                response := cashbillService.RegistIssue(txtCorpNum.text, cashbill, memo);
                 cashbill.Free;
         except
                 on le : EPopbillException do begin
@@ -1455,7 +1455,7 @@ begin
         {**********************************************************************}
 
         try
-                corpInfo := cashbillService.GetCorpInfo(txtCorpNum.text, txtUserID.Text);
+                corpInfo := cashbillService.GetCorpInfo(txtCorpNum.text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1483,7 +1483,7 @@ begin
         {**********************************************************************}
 
         try
-                InfoList := cashbillService.ListContact(txtCorpNum.text, txtUserID.text);
+                InfoList := cashbillService.ListContact(txtCorpNum.text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
