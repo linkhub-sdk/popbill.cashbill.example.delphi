@@ -718,33 +718,28 @@ begin
                 end;
         end;
 
-        tmp := tmp +'itemKey : ' +  cashbillInfo.itemKey + #13;
-        tmp := tmp +'mgtKey : ' +  cashbillInfo.mgtKey + #13;
-        tmp := tmp +'tradeDate : ' +  cashbillInfo.tradeDate + #13;
-        tmp := tmp +'tradeUsage : ' +  cashbillInfo.tradeUsage + #13;
-        tmp := tmp +'issueDT : ' +  cashbillInfo.issueDT + #13;
-        tmp := tmp +'customerName : ' +  cashbillInfo.customerName + #13;
-        tmp := tmp +'itemName : ' +  cashbillInfo.itemName + #13;
-        tmp := tmp +'identityNum : ' +  cashbillInfo.identityNum + #13;
-        tmp := tmp +'taxationType : ' +  cashbillInfo.taxationType + #13;
-
-        tmp := tmp +'totalAmount : ' +  cashbillInfo.totalAmount + #13;
-        tmp := tmp +'tradeType : ' +  cashbillInfo.tradeType + #13;
-        tmp := tmp +'stateCode : ' +  IntToStr(cashbillInfo.stateCode) + #13;
-        tmp := tmp +'stateDT : ' +  cashbillInfo.stateDT + #13;
-
-        tmp := tmp +'confirmNum : ' +  cashbillInfo.confirmNum + #13;
-        tmp := tmp +'orgTradeDate : ' +  cashbillInfo.orgTradeDate + #13;
-        tmp := tmp +'orgConfirmNum : ' +  cashbillInfo.orgConfirmNum + #13;
-
-        tmp := tmp +'ntssendDT : ' +  cashbillInfo.ntssendDT + #13;
-        tmp := tmp +'ntsresult : ' +  cashbillInfo.ntsresult + #13;
-        tmp := tmp +'ntsresultDT : ' +  cashbillInfo.ntsresultDT + #13;
-        tmp := tmp +'ntsresultCode : ' +  cashbillInfo.ntsresultCode + #13;
-        tmp := tmp +'ntsresultMessage : ' +  cashbillInfo.ntsresultMessage + #13;
-        tmp := tmp +'stateDT : ' +  cashbillInfo.stateDT + #13;
-
-        tmp := tmp +'printYN : ' +  IfThen(cashbillInfo.printYN,'true','false') + #13;        
+        tmp := tmp +'itemKey (아이템키) : ' +  cashbillInfo.itemKey + #13;
+        tmp := tmp +'mgtKey (문서관리번호) : ' +  cashbillInfo.mgtKey + #13;
+        tmp := tmp +'tradeDate (거래일자) : ' +  cashbillInfo.tradeDate + #13;
+        tmp := tmp +'issueDT (발행일시) : ' +  cashbillInfo.issueDT + #13;
+        tmp := tmp +'regDT (등록일시) : ' +  cashbillInfo.regDT + #13;        
+        tmp := tmp +'taxationType (과세형태) : ' +  cashbillInfo.taxationType + #13;
+        tmp := tmp +'totalAmount (거래금액) : ' +  cashbillInfo.totalAmount + #13;
+        tmp := tmp +'tradeUsage (거래용도) : ' +  cashbillInfo.tradeUsage + #13;
+        tmp := tmp +'tradeType (현금영수증 형태) : ' +  cashbillInfo.tradeType + #13;
+        tmp := tmp +'stateCode (상태코드) : ' +  IntToStr(cashbillInfo.stateCode) + #13;
+        tmp := tmp +'stateDT (상태변경일시) : ' +  cashbillInfo.stateDT + #13;
+        tmp := tmp +'identityNum (거래처 식별번호) : ' +  cashbillInfo.identityNum + #13;
+        tmp := tmp +'itemName (상품명) : ' +  cashbillInfo.itemName + #13;
+        tmp := tmp +'customerName (고객명) : ' +  cashbillInfo.customerName + #13;
+        tmp := tmp +'confirmNum (국세청승인번호) : ' +  cashbillInfo.confirmNum + #13;
+        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbillInfo.orgConfirmNum + #13;
+        tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbillInfo.orgTradeDate + #13;
+        tmp := tmp +'ntssendDT (국세청 전송일시) : ' +  cashbillInfo.ntssendDT + #13;
+        tmp := tmp +'ntsresultDT (국세청 처리결과 수신일시) : ' +  cashbillInfo.ntsresultDT + #13;
+        tmp := tmp +'ntsresultCode (국세청 처리결과 상태코드) : ' +  cashbillInfo.ntsresultCode + #13;
+        tmp := tmp +'ntsresultMessage (국세청 처리결과 메시지) : ' +  cashbillInfo.ntsresultMessage + #13;
+        tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(cashbillInfo.printYN,'true','false') + #13;        
 
         ShowMessage(tmp);
 end;
@@ -1039,37 +1034,34 @@ begin
                 end;
         end;
 
-        tmp := tmp +'mgtKey : ' +  cashbill.mgtKey + #13;
-        tmp := tmp +'tradeType : ' +  cashbill.tradeType + #13;
-        tmp := tmp +'tradeUsage : ' +  cashbill.tradeUsage + #13;
-        tmp := tmp +'taxactionType : ' +  cashbill.taxationType + #13;
-        tmp := tmp +'tradeDate : ' +  cashbill.tradeDate + #13;
+        tmp := tmp +'mgtKey (문서관리번호) : ' +  cashbill.mgtKey + #13;
+        tmp := tmp +'confirmNum (국세청 승인번호) : ' +  cashbill.confirmNum + #13;
+        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbill.orgConfirmNum + #13;
+        tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbill.orgTradeDate + #13;
+        tmp := tmp +'tradeDate (거래일자) : ' +  cashbill.tradeDate + #13;        
+        tmp := tmp +'tradeUsage (거래유형) : ' +  cashbill.tradeUsage + #13;
+        tmp := tmp +'tradeType (현금영수증 형태) : ' +  cashbill.tradeType + #13;
+        tmp := tmp +'taxationType (과세형태) : ' +  cashbill.taxationType + #13;
+        tmp := tmp +'supplyCost (공급가액) : ' +  cashbill.supplyCost + #13;
+        tmp := tmp +'tax (세액) : ' +  cashbill.tax + #13;
+        tmp := tmp +'serviceFee (봉사료) : ' +  cashbill.serviceFee + #13;
+        tmp := tmp +'totalAmount (거래금액) : ' +  cashbill.totalAmount + #13;
+        
+        tmp := tmp +'franchiseCorpNum (발행자 사업자번호) : ' +  cashbill.franchiseCorpNum + #13;
+        tmp := tmp +'franchiseCorpName (발행자 상호) : ' +  cashbill.franchiseCorpName + #13;
+        tmp := tmp +'franchiseCEOName (발행자 대표자성명) : ' +  cashbill.franchiseCEOName + #13;
+        tmp := tmp +'franchiseAddr (발행자 주소) : ' +  cashbill.franchiseAddr + #13;
+        tmp := tmp +'franchiseTEL (발행자 전화번호) : ' +  cashbill.franchiseTEL + #13;
 
-        tmp := tmp +'supplyCost : ' +  cashbill.supplyCost + #13;
-        tmp := tmp +'tax : ' +  cashbill.tax + #13;
-        tmp := tmp +'serviceFee : ' +  cashbill.serviceFee + #13;
-        tmp := tmp +'totalAmount : ' +  cashbill.totalAmount + #13;
-        tmp := tmp +'franchiseCorpNum : ' +  cashbill.franchiseCorpNum + #13;
-        tmp := tmp +'franchiseCorpName : ' +  cashbill.franchiseCorpName + #13;
-        tmp := tmp +'franchiseCEOName : ' +  cashbill.franchiseCEOName + #13;
-        tmp := tmp +'franchiseAddr : ' +  cashbill.franchiseAddr + #13;
-        tmp := tmp +'franchiseTEL : ' +  cashbill.franchiseTEL + #13;
-
-        tmp := tmp +'identityNum : ' +  cashbill.identityNum + #13;
-        tmp := tmp +'customerName : ' +  cashbill.customerName + #13;
-        tmp := tmp +'itemName : ' +  cashbill.itemName + #13;
-        tmp := tmp +'orderNumber : ' +  cashbill.orderNumber + #13;
-        tmp := tmp +'hp : ' +  cashbill.hp + #13;
-        tmp := tmp +'fax : ' +  cashbill.fax + #13;
-        tmp := tmp +'confirmNum : ' +  cashbill.confirmNum + #13;
-        tmp := tmp +'orgConfirmNum : ' +  cashbill.orgConfirmNum + #13;
-        tmp := tmp +'orgTradeDate : ' +  cashbill.orgTradeDate + #13;
-
-        tmp := tmp +'smssendYN : ' +  IfThen(cashbill.smssendYN,'true','false') + #13;
-        tmp := tmp +'faxsendYN : ' +  IfThen(cashbill.faxsendYN,'true','false') + #13;
+        tmp := tmp +'identityNum (거래처 식별번호) : ' +  cashbill.identityNum + #13;
+        tmp := tmp +'customerName (고객명) : ' +  cashbill.customerName + #13;
+        tmp := tmp +'itemName (상품명) : ' +  cashbill.itemName + #13;
+        tmp := tmp +'orderNumber (가맹점주문번호) : ' +  cashbill.orderNumber + #13;
+        tmp := tmp +'email (이메일) : ' +  cashbill.email + #13;
+        tmp := tmp +'hp (휴대폰) : ' +  cashbill.hp + #13;
+        tmp := tmp +'smssendYN (SMS 전송여부) : ' +  IfThen(cashbill.smssendYN,'true','false') + #13;
         
         ShowMessage(tmp);
-
 end;
 
 procedure TfrmExample.btnGetLogsClick(Sender: TObject);
@@ -1143,33 +1135,28 @@ begin
         
         for i := 0 to Length(InfoList) -1 do
         begin
-                tmp := tmp +'itemKey : ' +  InfoList[i].itemKey + #13;
-                tmp := tmp +'mgtKey : ' +  InfoList[i].mgtKey + #13;
-                tmp := tmp +'tradeDate : ' +  InfoList[i].tradeDate + #13;
-                tmp := tmp +'tradeUsage : ' +  InfoList[i].tradeUsage + #13;
-                tmp := tmp +'issueDT : ' +  InfoList[i].issueDT + #13;
-                tmp := tmp +'customerName : ' +  InfoList[i].customerName + #13;
-                tmp := tmp +'itemName : ' +  InfoList[i].itemName + #13;
-                tmp := tmp +'identityNum : ' +  InfoList[i].identityNum + #13;
-                tmp := tmp +'taxationType : ' +  InfoList[i].taxationType + #13;
-
-                tmp := tmp +'totalAmount : ' +  InfoList[i].totalAmount + #13;
-                tmp := tmp +'tradeType : ' +  InfoList[i].tradeType + #13;
-                tmp := tmp +'stateCode : ' +  IntToStr(InfoList[i].stateCode) + #13;
-                tmp := tmp +'stateDT : ' +  InfoList[i].stateDT + #13;
-
-                tmp := tmp +'confirmNum : ' +  InfoList[i].confirmNum + #13;
-                tmp := tmp +'orgTradeDate : ' +  InfoList[i].orgTradeDate + #13;
-                tmp := tmp +'orgConfirmNum : ' +  InfoList[i].orgConfirmNum + #13;
-
-                tmp := tmp +'ntssendDT : ' +  InfoList[i].ntssendDT + #13;
-                tmp := tmp +'ntsresult : ' +  InfoList[i].ntsresult + #13;
-                tmp := tmp +'ntsresultDT : ' +  InfoList[i].ntsresultDT + #13;
-                tmp := tmp +'ntsresultCode : ' +  InfoList[i].ntsresultCode + #13;
-                tmp := tmp +'ntsresultMessage : ' +  InfoList[i].ntsresultMessage + #13;
-                tmp := tmp +'stateDT : ' +  InfoList[i].stateDT + #13;
-
-                tmp := tmp +'printYN : ' +  IfThen(InfoList[i].printYN,'true','false') + #13 + #13;
+                tmp := tmp +'itemKey (아이템키) : ' +  InfoList[i].itemKey + #13;
+                tmp := tmp +'mgtKey (문서관리번호) : ' +  InfoList[i].mgtKey + #13;
+                tmp := tmp +'tradeDate (거래일자) : ' +  InfoList[i].tradeDate + #13;
+                tmp := tmp +'issueDT (발행일시) : ' +  InfoList[i].issueDT + #13;
+                tmp := tmp +'regDT (등록일시) : ' +  InfoList[i].regDT + #13;
+                tmp := tmp +'taxationType (과세형태) : ' +  InfoList[i].taxationType + #13;
+                tmp := tmp +'totalAmount (거래금액) : ' +  InfoList[i].totalAmount + #13;
+                tmp := tmp +'tradeUsage (거래용도) : ' +  InfoList[i].tradeUsage + #13;
+                tmp := tmp +'tradeType (현금영수증 형태) : ' +  InfoList[i].tradeType + #13;
+                tmp := tmp +'stateCode (상태코드) : ' +  IntToStr(InfoList[i].stateCode) + #13;
+                tmp := tmp +'stateDT (상태변경일시) : ' +  InfoList[i].stateDT + #13;
+                tmp := tmp +'identityNum (거래처 식별번호) : ' +  InfoList[i].identityNum + #13;
+                tmp := tmp +'itemName (상품명) : ' +  InfoList[i].itemName + #13;
+                tmp := tmp +'customerName (고객명) : ' +  InfoList[i].customerName + #13;
+                tmp := tmp +'confirmNum (국세청승인번호) : ' +  InfoList[i].confirmNum + #13;
+                tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  InfoList[i].orgConfirmNum + #13;
+                tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  InfoList[i].orgTradeDate + #13;
+                tmp := tmp +'ntssendDT (국세청 전송일시) : ' +  InfoList[i].ntssendDT + #13;
+                tmp := tmp +'ntsresultDT (국세청 처리결과 수신일시) : ' +  InfoList[i].ntsresultDT + #13;
+                tmp := tmp +'ntsresultCode (국세청 처리결과 상태코드) : ' +  InfoList[i].ntsresultCode + #13;
+                tmp := tmp +'ntsresultMessage (국세청 처리결과 메시지) : ' +  InfoList[i].ntsresultMessage + #13;
+                tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(InfoList[i].printYN,'true','false') + #13 + #13;
 
         end;
 
@@ -1579,10 +1566,10 @@ begin
         DType := 'I';
 
         // [필수] 검색 시작일자, 작성형태(yyyyMMdd)
-        SDate := '20160901';
+        SDate := '20170101';
 
         // [필수] 검색 종료일자, 작성형태(yyyyMMdd)
-        EDate := '20161031';
+        EDate := '20170601';
 
         // 전송상태값 배열. 미기재시 전체조회, 문서상태 값 3자리의 배열, 2,3번째 자리 와일드 카드 사용가능
         // 전송상태값 테이블은 "[현금영수증 연동매뉴얼] > 5.2 현금영수증 상태코드 테이블" 참조
@@ -1638,6 +1625,7 @@ begin
 
         tmp := tmp + 'itemKey | mgtKey | tradeDate | tradeUsage | issueDT | customerName | itemName | identityNum | taxationType | totalAmount | tradeType | stateCode | stateDT | confirmNum '
                   +'| ntssendDT | ntsresult | ntsresultDT | ntsresultCode | ntsMessage | stateDT | printYN  ' + #13#13;
+                  
         for i := 0 to Length(SearchList.list) -1 do
         begin
                 tmp := tmp + SearchList.list[i].itemKey + ' | ';
@@ -1654,7 +1642,6 @@ begin
                 tmp := tmp + SearchList.list[i].tradeType + ' | ';
                 tmp := tmp + IntToStr(SearchList.list[i].stateCode) + ' | ';
                 tmp := tmp + SearchList.list[i].stateDT + ' | ';
-
                 tmp := tmp + SearchList.list[i].confirmNum + ' | ';
 
                 tmp := tmp + SearchList.list[i].ntssendDT + ' | ';
