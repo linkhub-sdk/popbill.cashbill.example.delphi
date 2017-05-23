@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2017-03-08                                                 }
+{ - 업데이트 일자 : 2017-05-23                                                 }
 { - 연동 기술지원 연락처 : 1600-8536 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -1252,7 +1252,7 @@ begin
         contactInfo.personName := '테스트 담당자';
 
         // 연락처
-        contactInfo.tel := '070-7510-3710';
+        contactInfo.tel := '070-7510-3715';
 
         // 휴대폰번호
         contactInfo.hp := '010-4324-1111';
