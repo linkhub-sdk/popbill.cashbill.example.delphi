@@ -1357,7 +1357,11 @@ begin
         // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
 //      cashbill.orgConfirmNum := 'E95069345';
 
-        // [필수] 발행자 사업자 번호, '-' 제외 10자리       
+        // [취소거래시 필수] 원본현금영수증 거래일자
+        // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
+//      cashbill.orgTradeDate := '20170101';
+
+        // [필수] 발행자 사업자 번호, '-' 제외 10자리
         cashbill.franchiseCorpNum := txtCorpNum.Text;
 
         // [필수] 현금영수증 형태, [소득공제용, 지출증빙용] 중 기재
