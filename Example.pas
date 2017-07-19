@@ -733,7 +733,7 @@ begin
         tmp := tmp +'itemName (상품명) : ' +  cashbillInfo.itemName + #13;
         tmp := tmp +'customerName (고객명) : ' +  cashbillInfo.customerName + #13;
         tmp := tmp +'confirmNum (국세청승인번호) : ' +  cashbillInfo.confirmNum + #13;
-        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbillInfo.orgConfirmNum + #13;
+        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbillInfo.orgConfirmNum + #13;       
         tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbillInfo.orgTradeDate + #13;
         tmp := tmp +'ntssendDT (국세청 전송일시) : ' +  cashbillInfo.ntssendDT + #13;
         tmp := tmp +'ntsresultDT (국세청 처리결과 수신일시) : ' +  cashbillInfo.ntsresultDT + #13;
@@ -1150,7 +1150,7 @@ begin
                 tmp := tmp +'itemName (상품명) : ' +  InfoList[i].itemName + #13;
                 tmp := tmp +'customerName (고객명) : ' +  InfoList[i].customerName + #13;
                 tmp := tmp +'confirmNum (국세청승인번호) : ' +  InfoList[i].confirmNum + #13;
-                tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  InfoList[i].orgConfirmNum + #13;
+                tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  InfoList[i].orgConfirmNum + #13;               
                 tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  InfoList[i].orgTradeDate + #13;
                 tmp := tmp +'ntssendDT (국세청 전송일시) : ' +  InfoList[i].ntssendDT + #13;
                 tmp := tmp +'ntsresultDT (국세청 처리결과 수신일시) : ' +  InfoList[i].ntsresultDT + #13;
@@ -1355,11 +1355,11 @@ begin
 
         // [취소거래시 필수] 원본현금영수증 국세청 승인번호
         // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
-//      cashbill.orgConfirmNum := 'E95069345';
+        cashbill.orgConfirmNum := '';
 
         // [취소거래시 필수] 원본현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-//      cashbill.orgTradeDate := '20170101';
+        cashbill.orgTradeDate := '';
 
         // [필수] 발행자 사업자 번호, '-' 제외 10자리
         cashbill.franchiseCorpNum := txtCorpNum.Text;
@@ -1370,7 +1370,7 @@ begin
         // [필수] 거래처 식별번호
         // 거래유형(tradeUsage)이 '소득공제용'인 경우 [주민등록/휴대폰/카드]번호로 발행가능
         // 거래유형(traseUsage)이 '지출증빙용'인 경우 [주민등록/휴대폰/카드/사업자]번호로 발행가능
-        cashbill.identityNum := '01043245117';
+        cashbill.identityNum := '0101112222';
 
         // [필수] 과세형태, [과세, 비과세] 중 기재
         cashbill.taxationType := '과세';
@@ -1548,19 +1548,9 @@ end;
 
 procedure TfrmExample.btnSearchClick(Sender: TObject);
 var
-        DType : String;
-        SDate : String;
-        EDate : String;
-        State : Array Of String;
-        TradeType : Array Of String;
-        TradeUsage : Array Of String;
-        TaxationType : Array Of String;
-        QString : String;
-        Page : Integer;
-        PerPage : Integer;
-        Order : String;
-        tmp : String;
-        i : integer;
+        DType, SDate, EDate, QString, Order, tmp : String;
+        State, TradeType, TradeUsage, TaxationType : Array Of String;
+        Page, PerPage, i : Integer;
         SearchList : TCashbillSearchList;
 begin
         {**********************************************************************}
@@ -1570,13 +1560,13 @@ begin
         {**********************************************************************}
 
         // [필수] 일자유형 { R: 등록일자, W:작성일자, I:발행일자 }
-        DType := 'I';
+        DType := 'R';
 
         // [필수] 검색 시작일자, 작성형태(yyyyMMdd)
-        SDate := '20170101';
+        SDate := '20170601';
 
         // [필수] 검색 종료일자, 작성형태(yyyyMMdd)
-        EDate := '20170601';
+        EDate := '20171201';
 
         // 전송상태값 배열. 미기재시 전체조회, 문서상태 값 3자리의 배열, 2,3번째 자리 와일드 카드 사용가능
         // 전송상태값 테이블은 "[현금영수증 연동매뉴얼] > 5.2 현금영수증 상태코드 테이블" 참조
@@ -1631,7 +1621,7 @@ begin
         tmp := tmp + 'message : '+ SearchList.message + #13#13;                         // 응답 메시지
 
         tmp := tmp + 'itemKey | mgtKey | tradeDate | tradeUsage | issueDT | customerName | itemName | identityNum | taxationType | totalAmount | tradeType | stateCode | stateDT | confirmNum '
-                  +'| ntssendDT | ntsresult | ntsresultDT | ntsresultCode | ntsMessage | stateDT | printYN  ' + #13#13;
+                  +'orgConfirmNum | orgTradeDate | ntssendDT | ntsresult | ntsresultDT | ntsresultCode | ntsMessage | stateDT | printYN  ' + #13#13;
                   
         for i := 0 to Length(SearchList.list) -1 do
         begin
@@ -1650,6 +1640,8 @@ begin
                 tmp := tmp + IntToStr(SearchList.list[i].stateCode) + ' | ';
                 tmp := tmp + SearchList.list[i].stateDT + ' | ';
                 tmp := tmp + SearchList.list[i].confirmNum + ' | ';
+                tmp := tmp + SearchList.list[i].orgConfirmNum + ' | ';
+                tmp := tmp + SearchList.list[i].orgTradeDate + ' | ';
 
                 tmp := tmp + SearchList.list[i].ntssendDT + ' | ';
                 tmp := tmp + SearchList.list[i].ntsresult + ' | ';
