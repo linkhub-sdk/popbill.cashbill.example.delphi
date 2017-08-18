@@ -2,8 +2,8 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2017-05-23                                                 }
-{ - 연동 기술지원 연락처 : 1600-8536 / 070-4304-2991                           }
+{ - 업데이트 일자 : 2017-08-18                                                 }
+{ - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
 { <테스트 연동개발 준비사항>                                                   }
@@ -47,10 +47,7 @@ type
     GroupBox4: TGroupBox;
     txtMgtKey: TEdit;
     btnCheckMgtkeyInUse: TButton;
-    btnRegister: TButton;
-    btnUpdate: TButton;
     Panel1: TPanel;
-    btnIssue: TButton;
     btnCancelIssue: TButton;
     btnDelete: TButton;
     GroupBox5: TGroupBox;
@@ -76,7 +73,6 @@ type
     GroupBox9: TGroupBox;
     GroupBox10: TGroupBox;
     GroupBox11: TGroupBox;
-    Label4: TLabel;
     btnGetBalance: TButton;
     btnCheckID: TButton;
     btnCheckIsMember: TButton;
@@ -97,10 +93,12 @@ type
     Shape2: TShape;
     Shape3: TShape;
     Shape4: TShape;
-    Shape5: TShape;
     btnGetUnitCost: TButton;
     btnSearch: TButton;
     btnGetChargeInfo: TButton;
+    Label4: TLabel;
+    Label5: TLabel;
+    btnRevokeRegistIssue: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender:TObject; var Action:TCloseAction);
     procedure btnRegisterClick(Sender: TObject);
@@ -143,6 +141,7 @@ type
     procedure btnGetUnitCostClick(Sender: TObject);
     procedure btnSearchClick(Sender: TObject);
     procedure btnGetChargeInfoClick(Sender: TObject);
+    procedure btnRevokeRegistIssueClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -1339,7 +1338,7 @@ var
         memo : String;
 begin
         {**********************************************************************}
-        { 1건의 현금영수증을 즉시발행 처리합니다. (권장)                       }
+        { 1건의 현금영수증을 즉시발행 처리합니다.                              }
         { - 현금영수증 항목별 정보는 "[현금영수증 API 연동매뉴얼] >            }
         {   4.1. 현금영수증 구성" 을 참조하시기 바랍니다.                      }
         {**********************************************************************}
@@ -1683,6 +1682,53 @@ begin
 
         ShowMessage(tmp);
 
+end;
+
+
+
+
+procedure TfrmExample.btnRevokeRegistIssueClick(Sender: TObject);
+var
+        response : TResponse;
+        memo, mgtKey, orgConfirmNum, orgTradeDate : String;
+        smssendYN : Boolean;
+begin
+        {**********************************************************************}
+        { 1건의 취소현금영수증을 즉시발행 처리합니다.                          }
+        { - 현금영수증 항목별 정보는 "[현금영수증 API 연동매뉴얼] >            }
+        {   4.1. 현금영수증 구성" 을 참조하시기 바랍니다.                      }
+        {**********************************************************************}
+
+        // [필수] 문서 관리번호 1~24자리, 영문, 숫자, '-', '_' 조합하여 구성
+        // 사업자별로 중복되지 않도록 구성
+        mgtKey := txtMgtKey.Text;
+
+        // 원본현금영수증 국세청 승인번호
+        // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
+        orgConfirmNum := '';
+
+        // 원본현금영수증 거래일자
+        // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
+        orgTradeDate := '';
+
+        // 발행안내문자 전송여부
+        smssendYN := False;
+
+        // 메모
+        memo := '즉시발행 취소현금영수증 메모';
+                
+        try
+                response := cashbillService.RevokeRegistIssue(txtCorpNum.text,
+                        mgtKey, orgConfirmNum, orgTradeDate, smssendYN, memo, txtUserID.text);
+
+        except
+                on le : EPopbillException do begin
+                        ShowMessage('응답코드 : ' + IntToStr(le.code) + #10#13 + '응답메시지 : ' + le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
 end;
 
 end.
