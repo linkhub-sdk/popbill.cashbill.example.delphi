@@ -1,10 +1,10 @@
 object frmExample: TfrmExample
-  Left = 407
-  Top = 127
+  Left = 217
+  Top = 138
   AutoScroll = False
   Caption = '팝빌 현금영수증 SDK '
-  ClientHeight = 771
-  ClientWidth = 811
+  ClientHeight = 720
+  ClientWidth = 1115
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -34,11 +34,11 @@ object frmExample: TfrmExample
   end
   object GroupBox7: TGroupBox
     Left = 24
-    Top = 248
+    Top = 224
     Width = 705
     Height = 481
     Caption = '현금영수증 관련 기능'
-    TabOrder = 29
+    TabOrder = 28
     object Label3: TLabel
       Left = 114
       Top = 22
@@ -57,7 +57,7 @@ object frmExample: TfrmExample
     object Label5: TLabel
       Left = 344
       Top = 64
-      Width = 353
+      Width = 350
       Height = 13
       Caption = '원본 현금영수증에 대한 '#39'취소현금영수증'#39'을 발행해야 합니다.'
     end
@@ -160,13 +160,13 @@ object frmExample: TfrmExample
   end
   object GroupBox5: TGroupBox
     Left = 389
-    Top = 334
+    Top = 310
     Width = 212
     Height = 155
     Caption = '취소현금영수증 즉시발행 프로세스'
     Color = clBtnFace
     ParentColor = False
-    TabOrder = 13
+    TabOrder = 12
     object Shape2: TShape
       Left = 64
       Top = 55
@@ -183,23 +183,23 @@ object frmExample: TfrmExample
   object GroupBox4: TGroupBox
     Left = 23
     Top = 49
-    Width = 763
-    Height = 184
+    Width = 1074
+    Height = 160
     Caption = '팝빌 기본 API'
-    TabOrder = 7
+    TabOrder = 6
     object GroupBox6: TGroupBox
-      Left = 301
-      Top = 16
+      Left = 613
+      Top = 19
       Width = 163
-      Height = 157
+      Height = 126
       Caption = '팝빌 기본 URL'
       TabOrder = 0
     end
     object GroupBox3: TGroupBox
-      Left = 480
-      Top = 16
+      Left = 784
+      Top = 19
       Width = 145
-      Height = 156
+      Height = 125
       Caption = '담당자 관련'
       TabOrder = 1
       object btnRegistContact: TButton
@@ -231,10 +231,10 @@ object frmExample: TfrmExample
       end
     end
     object GroupBox13: TGroupBox
-      Left = 632
-      Top = 16
+      Left = 936
+      Top = 19
       Width = 121
-      Height = 156
+      Height = 125
       Caption = '회사정보 관련'
       TabOrder = 2
       object btnGetCorpInfo: TButton
@@ -261,34 +261,16 @@ object frmExample: TfrmExample
     Left = 170
     Top = 67
     Width = 145
-    Height = 155
+    Height = 126
     Caption = '포인트 관련'
-    TabOrder = 6
-    object btnGetBalance: TButton
-      Left = 12
-      Top = 55
-      Width = 123
-      Height = 25
-      Caption = '잔여포인트 확인'
-      TabOrder = 0
-      OnClick = btnGetBalanceClick
-    end
-    object btnGetPartnerBalance: TButton
-      Left = 12
-      Top = 88
-      Width = 123
-      Height = 25
-      Caption = '파트너포인트 확인'
-      TabOrder = 1
-      OnClick = btnGetPartnerBalanceClick
-    end
+    TabOrder = 5
     object btnGetUnitCost: TButton
       Left = 12
-      Top = 120
+      Top = 56
       Width = 124
       Height = 25
       Caption = '발행 단가 확인'
-      TabOrder = 2
+      TabOrder = 0
       OnClick = btnGetUnitCostClick
     end
     object btnGetChargeInfo: TButton
@@ -297,7 +279,7 @@ object frmExample: TfrmExample
       Width = 125
       Height = 25
       Caption = '과금정보 확인'
-      TabOrder = 3
+      TabOrder = 1
       OnClick = btnGetChargeInfoClick
     end
   end
@@ -305,9 +287,9 @@ object frmExample: TfrmExample
     Left = 33
     Top = 67
     Width = 127
-    Height = 154
+    Height = 125
     Caption = '회원정보'
-    TabOrder = 5
+    TabOrder = 4
     object btnCheckID: TButton
       Left = 8
       Top = 56
@@ -355,200 +337,191 @@ object frmExample: TfrmExample
     OnClick = btnJoinMemberClick
   end
   object btnGetPopbillURL_LOGIN: TButton
-    Left = 333
-    Top = 87
+    Left = 645
+    Top = 95
     Width = 141
     Height = 25
     Caption = '팝빌 로그인 URL'
     TabOrder = 3
     OnClick = btnGetPopbillURL_LOGINClick
   end
-  object btnGetPopbillURL_CHRG: TButton
-    Left = 333
-    Top = 119
-    Width = 141
-    Height = 25
-    Caption = '포인트 충전 팝업 URL'
-    TabOrder = 4
-    OnClick = btnGetPopbillURL_CHRGClick
-  end
   object txtMgtKey: TEdit
     Left = 268
-    Top = 267
+    Top = 243
     Width = 149
     Height = 21
     ImeName = 'Microsoft IME 2010'
-    TabOrder = 8
+    TabOrder = 7
   end
   object btnCheckMgtkeyInUse: TButton
     Left = 428
-    Top = 266
+    Top = 242
     Width = 161
     Height = 25
     Caption = '관리번호 사용여부 확인'
-    TabOrder = 9
+    TabOrder = 8
     OnClick = btnCheckMgtkeyInUseClick
   end
   object btnGetInfo: TButton
     Left = 70
-    Top = 525
+    Top = 501
     Width = 113
     Height = 25
     Caption = '문서 정보'
-    TabOrder = 14
+    TabOrder = 13
     OnClick = btnGetInfoClick
   end
   object btnGetInfos: TButton
     Left = 70
-    Top = 557
+    Top = 533
     Width = 113
     Height = 25
     Caption = '문서 정보(대량)'
-    TabOrder = 15
+    TabOrder = 14
     OnClick = btnGetInfosClick
   end
   object btnGetLogs: TButton
     Left = 70
-    Top = 589
+    Top = 565
     Width = 113
     Height = 25
     Caption = '문서 이력'
-    TabOrder = 16
+    TabOrder = 15
     OnClick = btnGetLogsClick
   end
   object btnGetDetailInfo: TButton
     Left = 70
-    Top = 621
+    Top = 597
     Width = 113
     Height = 25
     Caption = '문서 상세 정보'
-    TabOrder = 17
+    TabOrder = 16
     OnClick = btnGetDetailInfoClick
   end
   object btnSendEmail: TButton
     Left = 214
-    Top = 526
+    Top = 502
     Width = 113
     Height = 25
     Caption = '이메일 전송'
-    TabOrder = 18
+    TabOrder = 17
     OnClick = btnSendEmailClick
   end
   object btnSendSMS: TButton
     Left = 214
-    Top = 558
+    Top = 534
     Width = 113
     Height = 25
     Caption = '문자 전송'
-    TabOrder = 19
+    TabOrder = 18
     OnClick = btnSendSMSClick
   end
   object btnSendFAX: TButton
     Left = 214
-    Top = 590
+    Top = 566
     Width = 113
     Height = 25
     Caption = '팩스 전송'
-    TabOrder = 20
+    TabOrder = 19
     OnClick = btnSendFAXClick
   end
   object btnGetPopUpURL: TButton
     Left = 359
-    Top = 528
+    Top = 504
     Width = 187
     Height = 25
     Caption = '문서 내용보기 팝업 URL'
-    TabOrder = 21
+    TabOrder = 20
     OnClick = btnGetPopUpURLClick
   end
   object btnGetPrintURL: TButton
     Left = 359
-    Top = 560
+    Top = 536
     Width = 187
     Height = 25
     Caption = '인쇄 팝업 URL'
-    TabOrder = 22
+    TabOrder = 21
     OnClick = btnGetPrintURLClick
   end
   object btnGetEPrintURL: TButton
     Left = 359
-    Top = 592
+    Top = 568
     Width = 187
     Height = 25
     Caption = '공급받는자 인쇄 팝업 URL'
-    TabOrder = 23
+    TabOrder = 22
     OnClick = btnGetEPrintURLClick
   end
   object btnGetMassPrintURL: TButton
     Left = 359
-    Top = 624
+    Top = 600
     Width = 187
     Height = 25
     Caption = '다량 인쇄 팝업 URL'
-    TabOrder = 24
+    TabOrder = 23
     OnClick = btnGetMassPrintURLClick
   end
   object btnGetMailURL: TButton
     Left = 359
-    Top = 656
+    Top = 632
     Width = 187
     Height = 25
     Caption = '이메일(공급받는자) 링크 URL'
-    TabOrder = 25
+    TabOrder = 24
     OnClick = btnGetMailURLClick
   end
   object btnGetURL_WRITE: TButton
     Left = 575
-    Top = 592
+    Top = 568
     Width = 117
     Height = 25
     Caption = '매출 작성'
-    TabOrder = 26
+    TabOrder = 25
     OnClick = btnGetURL_WRITEClick
   end
   object btnGetURL_TBOX: TButton
     Left = 575
-    Top = 528
+    Top = 504
     Width = 117
     Height = 25
     Caption = '임시 문서함'
-    TabOrder = 27
+    TabOrder = 26
     OnClick = btnGetURL_TBOXClick
   end
   object btnGetURL_PBOX: TButton
     Left = 575
-    Top = 560
+    Top = 536
     Width = 117
     Height = 25
     Caption = '발행 문서함'
-    TabOrder = 28
+    TabOrder = 27
     OnClick = btnGetURL_PBOXClick
   end
   object btnCancelIssue: TButton
     Left = 420
-    Top = 443
+    Top = 419
     Width = 69
     Height = 25
     Caption = '발행취소'
-    TabOrder = 11
+    TabOrder = 10
     OnClick = btnCancelIssueClick
   end
   object btnDelete: TButton
     Left = 517
-    Top = 443
+    Top = 419
     Width = 60
     Height = 27
     Caption = '삭제'
-    TabOrder = 12
+    TabOrder = 11
     OnClick = btnDeleteClick
   end
   object Panel1: TPanel
     Left = 400
-    Top = 360
+    Top = 336
     Width = 174
     Height = 40
     Color = clActiveBorder
-    TabOrder = 10
+    TabOrder = 9
     object btnRevokeRegistIssue: TButton
       Left = 16
       Top = 7
@@ -557,6 +530,58 @@ object frmExample: TfrmExample
       Caption = '즉시발행'
       TabOrder = 0
       OnClick = btnRevokeRegistIssueClick
+    end
+  end
+  object GroupBox12: TGroupBox
+    Left = 328
+    Top = 68
+    Width = 139
+    Height = 124
+    Caption = '연동과금 포인트'
+    TabOrder = 29
+    object btnGetBalance: TButton
+      Left = 12
+      Top = 23
+      Width = 116
+      Height = 25
+      Caption = '잔여포인트 확인'
+      TabOrder = 0
+      OnClick = btnGetBalanceClick
+    end
+    object btnGetPopbillURL_CHRG: TButton
+      Left = 12
+      Top = 55
+      Width = 115
+      Height = 25
+      Caption = '포인트 충전 URL'
+      TabOrder = 1
+      OnClick = btnGetPopbillURL_CHRGClick
+    end
+  end
+  object GroupBox15: TGroupBox
+    Left = 480
+    Top = 68
+    Width = 146
+    Height = 124
+    Caption = '파트너과금 포인트'
+    TabOrder = 30
+    object btnGetPartnerBalance: TButton
+      Left = 9
+      Top = 24
+      Width = 128
+      Height = 25
+      Caption = '파트너포인트 확인'
+      TabOrder = 0
+      OnClick = btnGetPartnerBalanceClick
+    end
+    object btnGetPartnerURL_CHRG: TButton
+      Left = 9
+      Top = 56
+      Width = 129
+      Height = 26
+      Caption = '포인트 충전 URL'
+      TabOrder = 1
+      OnClick = btnGetPartnerURL_CHRGClick
     end
   end
 end
