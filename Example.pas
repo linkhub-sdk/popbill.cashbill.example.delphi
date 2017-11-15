@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2017-08-30                                                 }
+{ - 업데이트 일자 : 2017-11-15                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -102,6 +102,7 @@ type
     btnGetPopbillURL_CHRG: TButton;
     btnGetPartnerBalance: TButton;
     btnGetPartnerURL_CHRG: TButton;
+    btnRevokeRegistIssue_part: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender:TObject; var Action:TCloseAction);
     procedure btnRegisterClick(Sender: TObject);
@@ -146,6 +147,7 @@ type
     procedure btnGetChargeInfoClick(Sender: TObject);
     procedure btnRevokeRegistIssueClick(Sender: TObject);
     procedure btnGetPartnerURL_CHRGClick(Sender: TObject);
+    procedure btnRevokeRegistIssue_partClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -1039,9 +1041,7 @@ begin
 
         tmp := tmp +'mgtKey (문서관리번호) : ' +  cashbill.mgtKey + #13;
         tmp := tmp +'confirmNum (국세청 승인번호) : ' +  cashbill.confirmNum + #13;
-        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbill.orgConfirmNum + #13;
-        tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbill.orgTradeDate + #13;
-        tmp := tmp +'tradeDate (거래일자) : ' +  cashbill.tradeDate + #13;        
+        tmp := tmp +'tradeDate (거래일자) : ' +  cashbill.tradeDate + #13;
         tmp := tmp +'tradeUsage (거래유형) : ' +  cashbill.tradeUsage + #13;
         tmp := tmp +'tradeType (현금영수증 형태) : ' +  cashbill.tradeType + #13;
         tmp := tmp +'taxationType (과세형태) : ' +  cashbill.taxationType + #13;
@@ -1049,7 +1049,7 @@ begin
         tmp := tmp +'tax (세액) : ' +  cashbill.tax + #13;
         tmp := tmp +'serviceFee (봉사료) : ' +  cashbill.serviceFee + #13;
         tmp := tmp +'totalAmount (거래금액) : ' +  cashbill.totalAmount + #13;
-        
+
         tmp := tmp +'franchiseCorpNum (발행자 사업자번호) : ' +  cashbill.franchiseCorpNum + #13;
         tmp := tmp +'franchiseCorpName (발행자 상호) : ' +  cashbill.franchiseCorpName + #13;
         tmp := tmp +'franchiseCEOName (발행자 대표자성명) : ' +  cashbill.franchiseCEOName + #13;
@@ -1063,7 +1063,11 @@ begin
         tmp := tmp +'email (이메일) : ' +  cashbill.email + #13;
         tmp := tmp +'hp (휴대폰) : ' +  cashbill.hp + #13;
         tmp := tmp +'smssendYN (SMS 전송여부) : ' +  IfThen(cashbill.smssendYN,'true','false') + #13;
-        
+
+        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbill.orgConfirmNum + #13;
+        tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbill.orgTradeDate + #13;
+        tmp := tmp +'cancelType (취소사유) : ' +  IntToStr(cashbill.cancelType) + #13;
+                
         ShowMessage(tmp);
 end;
 
@@ -1709,11 +1713,11 @@ begin
 
         // 원본현금영수증 국세청 승인번호
         // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
-        orgConfirmNum := '';
+        orgConfirmNum := '820116333';
 
         // 원본현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-        orgTradeDate := '';
+        orgTradeDate := '20170711';
 
         // 발행안내문자 전송여부
         smssendYN := False;
@@ -1755,6 +1759,65 @@ begin
         end;
         
         ShowMessage('ResultURL is ' + #13 + resultURL);
+end;
+
+procedure TfrmExample.btnRevokeRegistIssue_partClick(Sender: TObject);
+var
+        response : TResponse;
+        memo, mgtKey, orgConfirmNum, orgTradeDate, supplyCost, tax, serviceFee, totalAmount : String;
+        cancelType: Integer;
+        isPartCancel, smssendYN : Boolean;
+begin
+        {**********************************************************************}
+        { 1건의 (부분) 취소현금영수증을 즉시발행 처리합니다.                   }
+        { - 현금영수증 항목별 정보는 "[현금영수증 API 연동매뉴얼] >            }
+        {   4.1. 현금영수증 구성" 을 참조하시기 바랍니다.                      }
+        {**********************************************************************}
+
+        // [필수] 문서 관리번호 1~24자리, 영문, 숫자, '-', '_' 조합하여 구성
+        // 사업자별로 중복되지 않도록 구성
+        mgtKey := txtMgtKey.Text;
+
+        // 원본현금영수증 국세청 승인번호
+        // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
+        orgConfirmNum := '820116333';
+
+        // 원본현금영수증 거래일자
+        // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
+        orgTradeDate := '20170711';
+
+        // 발행안내문자 전송여부
+        smssendYN := False;
+
+        // 메모
+        memo := '즉시발행 취소현금영수증 메모';
+
+        // 부분취소여부,
+        isPartCancel := True;
+
+        cancelType := 1;
+
+        supplyCost := '2000';
+
+        tax := '200';
+
+        serviceFee := '0';
+
+        totalAmount := '2200';
+                
+        try
+                response := cashbillService.RevokeRegistIssue(txtCorpNum.text,
+                        mgtKey, orgConfirmNum, orgTradeDate, smssendYN, memo, txtUserID.text,
+                        isPartCancel, cancelType, supplyCost, tax, serviceFee, totalAmount);
+
+        except
+                on le : EPopbillException do begin
+                        ShowMessage('응답코드 : ' + IntToStr(le.code) + #10#13 + '응답메시지 : ' + le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
 end;
 
 end.

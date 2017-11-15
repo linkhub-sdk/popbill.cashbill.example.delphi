@@ -1,9 +1,9 @@
 object frmExample: TfrmExample
-  Left = 217
-  Top = 138
+  Left = 269
+  Top = 149
   AutoScroll = False
-  Caption = '팝빌 현금영수증 SDK '
-  ClientHeight = 720
+  Caption = '팝빌 현금영수증 API SDK Delphi Example'
+  ClientHeight = 740
   ClientWidth = 1115
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -35,7 +35,7 @@ object frmExample: TfrmExample
   object GroupBox7: TGroupBox
     Left = 24
     Top = 224
-    Width = 705
+    Width = 737
     Height = 481
     Caption = '현금영수증 관련 기능'
     TabOrder = 28
@@ -57,7 +57,7 @@ object frmExample: TfrmExample
     object Label5: TLabel
       Left = 344
       Top = 64
-      Width = 350
+      Width = 353
       Height = 13
       Caption = '원본 현금영수증에 대한 '#39'취소현금영수증'#39'을 발행해야 합니다.'
     end
@@ -161,7 +161,7 @@ object frmExample: TfrmExample
   object GroupBox5: TGroupBox
     Left = 389
     Top = 310
-    Width = 212
+    Width = 273
     Height = 155
     Caption = '취소현금영수증 즉시발행 프로세스'
     Color = clBtnFace
@@ -498,9 +498,9 @@ object frmExample: TfrmExample
     OnClick = btnGetURL_PBOXClick
   end
   object btnCancelIssue: TButton
-    Left = 420
+    Left = 412
     Top = 419
-    Width = 69
+    Width = 77
     Height = 25
     Caption = '발행취소'
     TabOrder = 10
@@ -518,7 +518,7 @@ object frmExample: TfrmExample
   object Panel1: TPanel
     Left = 400
     Top = 336
-    Width = 174
+    Width = 249
     Height = 40
     Color = clActiveBorder
     TabOrder = 9
@@ -530,6 +530,15 @@ object frmExample: TfrmExample
       Caption = '즉시발행'
       TabOrder = 0
       OnClick = btnRevokeRegistIssueClick
+    end
+    object btnRevokeRegistIssue_part: TButton
+      Left = 112
+      Top = 8
+      Width = 123
+      Height = 25
+      Caption = '부분취소 즉시발행'
+      TabOrder = 1
+      OnClick = btnRevokeRegistIssue_partClick
     end
   end
   object GroupBox12: TGroupBox
