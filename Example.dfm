@@ -57,7 +57,7 @@ object frmExample: TfrmExample
     object Label5: TLabel
       Left = 344
       Top = 64
-      Width = 353
+      Width = 322
       Height = 13
       Caption = '원본 현금영수증에 대한 '#39'취소현금영수증'#39'을 발행해야 합니다.'
     end
