@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2017-11-15                                                 }
+{ - 업데이트 일자 : 2018-09-20                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -50,21 +50,6 @@ type
     btnCancelIssue: TButton;
     btnDelete: TButton;
     GroupBox5: TGroupBox;
-    btnGetInfo: TButton;
-    btnGetInfos: TButton;
-    btnGetLogs: TButton;
-    btnGetDetailInfo: TButton;
-    btnSendEmail: TButton;
-    btnSendSMS: TButton;
-    btnSendFAX: TButton;
-    btnGetPopUpURL: TButton;
-    btnGetPrintURL: TButton;
-    btnGetEPrintURL: TButton;
-    btnGetMassPrintURL: TButton;
-    btnGetMailURL: TButton;
-    btnGetURL_WRITE: TButton;
-    btnGetURL_TBOX: TButton;
-    btnGetURL_PBOX: TButton;
     GroupBox6: TGroupBox;
     GroupBox7: TGroupBox;
     Label3: TLabel;
@@ -103,6 +88,23 @@ type
     btnGetPartnerBalance: TButton;
     btnGetPartnerURL_CHRG: TButton;
     btnRevokeRegistIssue_part: TButton;
+    btnGetURL_TBOX: TButton;
+    btnGetURL_PBOX: TButton;
+    btnGetURL_WRITE: TButton;
+    btnGetPopUpURL: TButton;
+    btnGetPrintURL: TButton;
+    btnGetEPrintURL: TButton;
+    btnGetMassPrintURL: TButton;
+    btnGetMailURL: TButton;
+    btnSendEmail: TButton;
+    btnSendSMS: TButton;
+    btnSendFAX: TButton;
+    btnGetInfo: TButton;
+    btnGetInfos: TButton;
+    btnGetLogs: TButton;
+    btnGetDetailInfo: TButton;
+    btnListEmailConfig: TButton;
+    btnUpdateEmailConfig: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender:TObject; var Action:TCloseAction);
     procedure btnRegisterClick(Sender: TObject);
@@ -148,6 +150,8 @@ type
     procedure btnRevokeRegistIssueClick(Sender: TObject);
     procedure btnGetPartnerURL_CHRGClick(Sender: TObject);
     procedure btnRevokeRegistIssue_partClick(Sender: TObject);
+    procedure btnListEmailConfigClick(Sender: TObject);
+    procedure btnUpdateEmailConfigClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -1819,6 +1823,70 @@ begin
         end;
 
         ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+end;
+
+procedure TfrmExample.btnListEmailConfigClick(Sender: TObject);
+var
+        EmailConfigList : TEmailConfigList;
+        tmp : string;
+        i : Integer;
+begin
+        {**********************************************************************}
+        {  현금영수증 메일전송 항목에 대한 전송여부를 목록으로 반환한다.       }
+        {**********************************************************************}
+        
+        try
+                EmailConfigList := cashbillService.ListEmailConfig(txtCorpNum.text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
+                        Exit;
+                end;
+        end;
+
+        tmp := '메일전송유형 | 전송여부' + #13;
+
+        for i := 0 to Length(EmailConfigList) -1 do
+        begin
+            if EmailConfigList[i].EmailType = 'CSH_ISSUE' then
+                tmp := tmp + 'CSH_ISSUE (고객에게 현금영수증이 발행 되었음을 알려주는 메일) | ' + BoolToStr(EmailConfigList[i].SendYN) + #13;
+
+            if EmailConfigList[i].EmailType = 'CSH_CANCEL' then
+                tmp := tmp + 'CSH_CANCEL (고객에게 현금영수증이 발행취소 되었음을 알려주는 메일) | ' + BoolToStr(EmailConfigList[i].SendYN) + #13;
+        end;
+
+        ShowMessage(tmp);
+end;
+
+procedure TfrmExample.btnUpdateEmailConfigClick(Sender: TObject);
+var
+        response : TResponse;
+        EmailType : String;
+        SendYN    : Boolean;
+begin
+        {**********************************************************************}
+        { 현금영수증 메일전송 항목에 대한 전송여부를 수정한다.                 }
+        { 메일전송유형                                                         }
+        {  CSH_ISSUE : 고객에게 현금영수증이 발행 되었음을 알려주는 메일       }
+        {  CSH_CANCEL : 고객에게 현금영수증이 발행취소 되었음을 알려주는 메일  }
+        {**********************************************************************}
+
+        // 메일전송유형
+        EmailType := 'CSH_ISSUE';
+
+        // 전송여부 (True - 전송, False - 미전송)
+        SendYN := True;
+
+        try
+                response := cashbillService.UpdateEmailConfig(txtCorpNum.text, EmailType, SendYN);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
+                        Exit;
+                end;
+        end;
+
+        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
 end.
