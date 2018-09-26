@@ -1,6 +1,6 @@
 object frmExample: TfrmExample
-  Left = 759
-  Top = 261
+  Left = 711
+  Top = 106
   AutoScroll = False
   Caption = '팝빌 현금영수증 API SDK Delphi Example'
   ClientHeight = 708
@@ -34,31 +34,32 @@ object frmExample: TfrmExample
   end
   object GroupBox7: TGroupBox
     Left = 24
-    Top = 224
+    Top = 216
     Width = 1073
     Height = 465
     Caption = '현금영수증 관련 기능'
     TabOrder = 13
     object Label3: TLabel
       Left = 114
-      Top = 22
+      Top = 46
       Width = 120
       Height = 13
       Caption = '문서관리번호(MgtKey) :'
     end
     object Label4: TLabel
-      Left = 344
-      Top = 48
+      Left = 656
+      Top = 104
       Width = 321
       Height = 13
       AutoSize = False
       Caption = '국세청 전송이 완료된 현금영수증을 취소하기 위해서는'
     end
     object Label5: TLabel
-      Left = 344
-      Top = 64
-      Width = 322
+      Left = 656
+      Top = 120
+      Width = 353
       Height = 13
+      AutoSize = False
       Caption = '원본 현금영수증에 대한 '#39'취소현금영수증'#39'을 발행해야 합니다.'
     end
     object GroupBox8: TGroupBox
@@ -500,7 +501,7 @@ object frmExample: TfrmExample
   end
   object txtMgtKey: TEdit
     Left = 268
-    Top = 243
+    Top = 259
     Width = 149
     Height = 21
     ImeName = 'Microsoft IME 2010'
@@ -508,7 +509,7 @@ object frmExample: TfrmExample
   end
   object btnCheckMgtkeyInUse: TButton
     Left = 428
-    Top = 242
+    Top = 258
     Width = 161
     Height = 25
     Caption = '관리번호 사용여부 확인'

@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2018-09-20                                                 }
+{ - 업데이트 일자 : 2018-09-26                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -256,70 +256,75 @@ begin
         // 사업자별로 중복되지 않도록 구성
         cashbill.MgtKey := txtMgtKey.Text;
 
-        // [필수] 거래유형, [승인거래, 취소거래] 중 기재
+        // [취소거래시 필수] 원본 현금영수증 국세청승인번호
+        // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
+        cashbill.orgConfirmNum := '';
+
+        // [취소거래시 필수] 원본 현금영수증 거래일자
+        // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
+        cashbill.orgTradeDate := '';
+
+        // [필수] 문서형태, [승인거래, 취소거래] 중 기재
         cashbill.tradeType := '승인거래';
 
-        // [취소거래시 필수] 원본현금영수증 국세청 승인번호
-        // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
-//      cashbill.orgConfirmNum := 'E95069345';
-
-        // [필수] 발행자 사업자 번호, '-' 제외 10자리       
-        cashbill.franchiseCorpNum := txtCorpNum.Text;
-
-        // [필수] 현금영수증 형태, [소득공제용, 지출증빙용] 중 기재
+        // [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
         cashbill.tradeUsage := '소득공제용';
 
-        // [필수] 거래처 식별번호
-        // 거래유형(tradeUsage)이 '소득공제용'인 경우 [주민등록/휴대폰/카드]번호로 발행가능
-        // 거래유형(traseUsage)이 '지출증빙용'인 경우 [주민등록/휴대폰/카드/사업자]번호로 발행가능
-        cashbill.identityNum := '01043245117';
+        // 거래유형, [일반, 도서공연, 대중교통] 중 기재
+        cashbill.tradeOpt := '일반';
 
         // [필수] 과세형태, [과세, 비과세] 중 기재
         cashbill.taxationType := '과세';
 
+        // [필수] 거래금액
+        cashbill.totalAmount := '11000';
+
         // [필수] 공급가액
         cashbill.supplycost := '10000';
-        
-        // [필수] 세액
+
+        // [필수] 부가세
         cashbill.tax := '1000';
 
         // [필수] 봉사료
         cashbill.serviceFee := '0';
 
-        // [필수] 합계금액
-        cashbill.totalAmount := '11000';
+        // [필수] 가맹점 사업자번호, '-' 제외 10자리
+        cashbill.franchiseCorpNum := txtCorpNum.Text;
 
-        
-        // 발행자 상호
+        // 가맹점 상호
         cashbill.franchiseCorpName := '발행자상호';
 
-        // 발행자 대표자명
+        // 가맹점 대표자 성명
         cashbill.franchiseCEOName := '발행자 대표자';
 
-        // 발행자 주소
+        // 가맹점 주소
         cashbill.franchiseAddr := '발행자 주소';
 
-        // 발행자 연락처
+        // 가맹점 전화번호
         cashbill.franchiseTEL := '07043042991';
 
+        // [필수] 식별번호
+        // 거래구분(tradeUsage)이 '소득공제용'인 경우 [주민등록/휴대폰/카드]번호로 발행가능
+        // 거래구분(traseUsage)이 '지출증빙용'인 경우 [주민등록/휴대폰/카드/사업자]번호로 발행가능
+        cashbill.identityNum := '01043245117';
 
-        // 고객명
+        // 주문자명
         cashbill.customerName := '고객명';
 
-        // 상품명
+        // 주문상품명
         cashbill.itemName := '상품명';
-        
-        // 가맹점 주문번호
+
+        // 주문번호
         cashbill.orderNumber := '주문번호';
 
-        // 고객 이메일주소
+        // 주문자 이메일
         cashbill.email := 'test@test.com';
 
-        // 고객 팩스번호
-        cashbill.fax := '777-444-333';
-
-        // 고객 휴대폰번호
+        // 주문자 휴대폰
         cashbill.hp := '010-111-222';
+
+        // 주문자 팩스
+        cashbill.fax := '777-444-333';
 
         // 발행안내문자 전송여부
         cashbill.smssendYN := False;
@@ -572,70 +577,75 @@ begin
         // 사업자별로 중복되지 않도록 구성
         cashbill.MgtKey := txtMgtKey.Text;
 
-        // [필수] 거래유형, [승인거래, 취소거래] 중 기재
+        // [취소거래시 필수] 원본 현금영수증 국세청승인번호
+        // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
+        cashbill.orgConfirmNum := '';
+
+        // [취소거래시 필수] 원본 현금영수증 거래일자
+        // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
+        cashbill.orgTradeDate := '';
+
+        // [필수] 문서형태, [승인거래, 취소거래] 중 기재
         cashbill.tradeType := '승인거래';
 
-        // [취소거래시 필수] 원본현금영수증 국세청 승인번호
-        // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
-//      cashbill.orgConfirmNum := 'E95069345';
-
-        // [필수] 발행자 사업자 번호, '-' 제외 10자리       
-        cashbill.franchiseCorpNum := txtCorpNum.Text;
-
-        // [필수] 현금영수증 형태, [소득공제용, 지출증빙용] 중 기재
+        // [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
         cashbill.tradeUsage := '소득공제용';
 
-        // [필수] 거래처 식별번호
-        // 거래유형(tradeUsage)이 '소득공제용'인 경우 [주민등록/휴대폰/카드]번호로 발행가능
-        // 거래유형(traseUsage)이 '지출증빙용'인 경우 [주민등록/휴대폰/카드/사업자]번호로 발행가능
-        cashbill.identityNum := '01043245117';
+        // [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
+        cashbill.tradeOpt := '일반';
 
         // [필수] 과세형태, [과세, 비과세] 중 기재
         cashbill.taxationType := '과세';
 
+        // [필수] 거래금액
+        cashbill.totalAmount := '11000';
+
         // [필수] 공급가액
         cashbill.supplycost := '10000';
-        
-        // [필수] 세액
+
+        // [필수] 부가세
         cashbill.tax := '1000';
 
         // [필수] 봉사료
         cashbill.serviceFee := '0';
 
-        // [필수] 합계금액
-        cashbill.totalAmount := '11000';
+        // [필수] 가맹점 사업자번호, '-' 제외 10자리
+        cashbill.franchiseCorpNum := txtCorpNum.Text;
 
-        
-        // 발행자 상호
+        // 가맹점 상호
         cashbill.franchiseCorpName := '발행자상호_수정';
 
-        // 발행자 대표자명
+        // 가맹점 대표자 성명
         cashbill.franchiseCEOName := '발행자 대표자_수정';
 
-        // 발행자 주소
+        // 가맹점 주소
         cashbill.franchiseAddr := '발행자 주소';
 
-        // 발행자 연락처
+        // 가맹점 전화번호
         cashbill.franchiseTEL := '07043042991';
 
+        // [필수] 식별번호
+        // 거래구분(tradeUsage)이 '소득공제용'인 경우 [주민등록/휴대폰/카드]번호로 발행가능
+        // 거래구분(traseUsage)이 '지출증빙용'인 경우 [주민등록/휴대폰/카드/사업자]번호로 발행가능
+        cashbill.identityNum := '01043245117';
 
-        // 고객명
+        // 주문자명
         cashbill.customerName := '고객명';
 
-        // 상품명
+        // 주문상품명
         cashbill.itemName := '상품명';
-        
-        // 가맹점 주문번호
+
+        // 주문번호
         cashbill.orderNumber := '주문번호';
 
-        // 고객 이메일주소
+        // 주문자 이메일
         cashbill.email := 'test@test.com';
 
-        // 고객 팩스번호
-        cashbill.fax := '777-444-333';
-
-        // 고객 휴대폰번호
+        // 주문자 휴대폰
         cashbill.hp := '010-111-222';
+
+        // 주문자 팩스
+        cashbill.fax := '777-444-333';
 
         // 발행안내문자 전송여부
         cashbill.smssendYN := False;
@@ -730,25 +740,27 @@ begin
         tmp := tmp +'itemKey (아이템키) : ' +  cashbillInfo.itemKey + #13;
         tmp := tmp +'mgtKey (문서관리번호) : ' +  cashbillInfo.mgtKey + #13;
         tmp := tmp +'tradeDate (거래일자) : ' +  cashbillInfo.tradeDate + #13;
-        tmp := tmp +'issueDT (발행일시) : ' +  cashbillInfo.issueDT + #13;
-        tmp := tmp +'regDT (등록일시) : ' +  cashbillInfo.regDT + #13;        
+        tmp := tmp +'tradeType (문서형태) : ' +  cashbillInfo.tradeType + #13;
+        tmp := tmp +'tradeUsage (거래구분) : ' +  cashbillInfo.tradeUsage + #13;
+        tmp := tmp +'tradeOpt (거래유형) : ' +  cashbillInfo.tradeOpt + #13;
         tmp := tmp +'taxationType (과세형태) : ' +  cashbillInfo.taxationType + #13;
         tmp := tmp +'totalAmount (거래금액) : ' +  cashbillInfo.totalAmount + #13;
-        tmp := tmp +'tradeUsage (거래용도) : ' +  cashbillInfo.tradeUsage + #13;
-        tmp := tmp +'tradeType (현금영수증 형태) : ' +  cashbillInfo.tradeType + #13;
+        tmp := tmp +'issueDT (발행일시) : ' +  cashbillInfo.issueDT + #13;
+        tmp := tmp +'regDT (등록일시) : ' +  cashbillInfo.regDT + #13;
+        tmp := tmp +'stateMemo (상태메모) : ' +  cashbillInfo.stateMemo + #13;
         tmp := tmp +'stateCode (상태코드) : ' +  IntToStr(cashbillInfo.stateCode) + #13;
         tmp := tmp +'stateDT (상태변경일시) : ' +  cashbillInfo.stateDT + #13;
-        tmp := tmp +'identityNum (거래처 식별번호) : ' +  cashbillInfo.identityNum + #13;
-        tmp := tmp +'itemName (상품명) : ' +  cashbillInfo.itemName + #13;
-        tmp := tmp +'customerName (고객명) : ' +  cashbillInfo.customerName + #13;
+        tmp := tmp +'identityNum (식별번호) : ' +  cashbillInfo.identityNum + #13;
+        tmp := tmp +'itemName (주문상품명) : ' +  cashbillInfo.itemName + #13;
+        tmp := tmp +'customerName (주문자명) : ' +  cashbillInfo.customerName + #13;
         tmp := tmp +'confirmNum (국세청승인번호) : ' +  cashbillInfo.confirmNum + #13;
-        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbillInfo.orgConfirmNum + #13;       
+        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbillInfo.orgConfirmNum + #13;
         tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbillInfo.orgTradeDate + #13;
         tmp := tmp +'ntssendDT (국세청 전송일시) : ' +  cashbillInfo.ntssendDT + #13;
         tmp := tmp +'ntsresultDT (국세청 처리결과 수신일시) : ' +  cashbillInfo.ntsresultDT + #13;
         tmp := tmp +'ntsresultCode (국세청 처리결과 상태코드) : ' +  cashbillInfo.ntsresultCode + #13;
         tmp := tmp +'ntsresultMessage (국세청 처리결과 메시지) : ' +  cashbillInfo.ntsresultMessage + #13;
-        tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(cashbillInfo.printYN,'true','false') + #13;        
+        tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(cashbillInfo.printYN,'true','false') + #13;
 
         ShowMessage(tmp);
 end;
@@ -1045,31 +1057,29 @@ begin
 
         tmp := tmp +'mgtKey (문서관리번호) : ' +  cashbill.mgtKey + #13;
         tmp := tmp +'confirmNum (국세청 승인번호) : ' +  cashbill.confirmNum + #13;
-        tmp := tmp +'tradeDate (거래일자) : ' +  cashbill.tradeDate + #13;
-        tmp := tmp +'tradeUsage (거래유형) : ' +  cashbill.tradeUsage + #13;
-        tmp := tmp +'tradeType (현금영수증 형태) : ' +  cashbill.tradeType + #13;
-        tmp := tmp +'taxationType (과세형태) : ' +  cashbill.taxationType + #13;
-        tmp := tmp +'supplyCost (공급가액) : ' +  cashbill.supplyCost + #13;
-        tmp := tmp +'tax (세액) : ' +  cashbill.tax + #13;
-        tmp := tmp +'serviceFee (봉사료) : ' +  cashbill.serviceFee + #13;
-        tmp := tmp +'totalAmount (거래금액) : ' +  cashbill.totalAmount + #13;
-
-        tmp := tmp +'franchiseCorpNum (발행자 사업자번호) : ' +  cashbill.franchiseCorpNum + #13;
-        tmp := tmp +'franchiseCorpName (발행자 상호) : ' +  cashbill.franchiseCorpName + #13;
-        tmp := tmp +'franchiseCEOName (발행자 대표자성명) : ' +  cashbill.franchiseCEOName + #13;
-        tmp := tmp +'franchiseAddr (발행자 주소) : ' +  cashbill.franchiseAddr + #13;
-        tmp := tmp +'franchiseTEL (발행자 전화번호) : ' +  cashbill.franchiseTEL + #13;
-
-        tmp := tmp +'identityNum (거래처 식별번호) : ' +  cashbill.identityNum + #13;
-        tmp := tmp +'customerName (고객명) : ' +  cashbill.customerName + #13;
-        tmp := tmp +'itemName (상품명) : ' +  cashbill.itemName + #13;
-        tmp := tmp +'orderNumber (가맹점주문번호) : ' +  cashbill.orderNumber + #13;
-        tmp := tmp +'email (이메일) : ' +  cashbill.email + #13;
-        tmp := tmp +'hp (휴대폰) : ' +  cashbill.hp + #13;
-        tmp := tmp +'smssendYN (SMS 전송여부) : ' +  IfThen(cashbill.smssendYN,'true','false') + #13;
-
         tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbill.orgConfirmNum + #13;
         tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbill.orgTradeDate + #13;
+        tmp := tmp +'tradeDate (거래일자) : ' +  cashbill.tradeDate + #13;
+        tmp := tmp +'tradeType (문서형태) : ' +  cashbill.tradeType + #13;
+        tmp := tmp +'tradeUsage (거래구분) : ' +  cashbill.tradeUsage + #13;
+        tmp := tmp +'tradeOpt (거래유형) : ' +  cashbill.tradeOpt + #13;
+        tmp := tmp +'taxationType (과세형태) : ' +  cashbill.taxationType + #13;
+        tmp := tmp +'totalAmount (거래금액) : ' +  cashbill.totalAmount + #13;
+        tmp := tmp +'supplyCost (공급가액) : ' +  cashbill.supplyCost + #13;
+        tmp := tmp +'tax (부가세) : ' +  cashbill.tax + #13;
+        tmp := tmp +'serviceFee (봉사료) : ' +  cashbill.serviceFee + #13;
+        tmp := tmp +'franchiseCorpNum (가맹점 사업자번호) : ' +  cashbill.franchiseCorpNum + #13;
+        tmp := tmp +'franchiseCorpName (가맹점 상호) : ' +  cashbill.franchiseCorpName + #13;
+        tmp := tmp +'franchiseCEOName (가맹점 대표자 성명) : ' +  cashbill.franchiseCEOName + #13;
+        tmp := tmp +'franchiseAddr (가맹점 주소) : ' +  cashbill.franchiseAddr + #13;
+        tmp := tmp +'franchiseTEL (가맹점 전화번호) : ' +  cashbill.franchiseTEL + #13;
+        tmp := tmp +'identityNum (식별번호) : ' +  cashbill.identityNum + #13;
+        tmp := tmp +'customerName (주문자명) : ' +  cashbill.customerName + #13;
+        tmp := tmp +'itemName (주문상품명) : ' +  cashbill.itemName + #13;
+        tmp := tmp +'orderNumber (주문번호) : ' +  cashbill.orderNumber + #13;
+        tmp := tmp +'email (주문자 이메일) : ' +  cashbill.email + #13;
+        tmp := tmp +'hp (주문자 휴대폰) : ' +  cashbill.hp + #13;
+        tmp := tmp +'smssendYN (SMS 전송여부) : ' +  IfThen(cashbill.smssendYN,'true','false') + #13;
         tmp := tmp +'cancelType (취소사유) : ' +  IntToStr(cashbill.cancelType) + #13;
                 
         ShowMessage(tmp);
@@ -1130,10 +1140,10 @@ begin
 
         // 현금영수증 문서관리번호 배열, 최대 1000건
         SetLength(KeyList,4);
-        KeyList[0] := '20161004-01';
-        KeyList[1] := '20161004-02';
-        KeyList[2] := '20161004-03';
-        KeyList[3] := '20161004-04';
+        KeyList[0] := '20180926_10';
+        KeyList[1] := '20180926_11';
+        KeyList[2] := '20180926_12';
+        KeyList[3] := '20180926_13';
         
         try
                 InfoList := cashbillService.getInfos(txtCorpNum.text,KeyList);
@@ -1149,26 +1159,27 @@ begin
                 tmp := tmp +'itemKey (아이템키) : ' +  InfoList[i].itemKey + #13;
                 tmp := tmp +'mgtKey (문서관리번호) : ' +  InfoList[i].mgtKey + #13;
                 tmp := tmp +'tradeDate (거래일자) : ' +  InfoList[i].tradeDate + #13;
-                tmp := tmp +'issueDT (발행일시) : ' +  InfoList[i].issueDT + #13;
-                tmp := tmp +'regDT (등록일시) : ' +  InfoList[i].regDT + #13;
+                tmp := tmp +'tradeType (문서형태) : ' +  InfoList[i].tradeType + #13;
+                tmp := tmp +'tradeUsage (거래구분) : ' +  InfoList[i].tradeUsage + #13;
+                tmp := tmp +'tradeOpt (거래유형) : ' +  InfoList[i].tradeOpt + #13;
                 tmp := tmp +'taxationType (과세형태) : ' +  InfoList[i].taxationType + #13;
                 tmp := tmp +'totalAmount (거래금액) : ' +  InfoList[i].totalAmount + #13;
-                tmp := tmp +'tradeUsage (거래용도) : ' +  InfoList[i].tradeUsage + #13;
-                tmp := tmp +'tradeType (현금영수증 형태) : ' +  InfoList[i].tradeType + #13;
+                tmp := tmp +'issueDT (발행일시) : ' +  InfoList[i].issueDT + #13;
+                tmp := tmp +'regDT (등록일시) : ' +  InfoList[i].regDT + #13;
+                tmp := tmp +'stateMemo (상태메모) : ' +  InfoList[i].stateMemo + #13;
                 tmp := tmp +'stateCode (상태코드) : ' +  IntToStr(InfoList[i].stateCode) + #13;
                 tmp := tmp +'stateDT (상태변경일시) : ' +  InfoList[i].stateDT + #13;
-                tmp := tmp +'identityNum (거래처 식별번호) : ' +  InfoList[i].identityNum + #13;
-                tmp := tmp +'itemName (상품명) : ' +  InfoList[i].itemName + #13;
-                tmp := tmp +'customerName (고객명) : ' +  InfoList[i].customerName + #13;
+                tmp := tmp +'identityNum (식별번호) : ' +  InfoList[i].identityNum + #13;
+                tmp := tmp +'itemName (주문상품명) : ' +  InfoList[i].itemName + #13;
+                tmp := tmp +'customerName (주문자명) : ' +  InfoList[i].customerName + #13;
                 tmp := tmp +'confirmNum (국세청승인번호) : ' +  InfoList[i].confirmNum + #13;
-                tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  InfoList[i].orgConfirmNum + #13;               
+                tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  InfoList[i].orgConfirmNum + #13;
                 tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  InfoList[i].orgTradeDate + #13;
                 tmp := tmp +'ntssendDT (국세청 전송일시) : ' +  InfoList[i].ntssendDT + #13;
                 tmp := tmp +'ntsresultDT (국세청 처리결과 수신일시) : ' +  InfoList[i].ntsresultDT + #13;
                 tmp := tmp +'ntsresultCode (국세청 처리결과 상태코드) : ' +  InfoList[i].ntsresultCode + #13;
                 tmp := tmp +'ntsresultMessage (국세청 처리결과 메시지) : ' +  InfoList[i].ntsresultMessage + #13;
                 tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(InfoList[i].printYN,'true','false') + #13 + #13;
-
         end;
 
         ShowMessage(tmp);
@@ -1361,74 +1372,75 @@ begin
         // 사업자별로 중복되지 않도록 구성
         cashbill.MgtKey := txtMgtKey.Text;
 
-        // [필수] 거래유형, [승인거래, 취소거래] 중 기재
-        cashbill.tradeType := '승인거래';
-
-        // [취소거래시 필수] 원본현금영수증 국세청 승인번호
+        // [취소거래시 필수] 원본 현금영수증 국세청승인번호
         // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
         cashbill.orgConfirmNum := '';
 
-        // [취소거래시 필수] 원본현금영수증 거래일자
+        // [취소거래시 필수] 원본 현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
         cashbill.orgTradeDate := '';
 
-        // [필수] 발행자 사업자 번호, '-' 제외 10자리
-        cashbill.franchiseCorpNum := txtCorpNum.Text;
+        // [필수] 문서형태, [승인거래, 취소거래] 중 기재
+        cashbill.tradeType := '승인거래';
 
-        // [필수] 현금영수증 형태, [소득공제용, 지출증빙용] 중 기재
+        // [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
         cashbill.tradeUsage := '소득공제용';
 
-        // [필수] 거래처 식별번호
-        // 거래유형(tradeUsage)이 '소득공제용'인 경우 [주민등록/휴대폰/카드]번호로 발행가능
-        // 거래유형(traseUsage)이 '지출증빙용'인 경우 [주민등록/휴대폰/카드/사업자]번호로 발행가능
-        cashbill.identityNum := '0101112222';
+        // 거래유형, [일반, 도서공연, 대중교통] 중 기재
+        cashbill.tradeOpt := '일반';
 
         // [필수] 과세형태, [과세, 비과세] 중 기재
         cashbill.taxationType := '과세';
 
+        // [필수] 거래금액
+        cashbill.totalAmount := '11000';
+
         // [필수] 공급가액
         cashbill.supplycost := '10000';
-        
-        // [필수] 세액
+
+        // [필수] 부가세
         cashbill.tax := '1000';
 
         // [필수] 봉사료
         cashbill.serviceFee := '0';
 
-        // [필수] 합계금액
-        cashbill.totalAmount := '11000';
+        // [필수] 가맹점 사업자번호, '-' 제외 10자리
+        cashbill.franchiseCorpNum := txtCorpNum.Text;
 
-        
-        // 발행자 상호
+        // 가맹점 상호
         cashbill.franchiseCorpName := '발행자상호';
 
-        // 발행자 대표자명
+        // 가맹점 대표자 성명
         cashbill.franchiseCEOName := '발행자 대표자';
 
-        // 발행자 주소
+        // 가맹점 주소
         cashbill.franchiseAddr := '발행자 주소';
 
-        // 발행자 연락처
+        // 가맹점 전화번호
         cashbill.franchiseTEL := '07043042991';
 
+        // [필수] 식별번호
+        // 거래구분(tradeUsage)이 '소득공제용'인 경우 [주민등록/휴대폰/카드]번호로 발행가능
+        // 거래구분(traseUsage)이 '지출증빙용'인 경우 [주민등록/휴대폰/카드/사업자]번호로 발행가능
+        cashbill.identityNum := '0101112222';
 
-        // 고객명
+        // 주문자명
         cashbill.customerName := '고객명';
 
-        // 상품명
+        // 주문상품명
         cashbill.itemName := '상품명';
-        
-        // 가맹점 주문번호
+
+        // 주문번호
         cashbill.orderNumber := '주문번호';
 
-        // 고객 이메일주소
+        // 주문자 이메일주소
         cashbill.email := 'test@test.com';
 
-        // 고객 팩스번호
-        cashbill.fax := '777-444-333';
-
-        // 고객 휴대폰번호
+        // 주문자 휴대폰번호
         cashbill.hp := '010-111-222';
+
+        // 주문자 팩스번호
+        cashbill.fax := '777-444-333';
 
         // 발행안내문자 전송여부
         cashbill.smssendYN := False;
@@ -1561,7 +1573,7 @@ end;
 procedure TfrmExample.btnSearchClick(Sender: TObject);
 var
         DType, SDate, EDate, QString, Order, tmp : String;
-        State, TradeType, TradeUsage, TaxationType : Array Of String;
+        State, TradeType, TradeUsage, TradeOpt, TaxationType : Array Of String;
         Page, PerPage, i : Integer;
         SearchList : TCashbillSearchList;
 begin
@@ -1575,10 +1587,10 @@ begin
         DType := 'R';
 
         // [필수] 검색 시작일자, 작성형태(yyyyMMdd)
-        SDate := '20170601';
+        SDate := '20180901';
 
         // [필수] 검색 종료일자, 작성형태(yyyyMMdd)
-        EDate := '20171201';
+        EDate := '20180920';
 
         // 전송상태값 배열. 미기재시 전체조회, 문서상태 값 3자리의 배열, 2,3번째 자리 와일드 카드 사용가능
         // 전송상태값 테이블은 "[현금영수증 연동매뉴얼] > 5.2 현금영수증 상태코드 테이블" 참조
@@ -1596,6 +1608,12 @@ begin
         SetLength(TradeUsage, 2);
         TradeUsage[0] := 'P';
         TradeUsage[1] := 'C';
+
+        // 거래유형 배열, { N:일반 B:도서공연 T:대중교통 }
+        SetLength(TradeOpt, 3);
+        TradeOpt[0] := 'T';
+        TradeOpt[1] := 'B';
+        TradeOpt[2] := 'T';
 
         // 과세형태 배열, { T:과세 N:비과세 }
         SetLength(TaxationType, 2);
@@ -1617,7 +1635,7 @@ begin
         try
                 SearchList := cashbillService.Search(txtCorpNum.text,DType, SDate,
                                 EDate, State, TradeType, TradeUsage, TaxationType,
-                                QString, Page, PerPage,Order);
+                                QString, Page, PerPage,Order, TradeOpt);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1632,38 +1650,37 @@ begin
         tmp := tmp + 'pageCount : '+ IntToStr(SearchList.pageCount) + #13;              // 페이지 개수
         tmp := tmp + 'message : '+ SearchList.message + #13#13;                         // 응답 메시지
 
-        tmp := tmp + 'itemKey | mgtKey | tradeDate | tradeUsage | issueDT | customerName | itemName | identityNum | taxationType | totalAmount | tradeType | stateCode | stateDT | confirmNum '
-                  +'orgConfirmNum | orgTradeDate | ntssendDT | ntsresult | ntsresultDT | ntsresultCode | ntsMessage | stateDT | printYN  ' + #13#13;
-                  
+        tmp := tmp + 'itemKey | mgtKey | tradeDate | tradeType | tradeUsage | tradeOpt | taxationType | totalAmount | '
+                   + 'issueDT | regDT | tradeType | stateMemo | stateCode | stateDT | identityNum  | itemName | '
+                   + 'customerName | confirmNum | orgConfirmNum | orgTradeDate | ntssendDT | ntsresult | ntsresultDT | ntsresultCode | ntsMessage | printYN  ' + #13#13;
+
         for i := 0 to Length(SearchList.list) -1 do
         begin
                 tmp := tmp + SearchList.list[i].itemKey + ' | ';
                 tmp := tmp + SearchList.list[i].mgtKey +' | ';
                 tmp := tmp + SearchList.list[i].tradeDate + ' | ';
-                tmp := tmp + SearchList.list[i].tradeUsage + ' | ';
-                tmp := tmp + SearchList.list[i].issueDT + ' | ';
-                tmp := tmp + SearchList.list[i].customerName +' | ';
-                tmp := tmp + SearchList.list[i].itemName + ' | ';
-                tmp := tmp + SearchList.list[i].identityNum + ' | ';
-                tmp := tmp + SearchList.list[i].taxationType + ' | ';
-
-                tmp := tmp + SearchList.list[i].totalAmount + ' | ';
                 tmp := tmp + SearchList.list[i].tradeType + ' | ';
+                tmp := tmp + SearchList.list[i].tradeUsage + ' | ';
+                tmp := tmp + SearchList.list[i].tradeOpt + ' | ';
+                tmp := tmp + SearchList.list[i].taxationType + ' | ';
+                tmp := tmp + SearchList.list[i].totalAmount + ' | ';
+                tmp := tmp + SearchList.list[i].issueDT + ' | ';
+                tmp := tmp + SearchList.list[i].regDT + ' | ';
+                tmp := tmp + SearchList.list[i].stateMemo + ' | ';
                 tmp := tmp + IntToStr(SearchList.list[i].stateCode) + ' | ';
                 tmp := tmp + SearchList.list[i].stateDT + ' | ';
+                tmp := tmp + SearchList.list[i].identityNum + ' | ';
+                tmp := tmp + SearchList.list[i].itemName + ' | ';
+                tmp := tmp + SearchList.list[i].customerName +' | ';
                 tmp := tmp + SearchList.list[i].confirmNum + ' | ';
                 tmp := tmp + SearchList.list[i].orgConfirmNum + ' | ';
                 tmp := tmp + SearchList.list[i].orgTradeDate + ' | ';
-
                 tmp := tmp + SearchList.list[i].ntssendDT + ' | ';
                 tmp := tmp + SearchList.list[i].ntsresult + ' | ';
                 tmp := tmp + SearchList.list[i].ntsresultDT + ' | ';
                 tmp := tmp + SearchList.list[i].ntsresultCode + ' | ';
                 tmp := tmp + SearchList.list[i].ntsresultMessage + ' | ';
-                tmp := tmp + SearchList.list[i].stateDT + ' | ';
-
                 tmp := tmp + IfThen(SearchList.list[i].printYN,'true','false') +#13;
-               
         end;
 
         SearchList.Free;
