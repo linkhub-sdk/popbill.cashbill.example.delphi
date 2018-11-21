@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2018-09-26                                                 }
+{ - 업데이트 일자 : 2018-11-21                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -40,7 +40,7 @@ type
     Label1: TLabel;
     Label2: TLabel;
     btnJoinMember: TButton;
-    btnGetPopbillURL_LOGIN: TButton;
+    btnGetAccessURL: TButton;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     GroupBox4: TGroupBox;
@@ -84,7 +84,7 @@ type
     GroupBox12: TGroupBox;
     GroupBox15: TGroupBox;
     btnGetBalance: TButton;
-    btnGetPopbillURL_CHRG: TButton;
+    btnGetChargeURL: TButton;
     btnGetPartnerBalance: TButton;
     btnGetPartnerURL_CHRG: TButton;
     btnRevokeRegistIssue_part: TButton;
@@ -110,10 +110,10 @@ type
     procedure btnRegisterClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
     procedure btnJoinMemberClick(Sender: TObject);
-    procedure btnGetPopbillURL_LOGINClick(Sender: TObject);
+    procedure btnGetAccessURLClick(Sender: TObject);
     procedure btnGetBalanceClick(Sender: TObject);
     procedure btnUnitCostClick(Sender: TObject);
-    procedure btnGetPopbillURL_CHRGClick(Sender: TObject);
+    procedure btnGetChargeURLClick(Sender: TObject);
     procedure btnGetPartnerBalanceClick(Sender: TObject);
     procedure btnCheckMgtkeyInUseClick(Sender: TObject);
     procedure btnUpdateClick(Sender: TObject);
@@ -187,7 +187,7 @@ begin
     if b = false then BoolToStr:='False'; 
 end;
 
-procedure TfrmExample.btnGetPopbillURL_LOGINClick(Sender: TObject);
+procedure TfrmExample.btnGetAccessURLClick(Sender: TObject);
 var
   resultURL : String;
 
@@ -198,7 +198,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getPopbillURL(txtCorpNum.Text, 'LOGIN');
+                resultURL := cashbillService.getAccessURL(txtCorpNum.Text, txtUserID.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -493,7 +493,7 @@ begin
 
 end;
 
-procedure TfrmExample.btnGetPopbillURL_CHRGClick(Sender: TObject);
+procedure TfrmExample.btnGetChargeURLClick(Sender: TObject);
 var
   resultURL : String;
 
@@ -504,7 +504,7 @@ begin
         {**********************************************************************}
         
         try
-                resultURL := cashbillService.getPopbillURL(txtCorpNum.Text, 'CHRG');
+                resultURL := cashbillService.getChargeURL(txtCorpNum.Text, txtUserID.Text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
