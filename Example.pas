@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2018-12-20                                                 }
+{ - 업데이트 일자 : 2019-01-15                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -349,52 +349,52 @@ var
         response : TResponse;
         joinInfo : TJoinForm;
 begin
-        {**********************************************************************}
+         {**********************************************************************}
         {    파트너의 연동회원으로 회원가입을 요청합니다.                      }
-        {    아이디 중복확인은 btnCheckIDClick 프로시저를 참조하시기 바랍니다. }
+        {    아이디 중복확인은 btnCheckIDClick 프로시져를 참조하시기 바랍니다. }
         {**********************************************************************}
 
-        // 링크 아이디
+        // 링크아이디
         joinInfo.LinkID := LinkID;
 
         // 사업자번호 '-' 제외, 10자리
-        joinInfo.CorpNum := '1231212312';
+        joinInfo.CorpNum := '4364364364';
 
-        // 대표자성명, 최대 30자
+        // 대표자성명, 최대 100자
         joinInfo.CEOName := '대표자성명';
 
-        // 상호명, 최대 70자
-        joinInfo.CorpName := '상호';
+        // 상호명, 최대 200자
+        joinInfo.CorpName := '링크허브';
 
         // 주소, 최대 300자
         joinInfo.Addr := '주소';
 
-        // 업태, 최대 40자
+        // 업태, 최대 100자
         joinInfo.BizType := '업태';
 
-        // 종목, 최대 40자
+        // 종목, 최대 100자
         joinInfo.BizClass := '종목';
 
-        // 아이디, 6자이상 20자 미만 
+        // 아이디, 6자이상 50자 미만
         joinInfo.ID     := 'userid';
 
         // 비밀번호, 6자이상 20자 미만
         joinInfo.PWD    := 'pwd_must_be_long_enough';
 
-        // 담당자명, 최대 30자
+        // 담당자명, 최대 100자
         joinInfo.ContactName := '담당자명';
 
         // 담당자 연락처, 최대 20자
-        joinInfo.ContactTEL :='02-999-9999';
+        joinInfo.ContactTEL :='070-4304-2991';
 
         // 담당자 휴대폰번호, 최대 20자
-        joinInfo.ContactHP := '010-1234-5678';
+        joinInfo.ContactHP := '010-000-1111';
 
         // 담당자 팩스번호, 최대 20자
-        joinInfo.ContactFAX := '02-999-9998';
+        joinInfo.ContactFAX := '02-6442-9700';
 
-        // 담당자 메일 주소, 최대 70자
-        joinInfo.ContactEmail := 'test@test.com';
+        // 담당자 메일, 최대 100자
+        joinInfo.ContactEmail := 'code@linkhub.co.kr';
 
         try
                 response := cashbillService.JoinMember(joinInfo);
@@ -424,20 +424,20 @@ begin
         {**********************************************************************}
         { 연동회원의 회사정보를 수정합니다.                                    }
         {**********************************************************************}
-        
+
         corpInfo := TCorpInfo.Create;
 
-        // 대표자명, 최대 30자
+        // 대표자명, 최대 100자
         corpInfo.ceoname := '대표자명';
 
-        // 상호, 상호 최대 70자
-        corpInfo.corpName := '팝빌_수정';
+        // 상호, 최대 200자
+        corpInfo.corpName := '상호';
 
-        // 업태, 최대 40자
+        // 업태, 최대 100자
         corpInfo.bizType := '업태';
 
-        // 종목, 최대 40자
-        corpInfo.bizClass := '업종';
+        // 종목, 최대 100자
+        corpInfo.bizClass := '종목';
 
         // 주소, 최대 300자
         corpInfo.addr := '서울특별시 강남구 영동대로 517';
@@ -904,10 +904,10 @@ begin
 
         // 인쇄할 현금영수증 문서관리번호 배열, 최대 100건
         SetLength(KeyList,4);
-        KeyList[0] := '20161004-01';
-        KeyList[1] := '20161004-02';
-        KeyList[2] := '20161004-03';
-        KeyList[3] := '20161004-04';
+        KeyList[0] := '20190115-001';
+        KeyList[1] := '20190115-002';
+        KeyList[2] := '20190115-003';
+        KeyList[3] := '20190115-004';
         
         try
                 resultURL := cashbillService.getMassPrintURL(txtCorpNum.text, KeyList);
@@ -984,8 +984,8 @@ begin
         {**********************************************************************}
         { 알림문자를 전송합니다. (단문/SMS- 한글 최대 45자)                    }
         { - 알림문자 전송시 포인트가 차감됩니다. (전송실패시 환불처리)         }
-        { - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [전송내역] 탭에서    }
-        {   전송결과를 확인할 수 있습니다.                                     }
+        { - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > 문자 > [전송내역]    }
+        {   메뉴에서 전송결과를 확인할 수 있습니다.                            }
         {**********************************************************************}
 
         //발신번호
@@ -1107,7 +1107,8 @@ begin
                 end;
         end;
 
-        tmp := 'DocLogType | Log | ProcType | ProcMemo | RegDT | IP' + #13;
+        tmp := 'DocLogType(로그타입) | Log(이력정보) | ProcType(처리형태) | ProcMemo(처리메모) |';
+        tmp := tmp + 'RegDT(등록일시) | IP(아이피)' + #13;
         
         for i := 0 to Length(LogList) -1 do
         begin
@@ -1140,10 +1141,10 @@ begin
 
         // 현금영수증 문서관리번호 배열, 최대 1000건
         SetLength(KeyList,4);
-        KeyList[0] := '20180926_10';
-        KeyList[1] := '20180926_11';
-        KeyList[2] := '20180926_12';
-        KeyList[3] := '20180926_13';
+        KeyList[0] := '20190115-001';
+        KeyList[1] := '20190115-002';
+        KeyList[2] := '20190115-003';
+        KeyList[3] := '20190115-004';
         
         try
                 InfoList := cashbillService.getInfos(txtCorpNum.text,KeyList);
@@ -1212,35 +1213,35 @@ var
         response : TResponse;
         joinInfo : TJoinContact;
 begin
-        {**********************************************************************}
+         {**********************************************************************}
         { 연동회원의 담당자를 신규로 등록합니다.                               }
         {**********************************************************************}
 
-        // [필수] 아이디 (6자 이상 20자 미만)
-        joinInfo.id := 'userid';
+        // [필수] 담당자 아이디 (6자 이상 50자 미만)
+        joinInfo.id := 'testkorea0222_01';
 
         // [필수] 비밀번호 (6자 이상 20자 미만)
         joinInfo.pwd := 'thisispassword';
 
-        // [필수] 담당자명(한글이나 영문 30자 이내)
+        // [필수] 담당자명(한글이나 영문 100자 이내)
         joinInfo.personName := '담당자성명';
 
-        // [필수] 연락처
+        // [필수] 연락처 (최대 20자)
         joinInfo.tel := '070-4304-2991';
 
-        // 휴대폰번호
+        // 휴대폰번호 (최대 20자)
         joinInfo.hp := '010-1111-2222';
 
-        // 팩스번호
+        // 팩스번호 (최대 20자)
         joinInfo.fax := '02-6442-9700';
 
-        // [필수] 이메일
+        // [필수] 이메일 (최대 100자)
         joinInfo.email := 'test@test.com';
 
-        // 조회권한 (true 회사조회/ false 개인조회)
+        // 회사조회 권한여부, true-회사조회 / false-개인조회
         joinInfo.searchAllAllowYN := false;
 
-        // 관리자 권한여부
+        // 관리자 권한여부, true-관리자 / false-사용자
         joinInfo.mgrYN := false;
 
         try
@@ -1270,25 +1271,25 @@ begin
         // 담당자 아이디
         contactInfo.id := 'testkorea';
 
-        // 담당자명
+        // 담당자명 (최대 100자)
         contactInfo.personName := '테스트 담당자';
 
-        // 연락처
-        contactInfo.tel := '070-7510-3715';
+        // 연락처 (최대 20자)
+        contactInfo.tel := '070-4304-2991';
 
-        // 휴대폰번호
+        // 휴대폰번호 (최대 20자)
         contactInfo.hp := '010-4324-1111';
 
-        // 이메일 주소
+        // 이메일 주소 (최대 100자)
         contactInfo.email := 'test@test.com';
-        
-        // 팩스번호
+
+        // 팩스번호 (최대 20자)
         contactInfo.fax := '02-6442-9799';
-        
-        // 회사조회 권한여부
+
+        // 조회권한, true(회사조회), false(개인조회)
         contactInfo.searchAllAllowYN := true;
 
-        // 관리자 전환 여부
+        // 관리자권한 설정여부, true-관리자 / false-사용자
         contactInfo.mgrYN := false;
 
         try
@@ -1508,7 +1509,9 @@ begin
                 end;
         end;
         
-        tmp := 'id | email | hp | personName | searchAllAlloyYN | tel | fax | mgrYN | regDT | state ' + #13;
+        tmp := 'id(아이디) | email(이메일) | hp(휴대폰) | personName(성명) | searchAllAllowYN(회사조회 권한) | ';
+        tmp := tmp + 'tel(연락처) | fax(팩스) | mgrYN(관리자 여부) | regDT(등록일시) | state(상태)' + #13;
+        
         for i := 0 to Length(InfoList) -1 do
         begin
             tmp := tmp + InfoList[i].id + ' | ';
@@ -1587,10 +1590,10 @@ begin
         DType := 'R';
 
         // [필수] 검색 시작일자, 작성형태(yyyyMMdd)
-        SDate := '20181210';
+        SDate := '20190101';
 
         // [필수] 검색 종료일자, 작성형태(yyyyMMdd)
-        EDate := '20181220';
+        EDate := '20190115';
 
         // 전송상태값 배열. 미기재시 전체조회, 문서상태 값 3자리의 배열, 2,3번째 자리 와일드 카드 사용가능
         // 전송상태값 테이블은 "[현금영수증 연동매뉴얼] > 5.2 현금영수증 상태코드 테이블" 참조
@@ -1623,12 +1626,12 @@ begin
         // 거래처 식별번호, 공백처리시 전체조회
         QString := '';
 
-        // 페이지 번호, 기본값 
+        // 페이지 번호, 기본값
         Page := 1;
-        
+
         // 페이지당 목록갯수, 기본값 500, 최대 1000
         PerPage := 50;
-        
+
         // 'D' : 내림차순 , 'A' : 오름차순
         Order := 'D';
 
@@ -1643,16 +1646,21 @@ begin
                 end;
         end;
 
-        tmp := 'code : '+IntToStr(SearchList.code) + #13;                               // 응답 결과코드
-        tmp := tmp + 'total : '+ IntToStr(SearchList.total) + #13;                      // 총 검색결과 건수
-        tmp := tmp + 'perPage : '+ IntToStr(SearchList.perPage) + #13;                  // 페이지당 검색개수
-        tmp := tmp + 'pageNum : '+ IntToStr(SearchList.pageNum) + #13;                  // 페이지 번호
-        tmp := tmp + 'pageCount : '+ IntToStr(SearchList.pageCount) + #13;              // 페이지 개수
-        tmp := tmp + 'message : '+ SearchList.message + #13#13;                         // 응답 메시지
+        tmp := 'code(응답 결과코드) : '+IntToStr(SearchList.code) + #13;
+        tmp := tmp + 'total(총 검색결과 건수) : '+ IntToStr(SearchList.total) + #13;
+        tmp := tmp + 'perPage(페이지당 검색개수) : '+ IntToStr(SearchList.perPage) + #13;
+        tmp := tmp + 'pageNum(페이지 번호) : '+ IntToStr(SearchList.pageNum) + #13;
+        tmp := tmp + 'pageCount(페이지 개수) : '+ IntToStr(SearchList.pageCount) + #13;
+        tmp := tmp + 'message(응답 메시지) : '+ SearchList.message + #13#13;
 
-        tmp := tmp + 'itemKey | mgtKey | tradeDate | tradeType | tradeUsage | tradeOpt | taxationType | totalAmount | '
-                   + 'issueDT | regDT | tradeType | stateMemo | stateCode | stateDT | identityNum  | itemName | '
-                   + 'customerName | confirmNum | orgConfirmNum | orgTradeDate | ntssendDT | ntsresult | ntsresultDT | ntsresultCode | ntsMessage | printYN  ' + #13#13;
+        tmp := tmp + 'itemKey(팝빌 관리번호) | mgtKey(관리번호) | tradeDate(거래일자) | tradeType(문서형태) | '
+                   + 'tradeUsage(거래구분) | tradeOpt(거래유형) | taxationType(과세형태) | totalAmount(거래금액) | '
+                   + 'issueDT(발행일시) | regDT(등록일시) | stateMemo(상태메모) | stateCode(상태코드) | '
+                   + 'stateDT(상태변경일시) | identityNum(식별번호)  | itemName(주문상품명) | '
+                   + 'customerName(주문자명) | confirmNum(국세청승인번호) | orgConfirmNum(원본 현금영수증 국세청승인번호) |'
+                   + 'orgTradeDate(원본 현금영수증 거래일자) | ntssendDT(국세청 전송일시) | ntsresult(국세청 처리결과) | '
+                   + 'ntsresultDT(국세청 처리결과 수신일시) | ntsresultCode(국세청 처리결과 상태코드) | '
+                   + 'ntsresultMessage(국세청 처리결과 메시지) | printYN(인쇄여부)  ' + #13#13;
 
         for i := 0 to Length(SearchList.list) -1 do
         begin
@@ -1735,11 +1743,11 @@ begin
 
         // 원본현금영수증 국세청 승인번호
         // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
-        orgConfirmNum := '820116333';
+        orgConfirmNum := '548757045';
 
         // 원본현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-        orgTradeDate := '20170711';
+        orgTradeDate := '20190110';
 
         // 발행안내문자 전송여부
         smssendYN := False;
@@ -1802,11 +1810,11 @@ begin
 
         // 원본현금영수증 국세청 승인번호
         // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
-        orgConfirmNum := '820116333';
+        orgConfirmNum := '548757045';
 
         // 원본현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-        orgTradeDate := '20170711';
+        orgTradeDate := '20190110';
 
         // 발행안내문자 전송여부
         smssendYN := False;
@@ -1861,7 +1869,7 @@ begin
                 end;
         end;
 
-        tmp := '메일전송유형 | 전송여부' + #13;
+        tmp := 'emailType(메일전송유형) | sendYN(전송여부)' + #13;
 
         for i := 0 to Length(EmailConfigList) -1 do
         begin
