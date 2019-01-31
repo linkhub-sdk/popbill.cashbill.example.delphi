@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2019-01-15                                                 }
+{ - 업데이트 일자 : 2019-01-30                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -27,7 +27,7 @@ const
         {   인증에 사용되므로 유출되지 않도록 주의하시기 바랍니다              }
         { - 상업용 전환이후에도 인증정보는 변경되지 않습니다.                  }
         {**********************************************************************}
-        
+
         //링크아이디
         LinkID = 'TESTER';
 
@@ -167,7 +167,7 @@ implementation
 procedure TfrmExample.FormCreate(Sender: TObject);
 begin
         cashbillService := TCashbillService.Create(LinkID,SecretKey);
-        
+
         //연동환경 설정값, true(개발용), false(상업용)
         cashbillService.IsTest := true;
 
@@ -182,9 +182,14 @@ begin
 end;
 
 Function BoolToStr(b:Boolean):String;
-begin 
-    if b = true then BoolToStr:='True'; 
-    if b = false then BoolToStr:='False'; 
+begin
+    if b = true then BoolToStr:='True';
+    if b = false then BoolToStr:='False';
+end;
+
+function IfThen(condition :bool; trueVal :String ; falseVal : String) : string;
+begin
+    if condition then result := trueVal else result := falseVal;
 end;
 
 procedure TfrmExample.btnGetAccessURLClick(Sender: TObject);
@@ -205,7 +210,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('ResultURL is ' + #13 + resultURL);
 end;
 
@@ -215,12 +219,11 @@ var
         response : TResponse;
 begin
         {**********************************************************************}
-        { 1건의 현금영수증을 삭제합니다                                        }
+        { 1건의 현금영수증을 삭제합니다.                                       }
         { - 현금영수증이 삭제된 경우에만 문서관리번호(mgtKey)를 재사용 할 수   }
         {   있습니다.                                                          }
         { - 삭제가능한 문서 상태 : [임시저장], [발행취소]                      }
         {**********************************************************************}
-
         try
                 response := cashbillService.Delete(txtCorpNum.text, txtMgtKey.Text);
         except
@@ -229,7 +232,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
@@ -349,7 +351,7 @@ var
         response : TResponse;
         joinInfo : TJoinForm;
 begin
-         {**********************************************************************}
+        {**********************************************************************}
         {    파트너의 연동회원으로 회원가입을 요청합니다.                      }
         {    아이디 중복확인은 btnCheckIDClick 프로시져를 참조하시기 바랍니다. }
         {**********************************************************************}
@@ -404,16 +406,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-end;
-
-
-
-
-function IfThen(condition :bool; trueVal :String ; falseVal : String) : string;
-begin
-    if condition then result := trueVal else result := falseVal;
 end;
 
 procedure TfrmExample.btnUpdateCorpInfoClick(Sender: TObject);
@@ -450,7 +443,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
@@ -463,7 +455,6 @@ begin
         { - 과금방식이 연동과금이 아닌 파트너과금인 경우 파트너 잔여포인트     }
         {    확인(GetPartnerBalance API) 기능 이용하시기 바랍니다              }
         {**********************************************************************}
-
         try
                 balance := cashbillService.GetBalance(txtCorpNum.text);
         except
@@ -472,7 +463,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('잔여포인트 : ' + FloatToStr(balance));
 end;
 
@@ -511,9 +501,7 @@ begin
                         Exit;
                 end;
         end;
-        
         ShowMessage('ResultURL is ' + #13 + resultURL);
-
 end;
 
 procedure TfrmExample.btnGetPartnerBalanceClick(Sender: TObject);
@@ -534,7 +522,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('잔여포인트 : ' + FloatToStr(balance));
 
 end;
@@ -711,9 +698,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-
 end;
 
 procedure TfrmExample.btnGetInfoClick(Sender: TObject);
@@ -737,8 +722,8 @@ begin
                 end;
         end;
 
-        tmp := tmp +'itemKey (아이템키) : ' +  cashbillInfo.itemKey + #13;
-        tmp := tmp +'mgtKey (문서관리번호) : ' +  cashbillInfo.mgtKey + #13;
+        tmp := tmp +'itemKey (팝빌 관리번호) : ' +  cashbillInfo.itemKey + #13;
+        tmp := tmp +'mgtKey (관리번호) : ' +  cashbillInfo.mgtKey + #13;
         tmp := tmp +'tradeDate (거래일자) : ' +  cashbillInfo.tradeDate + #13;
         tmp := tmp +'tradeType (문서형태) : ' +  cashbillInfo.tradeType + #13;
         tmp := tmp +'tradeUsage (거래구분) : ' +  cashbillInfo.tradeUsage + #13;
@@ -761,7 +746,6 @@ begin
         tmp := tmp +'ntsresultCode (국세청 처리결과 상태코드) : ' +  cashbillInfo.ntsresultCode + #13;
         tmp := tmp +'ntsresultMessage (국세청 처리결과 메시지) : ' +  cashbillInfo.ntsresultMessage + #13;
         tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(cashbillInfo.printYN,'true','false') + #13;
-
         ShowMessage(tmp);
 end;
 
@@ -773,7 +757,7 @@ begin
         { 현금영수증 임시(연동)문서함 팝업 URL을 반환합니다.                   }
         { - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.              }
         {**********************************************************************}
-        
+
         try
                 resultURL := cashbillService.GetURL(txtCorpNum.Text, 'TBOX');
         except
@@ -794,7 +778,7 @@ begin
         { 현금영수증 발행문서함 팝업 URL을 반환합니다.                         }
         { - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.              }
         {**********************************************************************}
-        
+
         try
                 resultURL := cashbillService.GetURL(txtCorpNum.Text, 'PBOX');
         except
@@ -845,9 +829,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('ResultURL is ' + #13 + resultURL);
-
 end;
 
 procedure TfrmExample.btnGetPrintURLClick(Sender: TObject);
@@ -867,7 +849,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('ResultURL is ' + #13 + resultURL);
 end;
 
@@ -888,7 +869,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('ResultURL is ' + #13 + resultURL);
 end;
 
@@ -908,7 +888,7 @@ begin
         KeyList[1] := '20190115-002';
         KeyList[2] := '20190115-003';
         KeyList[3] := '20190115-004';
-        
+
         try
                 resultURL := cashbillService.getMassPrintURL(txtCorpNum.text, KeyList);
         except
@@ -917,7 +897,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('ResultURL is ' + #13 + resultURL);
 end;
 
@@ -929,7 +908,7 @@ begin
         { 메일링크 URL을 반환합니다.                                           }
         { - 메일링크 URL의 경우 유효시간이 존재하지 않습니다.                  }
         {**********************************************************************}
-        
+
         try
                 resultURL := cashbillService.getMailURL(txtCorpNum.Text, txtMgtKey.Text);
         except
@@ -938,7 +917,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('ResultURL is ' + #13 + resultURL);
 end;
 
@@ -969,9 +947,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-
 end;
 
 procedure TfrmExample.btnSendSMSClick(Sender: TObject);
@@ -984,19 +960,19 @@ begin
         {**********************************************************************}
         { 알림문자를 전송합니다. (단문/SMS- 한글 최대 45자)                    }
         { - 알림문자 전송시 포인트가 차감됩니다. (전송실패시 환불처리)         }
-        { - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > 문자 > [전송내역]    }
+        { - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [문자] > [전송내역]  }
         {   메뉴에서 전송결과를 확인할 수 있습니다.                            }
         {**********************************************************************}
 
         //발신번호
         sendNum := '07043042991';
-        
+
         //수신번호
         receiveNum := '010-111-222';
 
-        //문자 메시지내용, 90byte를 초과한 내용은 삭제되어 전송됩니다.
+        //문자 메시지내용, 90byte를 초과한 내용은 삭제되어 전송됩니다..
         contents := '현금영수증이 발행되었습니다. 메일 확인바랍니다.';
-        
+
         try
                 response := cashbillService.SendSMS(txtCorpNum.text,txtMgtKey.Text, sendNum, receiveNum, contents);
         except
@@ -1005,9 +981,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-
 end;
 
 procedure TfrmExample.btnSendEmailClick(Sender: TObject);
@@ -1015,11 +989,11 @@ var
         response : TResponse;
         email : String;
 begin
-        {**********************************************************************}
-        { 발행안내 메일을 재전송합니다.                                        }
-        {**********************************************************************}
-        
-        // 수신메일주소
+        {***************************************************************}
+        { 현금영수증 안내 메일을 재전송합니다.                          }
+        {***************************************************************}
+
+        // 수신자 이메일주소
         email := 'test@test.com';
 
         try
@@ -1030,9 +1004,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-
 end;
 
 procedure TfrmExample.btnGetDetailInfoClick(Sender: TObject);
@@ -1081,7 +1053,6 @@ begin
         tmp := tmp +'hp (주문자 휴대폰) : ' +  cashbill.hp + #13;
         tmp := tmp +'smssendYN (SMS 전송여부) : ' +  IfThen(cashbill.smssendYN,'true','false') + #13;
         tmp := tmp +'cancelType (취소사유) : ' +  IntToStr(cashbill.cancelType) + #13;
-                
         ShowMessage(tmp);
 end;
 
@@ -1109,7 +1080,7 @@ begin
 
         tmp := 'DocLogType(로그타입) | Log(이력정보) | ProcType(처리형태) | ProcMemo(처리메모) |';
         tmp := tmp + 'RegDT(등록일시) | IP(아이피)' + #13;
-        
+
         for i := 0 to Length(LogList) -1 do
         begin
             tmp := tmp + IntToStr(LogList[i].DocLogType) + ' | '
@@ -1119,11 +1090,8 @@ begin
                         + LogList[i].regDT  + ' | '
                         + LogList[i].IP + ' | ' + #13;
         end;
-
         ShowMessage(tmp)
-
 end;
-
 
 procedure TfrmExample.btnGetInfosClick(Sender: TObject);
 var
@@ -1139,13 +1107,13 @@ begin
         {   참조  하시기 바랍니다.                                             }
         {**********************************************************************}
 
-        // 현금영수증 문서관리번호 배열, 최대 1000건
+        // 현금영수증 문서관리번호 배열 (최대 1000건)
         SetLength(KeyList,4);
         KeyList[0] := '20190115-001';
         KeyList[1] := '20190115-002';
         KeyList[2] := '20190115-003';
         KeyList[3] := '20190115-004';
-        
+
         try
                 InfoList := cashbillService.getInfos(txtCorpNum.text,KeyList);
         except
@@ -1154,11 +1122,11 @@ begin
                         Exit;
                 end;
         end;
-        
+
         for i := 0 to Length(InfoList) -1 do
         begin
-                tmp := tmp +'itemKey (아이템키) : ' +  InfoList[i].itemKey + #13;
-                tmp := tmp +'mgtKey (문서관리번호) : ' +  InfoList[i].mgtKey + #13;
+                tmp := tmp +'itemKey (팝빌 관리번호) : ' +  InfoList[i].itemKey + #13;
+                tmp := tmp +'mgtKey (관리번호) : ' +  InfoList[i].mgtKey + #13;
                 tmp := tmp +'tradeDate (거래일자) : ' +  InfoList[i].tradeDate + #13;
                 tmp := tmp +'tradeType (문서형태) : ' +  InfoList[i].tradeType + #13;
                 tmp := tmp +'tradeUsage (거래구분) : ' +  InfoList[i].tradeUsage + #13;
@@ -1182,7 +1150,6 @@ begin
                 tmp := tmp +'ntsresultMessage (국세청 처리결과 메시지) : ' +  InfoList[i].ntsresultMessage + #13;
                 tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(InfoList[i].printYN,'true','false') + #13 + #13;
         end;
-
         ShowMessage(tmp);
 end;
 
@@ -1202,10 +1169,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-
-
 end;
 
 procedure TfrmExample.btnRegistContactClick(Sender: TObject);
@@ -1213,12 +1177,12 @@ var
         response : TResponse;
         joinInfo : TJoinContact;
 begin
-         {**********************************************************************}
-        { 연동회원의 담당자를 신규로 등록합니다.                               }
-        {**********************************************************************}
+        {***************************************************************}
+        { 연동회원의 담당자를 신규로 등록합니다.                        }
+        {***************************************************************}
 
         // [필수] 담당자 아이디 (6자 이상 50자 미만)
-        joinInfo.id := 'testkorea0222_01';
+        joinInfo.id := 'testkorea';
 
         // [필수] 비밀번호 (6자 이상 20자 미만)
         joinInfo.pwd := 'thisispassword';
@@ -1252,10 +1216,8 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
-
 
 procedure TfrmExample.btnUpdateContactClick(Sender: TObject);
 var
@@ -1300,10 +1262,8 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
-
 
 procedure TfrmExample.btnCancelIssue_riClick(Sender: TObject);
 var
@@ -1317,7 +1277,7 @@ begin
         {   를 호출하여 [삭제] 처리 하셔야 합니다.                             }
         {**********************************************************************}
 
-        // 발행취소 메모
+        // 메모
         memo := '발행취소 메모';
         
         try
@@ -1328,7 +1288,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
@@ -1337,12 +1296,11 @@ var
         response : TResponse;
 begin
         {**********************************************************************}
-        { 1건의 현금영수증을 삭제합니다                                        }
+        { 1건의 현금영수증을 삭제합니다.                                       }
         { - 현금영수증이 삭제된 경우에만 문서관리번호(mgtKey)를 재사용 할 수   }
         {   있습니다.                                                          }
         { - 삭제가능한 문서 상태 : [임시저장], [발행취소]                      }
         {**********************************************************************}
-
         try
                 response := cashbillService.Delete(txtCorpNum.text, txtMgtKey.Text);
         except
@@ -1351,7 +1309,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
@@ -1363,6 +1320,10 @@ var
 begin
         {**********************************************************************}
         { 1건의 현금영수증을 즉시발행 처리합니다.                              }
+        { - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에  }
+        {  국세청 전송결과를 확인할 수 있습니다.                               }
+        { - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 연동매뉴얼] }
+        {   > 1.3. 국세청 전송정책"을 참조하시기 바랍니다.                     }
         { - 현금영수증 항목별 정보는 "[현금영수증 API 연동매뉴얼] >            }
         {   4.1. 현금영수증 구성" 을 참조하시기 바랍니다.                      }
         {**********************************************************************}
@@ -1448,7 +1409,7 @@ begin
 
         // 메모
         memo := '즉시발행 현금영수증 메모';
-                
+
         try
                 response := cashbillService.RegistIssue(txtCorpNum.text, cashbill, memo);
                 cashbill.Free;
@@ -1459,7 +1420,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
 end;
 
@@ -1486,7 +1446,6 @@ begin
         tmp := tmp + 'BizType (업태) : ' + corpInfo.BizType + #13;
         tmp := tmp + 'BizClass (종목) : ' + corpInfo.BizClass + #13;
         tmp := tmp + 'Addr (주소) : ' + corpInfo.Addr + #13;
-
         ShowMessage(tmp);
 end;
 
@@ -1508,10 +1467,10 @@ begin
                         Exit;
                 end;
         end;
-        
+
         tmp := 'id(아이디) | email(이메일) | hp(휴대폰) | personName(성명) | searchAllAllowYN(회사조회 권한) | ';
         tmp := tmp + 'tel(연락처) | fax(팩스) | mgrYN(관리자 여부) | regDT(등록일시) | state(상태)' + #13;
-        
+
         for i := 0 to Length(InfoList) -1 do
         begin
             tmp := tmp + InfoList[i].id + ' | ';
@@ -1525,9 +1484,7 @@ begin
             tmp := tmp + InfoList[i].regDT + ' | ';
             tmp := tmp + IntToStr(InfoList[i].state) + #13;
         end;
-
         ShowMessage(tmp);
-
 end;
 
 
@@ -1536,8 +1493,8 @@ var
         response : TResponse;
 begin
         {**********************************************************************}
-        { 해당 사업자의 연동회원 가입여부를 확인합니다.                        }
-        { - LinkID는 파트너를 식별하는 인증정보(32번라인)에 설정되어 있습니다. }
+        { 파트너의 연동회원으로 가입된 사업자번호인지 확인합니다.              }
+        { - LinkID는 인증정보에 설정되어 있는 링크아이디 입니다. (32번라인)    }
         {**********************************************************************}
         
         try
@@ -1548,9 +1505,7 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-
 end;
 
 procedure TfrmExample.btnGetUnitCostClick(Sender: TObject);
@@ -1569,7 +1524,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('현금영수증 발행단가 : '+ FloatToStr(unitcost));
 end;
 
@@ -1583,7 +1537,7 @@ begin
         {**********************************************************************}
         { 검색조건들을 이용해 현금영수증 목록을 조회합니다.                    }
         { - 응답항목에 대한 자세한 사항은 "[현금영수증 API 연동매뉴얼] >       }
-        {   3.4.3. Search (목록 조회)" 을 참조하시기 바랍니다.                 }
+        {   3.3.4. Search (목록 조회)" 을 참조하시기 바랍니다.                 }
         {**********************************************************************}
 
         // [필수] 일자유형 { R: 등록일자, T:거래일자, I:발행일자 }
@@ -1690,9 +1644,7 @@ begin
                 tmp := tmp + SearchList.list[i].ntsresultMessage + ' | ';
                 tmp := tmp + IfThen(SearchList.list[i].printYN,'true','false') +#13;
         end;
-
         SearchList.Free;
-
         ShowMessage(tmp);
 end;
 
@@ -1717,13 +1669,8 @@ begin
         tmp := 'unitCost (단가) : ' + chargeInfo.unitCost + #13;
         tmp := tmp + 'chargeMethod (과금유형) : ' + chargeInfo.chargeMethod + #13;
         tmp := tmp + 'rateSystem (과금제도) : ' + chargeInfo.rateSystem + #13;
-
         ShowMessage(tmp);
-
 end;
-
-
-
 
 procedure TfrmExample.btnRevokeRegistIssueClick(Sender: TObject);
 var
@@ -1733,8 +1680,11 @@ var
 begin
         {**********************************************************************}
         { 1건의 취소현금영수증을 즉시발행 처리합니다.                          }
-        { - 현금영수증 항목별 정보는 "[현금영수증 API 연동매뉴얼] >            }
-        {   4.1. 현금영수증 구성" 을 참조하시기 바랍니다.                      }
+        { - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에  }
+        {  국세청 전송결과를 확인할 수 있습니다.                               }
+        { - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 연동매뉴얼] }
+        {   > 1.3. 국세청 전송정책"을 참조하시기 바랍니다.                     }
+        { - 취소현금영수증 작성방법 안내 -  http://blog.linkhub.co.kr/702      }
         {**********************************************************************}
 
         // [필수] 문서 관리번호 1~24자리, 영문, 숫자, '-', '_' 조합하여 구성
@@ -1754,7 +1704,7 @@ begin
 
         // 메모
         memo := '즉시발행 취소현금영수증 메모';
-                
+
         try
                 response := cashbillService.RevokeRegistIssue(txtCorpNum.text,
                         mgtKey, orgConfirmNum, orgTradeDate, smssendYN, memo, txtUserID.text);
@@ -1765,7 +1715,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
 end;
 
@@ -1787,7 +1736,6 @@ begin
                         Exit;
                 end;
         end;
-        
         ShowMessage('ResultURL is ' + #13 + resultURL);
 end;
 
@@ -1800,8 +1748,10 @@ var
 begin
         {**********************************************************************}
         { 1건의 (부분) 취소현금영수증을 즉시발행 처리합니다.                   }
-        { - 현금영수증 항목별 정보는 "[현금영수증 API 연동매뉴얼] >            }
-        {   4.1. 현금영수증 구성" 을 참조하시기 바랍니다.                      }
+        { - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에  }
+        {  국세청 전송결과를 확인할 수 있습니다.                               }
+        { - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 연동매뉴얼] }
+        {   > 1.3. 국세청 전송정책"을 참조하시기 바랍니다.                     }
         {**********************************************************************}
 
         // [필수] 문서 관리번호 1~24자리, 영문, 숫자, '-', '_' 조합하여 구성
@@ -1822,19 +1772,24 @@ begin
         // 메모
         memo := '즉시발행 취소현금영수증 메모';
 
-        // 부분취소여부,
+        // 취소유형, True-부분취소, False-전체취소
         isPartCancel := True;
 
+        // 취소사유, 1-거래취소 / 2-오류발급취소 / 3-기타
         cancelType := 1;
 
+        // [취소] 공급가액
         supplyCost := '2000';
 
+        // [취소] 부가세
         tax := '200';
 
+        // [취소] 봉사료
         serviceFee := '0';
 
+        // [취소] 거래금액
         totalAmount := '2200';
-                
+
         try
                 response := cashbillService.RevokeRegistIssue(txtCorpNum.text,
                         mgtKey, orgConfirmNum, orgTradeDate, smssendYN, memo, txtUserID.text,
@@ -1846,7 +1801,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
 end;
 
@@ -1857,9 +1811,9 @@ var
         i : Integer;
 begin
         {**********************************************************************}
-        {  현금영수증 메일전송 항목에 대한 전송여부를 목록으로 반환한다.       }
+        {  현금영수증 메일전송 항목에 대한 전송여부를 목록으로 반환합니다.     }
         {**********************************************************************}
-        
+
         try
                 EmailConfigList := cashbillService.ListEmailConfig(txtCorpNum.text);
         except
@@ -1879,7 +1833,6 @@ begin
             if EmailConfigList[i].EmailType = 'CSH_CANCEL' then
                 tmp := tmp + 'CSH_CANCEL (고객에게 현금영수증이 발행취소 되었음을 알려주는 메일) | ' + BoolToStr(EmailConfigList[i].SendYN) + #13;
         end;
-
         ShowMessage(tmp);
 end;
 
@@ -1890,7 +1843,7 @@ var
         SendYN    : Boolean;
 begin
         {**********************************************************************}
-        { 현금영수증 메일전송 항목에 대한 전송여부를 수정한다.                 }
+        { 현금영수증 메일전송 항목에 대한 전송여부를 수정합니다.               }
         { 메일전송유형                                                         }
         {  CSH_ISSUE : 고객에게 현금영수증이 발행 되었음을 알려주는 메일       }
         {  CSH_CANCEL : 고객에게 현금영수증이 발행취소 되었음을 알려주는 메일  }
@@ -1910,7 +1863,6 @@ begin
                         Exit;
                 end;
         end;
-
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 

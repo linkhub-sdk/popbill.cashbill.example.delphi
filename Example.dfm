@@ -1,6 +1,6 @@
 object frmExample: TfrmExample
-  Left = 758
-  Top = 116
+  Left = 138
+  Top = 117
   AutoScroll = False
   Caption = '팝빌 현금영수증 API SDK Delphi Example'
   ClientHeight = 708
@@ -71,10 +71,10 @@ object frmExample: TfrmExample
       TabOrder = 0
       object btnSearch: TButton
         Left = 9
-        Top = 149
+        Top = 117
         Width = 179
         Height = 25
-        Caption = '문서 목록조회'
+        Caption = '목록 조회'
         TabOrder = 0
         OnClick = btnSearchClick
       end
@@ -83,7 +83,7 @@ object frmExample: TfrmExample
         Top = 24
         Width = 179
         Height = 25
-        Caption = '문서 정보'
+        Caption = '상태 확인'
         TabOrder = 1
         OnClick = btnGetInfoClick
       end
@@ -92,25 +92,25 @@ object frmExample: TfrmExample
         Top = 55
         Width = 179
         Height = 25
-        Caption = '문서 정보(대량)'
+        Caption = '상태 대량 확인'
         TabOrder = 2
         OnClick = btnGetInfosClick
       end
       object btnGetLogs: TButton
         Left = 9
-        Top = 87
+        Top = 151
         Width = 179
         Height = 25
-        Caption = '문서 이력'
+        Caption = '상태 변경이력 확인'
         TabOrder = 3
         OnClick = btnGetLogsClick
       end
       object btnGetDetailInfo: TButton
         Left = 9
-        Top = 118
+        Top = 86
         Width = 179
         Height = 25
-        Caption = '문서 상세 정보'
+        Caption = '상세정보 확인'
         TabOrder = 4
         OnClick = btnGetDetailInfoClick
       end
@@ -180,7 +180,7 @@ object frmExample: TfrmExample
         Top = 24
         Width = 179
         Height = 25
-        Caption = '문서 내용보기 팝업 URL'
+        Caption = '현금영수증 보기 URL'
         TabOrder = 0
         OnClick = btnGetPopUpURLClick
       end
@@ -189,7 +189,7 @@ object frmExample: TfrmExample
         Top = 55
         Width = 179
         Height = 25
-        Caption = '인쇄 팝업 URL'
+        Caption = '공급자 인쇄 URL'
         TabOrder = 1
         OnClick = btnGetPrintURLClick
       end
@@ -198,7 +198,7 @@ object frmExample: TfrmExample
         Top = 87
         Width = 179
         Height = 25
-        Caption = '공급받는자 인쇄 팝업 URL'
+        Caption = '공급받는자 인쇄 URL'
         TabOrder = 2
         OnClick = btnGetEPrintURLClick
       end
@@ -207,7 +207,7 @@ object frmExample: TfrmExample
         Top = 118
         Width = 179
         Height = 25
-        Caption = '다량 인쇄 팝업 URL'
+        Caption = '현금영수증 대량 인쇄 URL'
         TabOrder = 3
         OnClick = btnGetMassPrintURLClick
       end
@@ -216,7 +216,7 @@ object frmExample: TfrmExample
         Top = 149
         Width = 179
         Height = 25
-        Caption = '이메일(공급받는자) 링크 URL'
+        Caption = '현금영수증 메일링크 URL'
         TabOrder = 4
         OnClick = btnGetMailURLClick
       end
@@ -257,7 +257,7 @@ object frmExample: TfrmExample
       end
     end
     object GroupBox14: TGroupBox
-      Left = 104
+      Left = 120
       Top = 88
       Width = 217
       Height = 153
@@ -314,7 +314,7 @@ object frmExample: TfrmExample
   end
   object GroupBox5: TGroupBox
     Left = 389
-    Top = 310
+    Top = 302
     Width = 273
     Height = 155
     Caption = '취소현금영수증 즉시발행 프로세스'
@@ -345,7 +345,7 @@ object frmExample: TfrmExample
       Left = 613
       Top = 19
       Width = 163
-      Height = 126
+      Height = 125
       Caption = '팝빌 기본 URL'
       TabOrder = 0
     end
@@ -415,7 +415,7 @@ object frmExample: TfrmExample
     Left = 170
     Top = 67
     Width = 145
-    Height = 126
+    Height = 125
     Caption = '포인트 관련'
     TabOrder = 5
     object btnGetUnitCost: TButton
@@ -447,16 +447,16 @@ object frmExample: TfrmExample
     object btnCheckID: TButton
       Left = 8
       Top = 56
-      Width = 105
+      Width = 113
       Height = 25
-      Caption = 'ID 중복 확인'
+      Caption = '아이디 중복 확인'
       TabOrder = 0
       OnClick = btnCheckIDClick
     end
     object btnCheckIsMember: TButton
       Left = 8
       Top = 24
-      Width = 105
+      Width = 113
       Height = 25
       Caption = '가입여부 확인'
       TabOrder = 1
@@ -484,7 +484,7 @@ object frmExample: TfrmExample
   object btnJoinMember: TButton
     Left = 41
     Top = 155
-    Width = 105
+    Width = 112
     Height = 25
     Caption = '회원 가입'
     TabOrder = 2
@@ -518,7 +518,7 @@ object frmExample: TfrmExample
   end
   object btnCancelIssue: TButton
     Left = 412
-    Top = 419
+    Top = 411
     Width = 77
     Height = 25
     Caption = '발행취소'
@@ -526,26 +526,26 @@ object frmExample: TfrmExample
     OnClick = btnCancelIssueClick
   end
   object btnDelete: TButton
-    Left = 517
-    Top = 419
+    Left = 525
+    Top = 411
     Width = 60
-    Height = 27
+    Height = 25
     Caption = '삭제'
     TabOrder = 11
     OnClick = btnDeleteClick
   end
   object Panel1: TPanel
     Left = 400
-    Top = 336
+    Top = 328
     Width = 249
-    Height = 40
+    Height = 41
     Color = clActiveBorder
     TabOrder = 9
     object btnRevokeRegistIssue: TButton
       Left = 16
       Top = 7
       Width = 75
-      Height = 26
+      Height = 25
       Caption = '즉시발행'
       TabOrder = 0
       OnClick = btnRevokeRegistIssueClick
@@ -564,7 +564,7 @@ object frmExample: TfrmExample
     Left = 328
     Top = 68
     Width = 139
-    Height = 124
+    Height = 125
     Caption = '연동과금 포인트'
     TabOrder = 14
     object btnGetBalance: TButton
@@ -590,7 +590,7 @@ object frmExample: TfrmExample
     Left = 480
     Top = 68
     Width = 146
-    Height = 124
+    Height = 125
     Caption = '파트너과금 포인트'
     TabOrder = 15
     object btnGetPartnerBalance: TButton
@@ -606,7 +606,7 @@ object frmExample: TfrmExample
       Left = 9
       Top = 56
       Width = 129
-      Height = 26
+      Height = 25
       Caption = '포인트 충전 URL'
       TabOrder = 1
       OnClick = btnGetPartnerURL_CHRGClick
