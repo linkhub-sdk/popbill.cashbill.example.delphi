@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2019-01-30                                                 }
+{ - 업데이트 일자 : 2019-02-07                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -210,7 +210,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 
@@ -501,7 +501,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnGetPartnerBalanceClick(Sender: TObject);
@@ -767,7 +767,7 @@ begin
                 end;
         end;
 
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnGetURL_PBOXClick(Sender: TObject);
@@ -788,7 +788,7 @@ begin
                 end;
         end;
 
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnGetURL_WRITEClick(Sender: TObject);
@@ -809,7 +809,7 @@ begin
                 end;
         end;
 
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnGetPopUpURLClick(Sender: TObject);
@@ -829,7 +829,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnGetPrintURLClick(Sender: TObject);
@@ -849,7 +849,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnGetEPrintURLClick(Sender: TObject);
@@ -869,7 +869,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnGetMassPrintURLClick(Sender: TObject);
@@ -878,11 +878,11 @@ var
         resultURL : String;
 begin
        {**********************************************************************}
-       { 다수건의 현금영수증 인쇄 팝업 URL을 반환합니다.                      }
+       { 다수건의 현금영수증 인쇄 팝업 URL을 반환합니다. (최대 100건)         }
        { - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.              }
        {**********************************************************************}
 
-        // 인쇄할 현금영수증 문서관리번호 배열, 최대 100건
+        // 인쇄할 현금영수증 문서관리번호 배열 (최대 100건)
         SetLength(KeyList,4);
         KeyList[0] := '20190115-001';
         KeyList[1] := '20190115-002';
@@ -897,7 +897,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnGetMailURLClick(Sender: TObject);
@@ -917,7 +917,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnSendFAXClick(Sender: TObject);
@@ -1736,7 +1736,7 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('ResultURL is ' + #13 + resultURL);
+        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnRevokeRegistIssue_partClick(Sender: TObject);
