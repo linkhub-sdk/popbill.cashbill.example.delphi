@@ -172,7 +172,7 @@ begin
         cashbillService.IsTest := true;
 
         //Exception 처리 설정값 true(기본값)
-        cashbillService.IsThrowException := true;
+        cashbillService.IsThrowException := false;
 end;
 
 procedure TfrmExample.FormClose(Sender: TObject; var Action:TCloseAction);
@@ -544,7 +544,16 @@ begin
                 end;
         end;
 
-        if InUse then ShowMessage('사용중') else ShowMessage('미 사용중.');
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                if InUse then ShowMessage('사용중') else ShowMessage('미 사용중.');
+        end;
+
+
 end;
 
 procedure TfrmExample.btnUpdateClick(Sender: TObject);
@@ -722,31 +731,40 @@ begin
                 end;
         end;
 
-        tmp := tmp +'itemKey (팝빌 관리번호) : ' +  cashbillInfo.itemKey + #13;
-        tmp := tmp +'mgtKey (관리번호) : ' +  cashbillInfo.mgtKey + #13;
-        tmp := tmp +'tradeDate (거래일자) : ' +  cashbillInfo.tradeDate + #13;
-        tmp := tmp +'tradeType (문서형태) : ' +  cashbillInfo.tradeType + #13;
-        tmp := tmp +'tradeUsage (거래구분) : ' +  cashbillInfo.tradeUsage + #13;
-        tmp := tmp +'tradeOpt (거래유형) : ' +  cashbillInfo.tradeOpt + #13;
-        tmp := tmp +'taxationType (과세형태) : ' +  cashbillInfo.taxationType + #13;
-        tmp := tmp +'totalAmount (거래금액) : ' +  cashbillInfo.totalAmount + #13;
-        tmp := tmp +'issueDT (발행일시) : ' +  cashbillInfo.issueDT + #13;
-        tmp := tmp +'regDT (등록일시) : ' +  cashbillInfo.regDT + #13;
-        tmp := tmp +'stateMemo (상태메모) : ' +  cashbillInfo.stateMemo + #13;
-        tmp := tmp +'stateCode (상태코드) : ' +  IntToStr(cashbillInfo.stateCode) + #13;
-        tmp := tmp +'stateDT (상태변경일시) : ' +  cashbillInfo.stateDT + #13;
-        tmp := tmp +'identityNum (식별번호) : ' +  cashbillInfo.identityNum + #13;
-        tmp := tmp +'itemName (주문상품명) : ' +  cashbillInfo.itemName + #13;
-        tmp := tmp +'customerName (주문자명) : ' +  cashbillInfo.customerName + #13;
-        tmp := tmp +'confirmNum (국세청승인번호) : ' +  cashbillInfo.confirmNum + #13;
-        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbillInfo.orgConfirmNum + #13;
-        tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbillInfo.orgTradeDate + #13;
-        tmp := tmp +'ntssendDT (국세청 전송일시) : ' +  cashbillInfo.ntssendDT + #13;
-        tmp := tmp +'ntsresultDT (국세청 처리결과 수신일시) : ' +  cashbillInfo.ntsresultDT + #13;
-        tmp := tmp +'ntsresultCode (국세청 처리결과 상태코드) : ' +  cashbillInfo.ntsresultCode + #13;
-        tmp := tmp +'ntsresultMessage (국세청 처리결과 메시지) : ' +  cashbillInfo.ntsresultMessage + #13;
-        tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(cashbillInfo.printYN,'true','false') + #13;
-        ShowMessage(tmp);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := tmp +'itemKey (팝빌 관리번호) : ' +  cashbillInfo.itemKey + #13;
+                tmp := tmp +'mgtKey (관리번호) : ' +  cashbillInfo.mgtKey + #13;
+                tmp := tmp +'tradeDate (거래일자) : ' +  cashbillInfo.tradeDate + #13;
+                tmp := tmp +'tradeType (문서형태) : ' +  cashbillInfo.tradeType + #13;
+                tmp := tmp +'tradeUsage (거래구분) : ' +  cashbillInfo.tradeUsage + #13;
+                tmp := tmp +'tradeOpt (거래유형) : ' +  cashbillInfo.tradeOpt + #13;
+                tmp := tmp +'taxationType (과세형태) : ' +  cashbillInfo.taxationType + #13;
+                tmp := tmp +'totalAmount (거래금액) : ' +  cashbillInfo.totalAmount + #13;
+                tmp := tmp +'issueDT (발행일시) : ' +  cashbillInfo.issueDT + #13;
+                tmp := tmp +'regDT (등록일시) : ' +  cashbillInfo.regDT + #13;
+                tmp := tmp +'stateMemo (상태메모) : ' +  cashbillInfo.stateMemo + #13;
+                tmp := tmp +'stateCode (상태코드) : ' +  IntToStr(cashbillInfo.stateCode) + #13;
+                tmp := tmp +'stateDT (상태변경일시) : ' +  cashbillInfo.stateDT + #13;
+                tmp := tmp +'identityNum (식별번호) : ' +  cashbillInfo.identityNum + #13;
+                tmp := tmp +'itemName (주문상품명) : ' +  cashbillInfo.itemName + #13;
+                tmp := tmp +'customerName (주문자명) : ' +  cashbillInfo.customerName + #13;
+                tmp := tmp +'confirmNum (국세청승인번호) : ' +  cashbillInfo.confirmNum + #13;
+                tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbillInfo.orgConfirmNum + #13;
+                tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbillInfo.orgTradeDate + #13;
+                tmp := tmp +'ntssendDT (국세청 전송일시) : ' +  cashbillInfo.ntssendDT + #13;
+                tmp := tmp +'ntsresultDT (국세청 처리결과 수신일시) : ' +  cashbillInfo.ntsresultDT + #13;
+                tmp := tmp +'ntsresultCode (국세청 처리결과 상태코드) : ' +  cashbillInfo.ntsresultCode + #13;
+                tmp := tmp +'ntsresultMessage (국세청 처리결과 메시지) : ' +  cashbillInfo.ntsresultMessage + #13;
+                tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(cashbillInfo.printYN,'true','false') + #13;
+                ShowMessage(tmp);
+        end;
+
+
 end;
 
 procedure TfrmExample.btnGetURL_TBOXClick(Sender: TObject);
@@ -767,7 +785,14 @@ begin
                 end;
         end;
 
-        ShowMessage('URL : ' + #13 + resultURL);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
 end;
 
 procedure TfrmExample.btnGetURL_PBOXClick(Sender: TObject);
@@ -787,8 +812,16 @@ begin
                         Exit;
                 end;
         end;
+        
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
 
-        ShowMessage('URL : ' + #13 + resultURL);
 end;
 
 procedure TfrmExample.btnGetURL_WRITEClick(Sender: TObject);
@@ -809,7 +842,14 @@ begin
                 end;
         end;
 
-        ShowMessage('URL : ' + #13 + resultURL);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
 end;
 
 procedure TfrmExample.btnGetPopUpURLClick(Sender: TObject);
@@ -829,7 +869,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL : ' + #13 + resultURL);
+
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
 end;
 
 procedure TfrmExample.btnGetPrintURLClick(Sender: TObject);
@@ -849,7 +897,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL : ' + #13 + resultURL);
+
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
 end;
 
 procedure TfrmExample.btnGetEPrintURLClick(Sender: TObject);
@@ -869,7 +925,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL : ' + #13 + resultURL);
+        
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
 end;
 
 procedure TfrmExample.btnGetMassPrintURLClick(Sender: TObject);
@@ -897,7 +961,16 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL : ' + #13 + resultURL);
+        
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
+
 end;
 
 procedure TfrmExample.btnGetMailURLClick(Sender: TObject);
@@ -917,7 +990,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL : ' + #13 + resultURL);
+
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;        
 end;
 
 procedure TfrmExample.btnSendFAXClick(Sender: TObject);
@@ -1027,33 +1108,41 @@ begin
                 end;
         end;
 
-        tmp := tmp +'mgtKey (문서관리번호) : ' +  cashbill.mgtKey + #13;
-        tmp := tmp +'confirmNum (국세청 승인번호) : ' +  cashbill.confirmNum + #13;
-        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbill.orgConfirmNum + #13;
-        tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbill.orgTradeDate + #13;
-        tmp := tmp +'tradeDate (거래일자) : ' +  cashbill.tradeDate + #13;
-        tmp := tmp +'tradeType (문서형태) : ' +  cashbill.tradeType + #13;
-        tmp := tmp +'tradeUsage (거래구분) : ' +  cashbill.tradeUsage + #13;
-        tmp := tmp +'tradeOpt (거래유형) : ' +  cashbill.tradeOpt + #13;
-        tmp := tmp +'taxationType (과세형태) : ' +  cashbill.taxationType + #13;
-        tmp := tmp +'totalAmount (거래금액) : ' +  cashbill.totalAmount + #13;
-        tmp := tmp +'supplyCost (공급가액) : ' +  cashbill.supplyCost + #13;
-        tmp := tmp +'tax (부가세) : ' +  cashbill.tax + #13;
-        tmp := tmp +'serviceFee (봉사료) : ' +  cashbill.serviceFee + #13;
-        tmp := tmp +'franchiseCorpNum (가맹점 사업자번호) : ' +  cashbill.franchiseCorpNum + #13;
-        tmp := tmp +'franchiseCorpName (가맹점 상호) : ' +  cashbill.franchiseCorpName + #13;
-        tmp := tmp +'franchiseCEOName (가맹점 대표자 성명) : ' +  cashbill.franchiseCEOName + #13;
-        tmp := tmp +'franchiseAddr (가맹점 주소) : ' +  cashbill.franchiseAddr + #13;
-        tmp := tmp +'franchiseTEL (가맹점 전화번호) : ' +  cashbill.franchiseTEL + #13;
-        tmp := tmp +'identityNum (식별번호) : ' +  cashbill.identityNum + #13;
-        tmp := tmp +'customerName (주문자명) : ' +  cashbill.customerName + #13;
-        tmp := tmp +'itemName (주문상품명) : ' +  cashbill.itemName + #13;
-        tmp := tmp +'orderNumber (주문번호) : ' +  cashbill.orderNumber + #13;
-        tmp := tmp +'email (주문자 이메일) : ' +  cashbill.email + #13;
-        tmp := tmp +'hp (주문자 휴대폰) : ' +  cashbill.hp + #13;
-        tmp := tmp +'smssendYN (SMS 전송여부) : ' +  IfThen(cashbill.smssendYN,'true','false') + #13;
-        tmp := tmp +'cancelType (취소사유) : ' +  IntToStr(cashbill.cancelType) + #13;
-        ShowMessage(tmp);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+                exit;
+        end
+        else
+        begin
+                tmp := tmp +'mgtKey (문서관리번호) : ' +  cashbill.mgtKey + #13;
+                tmp := tmp +'confirmNum (국세청 승인번호) : ' +  cashbill.confirmNum + #13;
+                tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbill.orgConfirmNum + #13;
+                tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbill.orgTradeDate + #13;
+                tmp := tmp +'tradeDate (거래일자) : ' +  cashbill.tradeDate + #13;
+                tmp := tmp +'tradeType (문서형태) : ' +  cashbill.tradeType + #13;
+                tmp := tmp +'tradeUsage (거래구분) : ' +  cashbill.tradeUsage + #13;
+                tmp := tmp +'tradeOpt (거래유형) : ' +  cashbill.tradeOpt + #13;
+                tmp := tmp +'taxationType (과세형태) : ' +  cashbill.taxationType + #13;
+                tmp := tmp +'totalAmount (거래금액) : ' +  cashbill.totalAmount + #13;
+                tmp := tmp +'supplyCost (공급가액) : ' +  cashbill.supplyCost + #13;
+                tmp := tmp +'tax (부가세) : ' +  cashbill.tax + #13;
+                tmp := tmp +'serviceFee (봉사료) : ' +  cashbill.serviceFee + #13;
+                tmp := tmp +'franchiseCorpNum (가맹점 사업자번호) : ' +  cashbill.franchiseCorpNum + #13;
+                tmp := tmp +'franchiseCorpName (가맹점 상호) : ' +  cashbill.franchiseCorpName + #13;
+                tmp := tmp +'franchiseCEOName (가맹점 대표자 성명) : ' +  cashbill.franchiseCEOName + #13;
+                tmp := tmp +'franchiseAddr (가맹점 주소) : ' +  cashbill.franchiseAddr + #13;
+                tmp := tmp +'franchiseTEL (가맹점 전화번호) : ' +  cashbill.franchiseTEL + #13;
+                tmp := tmp +'identityNum (식별번호) : ' +  cashbill.identityNum + #13;
+                tmp := tmp +'customerName (주문자명) : ' +  cashbill.customerName + #13;
+                tmp := tmp +'itemName (주문상품명) : ' +  cashbill.itemName + #13;
+                tmp := tmp +'orderNumber (주문번호) : ' +  cashbill.orderNumber + #13;
+                tmp := tmp +'email (주문자 이메일) : ' +  cashbill.email + #13;
+                tmp := tmp +'hp (주문자 휴대폰) : ' +  cashbill.hp + #13;
+                tmp := tmp +'smssendYN (SMS 전송여부) : ' +  IfThen(cashbill.smssendYN,'true','false') + #13;
+                tmp := tmp +'cancelType (취소사유) : ' +  IntToStr(cashbill.cancelType) + #13;
+                ShowMessage(tmp);
+        end;
 end;
 
 procedure TfrmExample.btnGetLogsClick(Sender: TObject);
@@ -1078,19 +1167,28 @@ begin
                 end;
         end;
 
-        tmp := 'DocLogType(로그타입) | Log(이력정보) | ProcType(처리형태) | ProcMemo(처리메모) |';
-        tmp := tmp + 'RegDT(등록일시) | IP(아이피)' + #13;
-
-        for i := 0 to Length(LogList) -1 do
+        if cashbillService.LastErrCode <> 0 then
         begin
-            tmp := tmp + IntToStr(LogList[i].DocLogType) + ' | '
-                        + LogList[i].Log + ' | '
-                        + LogList[i].ProcType + ' | '
-                        + LogList[i].ProcMemo + ' | '
-                        + LogList[i].regDT  + ' | '
-                        + LogList[i].IP + ' | ' + #13;
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'DocLogType(로그타입) | Log(이력정보) | ProcType(처리형태) | ProcMemo(처리메모) |';
+                tmp := tmp + 'RegDT(등록일시) | IP(아이피)' + #13;
+
+                for i := 0 to Length(LogList) -1 do
+                begin
+                    tmp := tmp + IntToStr(LogList[i].DocLogType) + ' | '
+                                + LogList[i].Log + ' | '
+                                + LogList[i].ProcType + ' | '
+                                + LogList[i].ProcMemo + ' | '
+                                + LogList[i].regDT  + ' | '
+                                + LogList[i].IP + ' | ' + #13;
+                end;
+                ShowMessage(tmp);
         end;
-        ShowMessage(tmp)
+
+
 end;
 
 procedure TfrmExample.btnGetInfosClick(Sender: TObject);
@@ -1123,34 +1221,41 @@ begin
                 end;
         end;
 
-        for i := 0 to Length(InfoList) -1 do
+        if cashbillService.LastErrCode <> 0 then
         begin
-                tmp := tmp +'itemKey (팝빌 관리번호) : ' +  InfoList[i].itemKey + #13;
-                tmp := tmp +'mgtKey (관리번호) : ' +  InfoList[i].mgtKey + #13;
-                tmp := tmp +'tradeDate (거래일자) : ' +  InfoList[i].tradeDate + #13;
-                tmp := tmp +'tradeType (문서형태) : ' +  InfoList[i].tradeType + #13;
-                tmp := tmp +'tradeUsage (거래구분) : ' +  InfoList[i].tradeUsage + #13;
-                tmp := tmp +'tradeOpt (거래유형) : ' +  InfoList[i].tradeOpt + #13;
-                tmp := tmp +'taxationType (과세형태) : ' +  InfoList[i].taxationType + #13;
-                tmp := tmp +'totalAmount (거래금액) : ' +  InfoList[i].totalAmount + #13;
-                tmp := tmp +'issueDT (발행일시) : ' +  InfoList[i].issueDT + #13;
-                tmp := tmp +'regDT (등록일시) : ' +  InfoList[i].regDT + #13;
-                tmp := tmp +'stateMemo (상태메모) : ' +  InfoList[i].stateMemo + #13;
-                tmp := tmp +'stateCode (상태코드) : ' +  IntToStr(InfoList[i].stateCode) + #13;
-                tmp := tmp +'stateDT (상태변경일시) : ' +  InfoList[i].stateDT + #13;
-                tmp := tmp +'identityNum (식별번호) : ' +  InfoList[i].identityNum + #13;
-                tmp := tmp +'itemName (주문상품명) : ' +  InfoList[i].itemName + #13;
-                tmp := tmp +'customerName (주문자명) : ' +  InfoList[i].customerName + #13;
-                tmp := tmp +'confirmNum (국세청승인번호) : ' +  InfoList[i].confirmNum + #13;
-                tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  InfoList[i].orgConfirmNum + #13;
-                tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  InfoList[i].orgTradeDate + #13;
-                tmp := tmp +'ntssendDT (국세청 전송일시) : ' +  InfoList[i].ntssendDT + #13;
-                tmp := tmp +'ntsresultDT (국세청 처리결과 수신일시) : ' +  InfoList[i].ntsresultDT + #13;
-                tmp := tmp +'ntsresultCode (국세청 처리결과 상태코드) : ' +  InfoList[i].ntsresultCode + #13;
-                tmp := tmp +'ntsresultMessage (국세청 처리결과 메시지) : ' +  InfoList[i].ntsresultMessage + #13;
-                tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(InfoList[i].printYN,'true','false') + #13 + #13;
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                for i := 0 to Length(InfoList) -1 do
+                begin
+                        tmp := tmp +'itemKey (팝빌 관리번호) : ' +  InfoList[i].itemKey + #13;
+                        tmp := tmp +'mgtKey (관리번호) : ' +  InfoList[i].mgtKey + #13;
+                        tmp := tmp +'tradeDate (거래일자) : ' +  InfoList[i].tradeDate + #13;
+                        tmp := tmp +'tradeType (문서형태) : ' +  InfoList[i].tradeType + #13;
+                        tmp := tmp +'tradeUsage (거래구분) : ' +  InfoList[i].tradeUsage + #13;
+                        tmp := tmp +'tradeOpt (거래유형) : ' +  InfoList[i].tradeOpt + #13;
+                        tmp := tmp +'taxationType (과세형태) : ' +  InfoList[i].taxationType + #13;
+                        tmp := tmp +'totalAmount (거래금액) : ' +  InfoList[i].totalAmount + #13;
+                        tmp := tmp +'issueDT (발행일시) : ' +  InfoList[i].issueDT + #13;
+                        tmp := tmp +'regDT (등록일시) : ' +  InfoList[i].regDT + #13;
+                        tmp := tmp +'stateMemo (상태메모) : ' +  InfoList[i].stateMemo + #13;
+                        tmp := tmp +'stateCode (상태코드) : ' +  IntToStr(InfoList[i].stateCode) + #13;
+                        tmp := tmp +'stateDT (상태변경일시) : ' +  InfoList[i].stateDT + #13;
+                        tmp := tmp +'identityNum (식별번호) : ' +  InfoList[i].identityNum + #13;
+                        tmp := tmp +'itemName (주문상품명) : ' +  InfoList[i].itemName + #13;
+                        tmp := tmp +'customerName (주문자명) : ' +  InfoList[i].customerName + #13;
+                        tmp := tmp +'confirmNum (국세청승인번호) : ' +  InfoList[i].confirmNum + #13;
+                        tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  InfoList[i].orgConfirmNum + #13;
+                        tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  InfoList[i].orgTradeDate + #13;
+                        tmp := tmp +'ntssendDT (국세청 전송일시) : ' +  InfoList[i].ntssendDT + #13;
+                        tmp := tmp +'ntsresultDT (국세청 처리결과 수신일시) : ' +  InfoList[i].ntsresultDT + #13;
+                        tmp := tmp +'ntsresultCode (국세청 처리결과 상태코드) : ' +  InfoList[i].ntsresultCode + #13;
+                        tmp := tmp +'ntsresultMessage (국세청 처리결과 메시지) : ' +  InfoList[i].ntsresultMessage + #13;
+                        tmp := tmp +'printYN (인쇄여부) : ' +  IfThen(InfoList[i].printYN,'true','false') + #13 + #13;
+                end;
+                ShowMessage(tmp);
         end;
-        ShowMessage(tmp);
 end;
 
 procedure TfrmExample.btnCheckIDClick(Sender: TObject);
@@ -1524,7 +1629,16 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('현금영수증 발행단가 : '+ FloatToStr(unitcost));
+
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('현금영수증 발행단가 : '+ FloatToStr(unitcost));
+        end;
+
 end;
 
 procedure TfrmExample.btnSearchClick(Sender: TObject);
@@ -1666,10 +1780,19 @@ begin
                 end;
         end;
 
-        tmp := 'unitCost (단가) : ' + chargeInfo.unitCost + #13;
-        tmp := tmp + 'chargeMethod (과금유형) : ' + chargeInfo.chargeMethod + #13;
-        tmp := tmp + 'rateSystem (과금제도) : ' + chargeInfo.rateSystem + #13;
-        ShowMessage(tmp);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'unitCost (단가) : ' + chargeInfo.unitCost + #13;
+                tmp := tmp + 'chargeMethod (과금유형) : ' + chargeInfo.chargeMethod + #13;
+                tmp := tmp + 'rateSystem (과금제도) : ' + chargeInfo.rateSystem + #13;
+                ShowMessage(tmp);
+        end;
+
+
 end;
 
 procedure TfrmExample.btnRevokeRegistIssueClick(Sender: TObject);
@@ -1823,17 +1946,25 @@ begin
                 end;
         end;
 
-        tmp := 'emailType(메일전송유형) | sendYN(전송여부)' + #13;
-
-        for i := 0 to Length(EmailConfigList) -1 do
+        if cashbillService.LastErrCode <> 0 then
         begin
-            if EmailConfigList[i].EmailType = 'CSH_ISSUE' then
-                tmp := tmp + 'CSH_ISSUE (고객에게 현금영수증이 발행 되었음을 알려주는 메일) | ' + BoolToStr(EmailConfigList[i].SendYN) + #13;
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'emailType(메일전송유형) | sendYN(전송여부)' + #13;
 
-            if EmailConfigList[i].EmailType = 'CSH_CANCEL' then
-                tmp := tmp + 'CSH_CANCEL (고객에게 현금영수증이 발행취소 되었음을 알려주는 메일) | ' + BoolToStr(EmailConfigList[i].SendYN) + #13;
+                for i := 0 to Length(EmailConfigList) -1 do
+                begin
+                    if EmailConfigList[i].EmailType = 'CSH_ISSUE' then
+                        tmp := tmp + 'CSH_ISSUE (고객에게 현금영수증이 발행 되었음을 알려주는 메일) | ' + BoolToStr(EmailConfigList[i].SendYN) + #13;
+
+                    if EmailConfigList[i].EmailType = 'CSH_CANCEL' then
+                        tmp := tmp + 'CSH_CANCEL (고객에게 현금영수증이 발행취소 되었음을 알려주는 메일) | ' + BoolToStr(EmailConfigList[i].SendYN) + #13;
+                end;
+                
+                ShowMessage(tmp);
         end;
-        ShowMessage(tmp);
 end;
 
 procedure TfrmExample.btnUpdateEmailConfigClick(Sender: TObject);
