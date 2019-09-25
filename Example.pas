@@ -172,7 +172,7 @@ begin
         cashbillService.IsTest := true;
 
         //Exception 처리 설정값 true(기본값)
-        cashbillService.IsThrowException := false;
+        cashbillService.IsThrowException := true;
 
         //인증토큰 IP제한기능 사용여부, true(권장)
         cashbillService.IPRestrictOnOff := true;
