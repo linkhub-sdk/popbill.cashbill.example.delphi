@@ -1,8 +1,8 @@
 {******************************************************************************}
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
-{ - 델파이 SDK 적용방법 안내 : http://blog.linkhub.co.kr/572                   }
-{ - 업데이트 일자 : 2019-09-25                                                 }
+{ - 델파이 SDK 적용방법 안내 : https://docs.popbill.com/cashbill/tutorial/delphi }
+{ - 업데이트 일자 : 2019-11-28                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -1425,7 +1425,8 @@ procedure TfrmExample.btnRegistIssueClick(Sender: TObject);
 var
         cashbill : TCashbill;
         response : TResponse;
-        memo : String;
+        memo, emailSubject : String;
+
 begin
         {**********************************************************************}
         { 1건의 현금영수증을 즉시발행 처리합니다.                              }
@@ -1519,8 +1520,11 @@ begin
         // 메모
         memo := '즉시발행 현금영수증 메모';
 
+        // 안내메일 제목, 미기재시 기본양식으로 전송
+        emailSubject := '';
+
         try
-                response := cashbillService.RegistIssue(txtCorpNum.text, cashbill, memo);
+                response := cashbillService.RegistIssue(txtCorpNum.text, cashbill, memo, txtUserID.text, emailSubject);
                 cashbill.Free;
         except
                 on le : EPopbillException do begin
