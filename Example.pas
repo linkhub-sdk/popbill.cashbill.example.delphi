@@ -106,6 +106,7 @@ type
     btnListEmailConfig: TButton;
     btnUpdateEmailConfig: TButton;
     Button1: TButton;
+    btnAssignMgtKey: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender:TObject; var Action:TCloseAction);
     procedure btnRegisterClick(Sender: TObject);
@@ -154,6 +155,7 @@ type
     procedure btnListEmailConfigClick(Sender: TObject);
     procedure btnUpdateEmailConfigClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure btnAssignMgtKeyClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -2045,6 +2047,34 @@ begin
         begin
                 ShowMessage('URL : ' + #13 + resultURL);
         end;
+end;
+
+procedure TfrmExample.btnAssignMgtKeyClick(Sender: TObject);
+var
+        response : TResponse;
+        mgtKey, itemKey : String;
+begin
+        {**********************************************************************}
+        { 팝빌 사이트에서 작성된 현금영수증에 파트너의 문서번호를 할당합니다.
+        {**********************************************************************}
+
+        // 현금영수증 아이템키 (Search) API의 반환항목중 ItemKey 참조
+        itemKey := '020021917480600001';
+
+        // 문서번호, 숫자, 영문, '-', '_' 조합으로 최대 24자리 구성.
+        // 사업자번호별로 중복없는 고유번호 할당.
+        mgtKey := '20200722-22';
+
+        try
+                response := cashbillService.AssignMgtKey(txtCorpNum.text, itemKey, mgtKey);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage('오류코드 : '+ IntToStr(le.code) + #10#13 +'오류메시지 : '+  le.Message);
+                        Exit;
+                end;
+        end;
+        
+        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
 end;
 
 end.

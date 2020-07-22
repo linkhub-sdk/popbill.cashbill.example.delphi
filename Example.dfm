@@ -63,16 +63,16 @@ object frmExample: TfrmExample
       Caption = '원본 현금영수증에 대한 '#39'취소현금영수증'#39'을 발행해야 합니다.'
     end
     object GroupBox8: TGroupBox
-      Left = 28
+      Left = 12
       Top = 264
-      Width = 197
+      Width = 151
       Height = 185
       Caption = '문서 정보'
       TabOrder = 0
       object btnSearch: TButton
         Left = 9
         Top = 117
-        Width = 179
+        Width = 130
         Height = 25
         Caption = '목록 조회'
         TabOrder = 0
@@ -81,7 +81,7 @@ object frmExample: TfrmExample
       object btnGetInfo: TButton
         Left = 9
         Top = 24
-        Width = 179
+        Width = 130
         Height = 25
         Caption = '상태 확인'
         TabOrder = 1
@@ -90,7 +90,7 @@ object frmExample: TfrmExample
       object btnGetInfos: TButton
         Left = 9
         Top = 55
-        Width = 179
+        Width = 130
         Height = 25
         Caption = '상태 대량 확인'
         TabOrder = 2
@@ -99,7 +99,7 @@ object frmExample: TfrmExample
       object btnGetLogs: TButton
         Left = 9
         Top = 151
-        Width = 179
+        Width = 130
         Height = 25
         Caption = '상태 변경이력 확인'
         TabOrder = 3
@@ -108,7 +108,7 @@ object frmExample: TfrmExample
       object btnGetDetailInfo: TButton
         Left = 9
         Top = 86
-        Width = 179
+        Width = 130
         Height = 25
         Caption = '상세정보 확인'
         TabOrder = 4
@@ -116,16 +116,16 @@ object frmExample: TfrmExample
       end
     end
     object GroupBox9: TGroupBox
-      Left = 245
+      Left = 173
       Top = 264
-      Width = 197
+      Width = 324
       Height = 185
       Caption = '부가 기능'
       TabOrder = 1
       object btnSendEmail: TButton
         Left = 9
         Top = 24
-        Width = 179
+        Width = 152
         Height = 25
         Caption = '이메일 전송'
         TabOrder = 0
@@ -134,7 +134,7 @@ object frmExample: TfrmExample
       object btnSendSMS: TButton
         Left = 9
         Top = 55
-        Width = 179
+        Width = 152
         Height = 25
         Caption = '문자 전송'
         TabOrder = 1
@@ -143,7 +143,7 @@ object frmExample: TfrmExample
       object btnSendFAX: TButton
         Left = 9
         Top = 87
-        Width = 179
+        Width = 152
         Height = 25
         Caption = '팩스 전송'
         TabOrder = 2
@@ -152,7 +152,7 @@ object frmExample: TfrmExample
       object btnListEmailConfig: TButton
         Left = 9
         Top = 118
-        Width = 179
+        Width = 152
         Height = 25
         Caption = '알림메일 전송목록 조회'
         TabOrder = 3
@@ -161,15 +161,24 @@ object frmExample: TfrmExample
       object btnUpdateEmailConfig: TButton
         Left = 9
         Top = 149
-        Width = 179
+        Width = 152
         Height = 25
         Caption = '알림메일 전송설정 수정'
         TabOrder = 4
         OnClick = btnUpdateEmailConfigClick
       end
+      object btnAssignMgtKey: TButton
+        Left = 168
+        Top = 24
+        Width = 145
+        Height = 25
+        Caption = '문서번호 할당'
+        TabOrder = 5
+        OnClick = btnAssignMgtKeyClick
+      end
     end
     object GroupBox10: TGroupBox
-      Left = 463
+      Left = 503
       Top = 264
       Width = 402
       Height = 185
@@ -231,16 +240,16 @@ object frmExample: TfrmExample
       end
     end
     object GroupBox11: TGroupBox
-      Left = 880
+      Left = 912
       Top = 264
-      Width = 177
+      Width = 129
       Height = 185
       Caption = '기타 URL'
       TabOrder = 3
       object btnGetURL_TBOX: TButton
         Left = 9
         Top = 24
-        Width = 154
+        Width = 110
         Height = 25
         Caption = '임시 문서함'
         TabOrder = 0
@@ -249,7 +258,7 @@ object frmExample: TfrmExample
       object btnGetURL_PBOX: TButton
         Left = 9
         Top = 55
-        Width = 154
+        Width = 110
         Height = 25
         Caption = '발행 문서함'
         TabOrder = 1
@@ -258,7 +267,7 @@ object frmExample: TfrmExample
       object btnGetURL_WRITE: TButton
         Left = 9
         Top = 87
-        Width = 154
+        Width = 110
         Height = 25
         Caption = '매출 작성'
         TabOrder = 2
