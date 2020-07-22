@@ -120,7 +120,7 @@ object frmExample: TfrmExample
       Top = 264
       Width = 197
       Height = 185
-      Caption = '부가 서비스'
+      Caption = '부가 기능'
       TabOrder = 1
       object btnSendEmail: TButton
         Left = 9
@@ -171,7 +171,7 @@ object frmExample: TfrmExample
     object GroupBox10: TGroupBox
       Left = 463
       Top = 264
-      Width = 197
+      Width = 402
       Height = 185
       Caption = 'URL 관련'
       TabOrder = 2
@@ -220,18 +220,27 @@ object frmExample: TfrmExample
         TabOrder = 4
         OnClick = btnGetMailURLClick
       end
+      object Button1: TButton
+        Left = 200
+        Top = 24
+        Width = 193
+        Height = 25
+        Caption = '현금영수증 PDF 다운로드 URL'
+        TabOrder = 5
+        OnClick = Button1Click
+      end
     end
     object GroupBox11: TGroupBox
-      Left = 680
+      Left = 880
       Top = 264
-      Width = 197
+      Width = 177
       Height = 185
       Caption = '기타 URL'
       TabOrder = 3
       object btnGetURL_TBOX: TButton
         Left = 9
         Top = 24
-        Width = 179
+        Width = 154
         Height = 25
         Caption = '임시 문서함'
         TabOrder = 0
@@ -240,7 +249,7 @@ object frmExample: TfrmExample
       object btnGetURL_PBOX: TButton
         Left = 9
         Top = 55
-        Width = 179
+        Width = 154
         Height = 25
         Caption = '발행 문서함'
         TabOrder = 1
@@ -249,7 +258,7 @@ object frmExample: TfrmExample
       object btnGetURL_WRITE: TButton
         Left = 9
         Top = 87
-        Width = 179
+        Width = 154
         Height = 25
         Caption = '매출 작성'
         TabOrder = 2
