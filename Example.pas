@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : https://docs.popbill.com/cashbill/tutorial/delphi }
-{ - 업데이트 일자 : 2020-07-22                                                 }
+{ - 업데이트 일자 : 2021-04-16                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -107,6 +107,8 @@ type
     btnUpdateEmailConfig: TButton;
     Button1: TButton;
     btnAssignMgtKey: TButton;
+    btnGetViewURL: TButton;
+    txtURL: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender:TObject; var Action:TCloseAction);
     procedure btnRegisterClick(Sender: TObject);
@@ -156,6 +158,7 @@ type
     procedure btnUpdateEmailConfigClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure btnAssignMgtKeyClick(Sender: TObject);
+    procedure btnGetViewURLClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -2075,6 +2078,36 @@ begin
         end;
         
         ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+end;
+
+procedure TfrmExample.btnGetViewURLClick(Sender: TObject);
+var
+  resultURL : String;
+begin
+        {**********************************************************************}
+        { 1건의 현금영수증 보기 팝업 URL을 반환합니다. (메뉴/버튼 제외)
+        { - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+        { - https://docs.popbill.com/cashbill/delphi/api#GetViewURL
+        {**********************************************************************}
+
+        try
+                resultURL := cashbillService.getViewURL(txtCorpNum.Text, txtMgtKey.Text);
+                txtURL.text := resultURL;                
+        except
+                on le : EPopbillException do begin
+                        ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
+                        Exit;
+                end;
+        end;
+
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
 end;
 
 end.

@@ -195,7 +195,7 @@ object frmExample: TfrmExample
       end
       object btnGetPrintURL: TButton
         Left = 9
-        Top = 55
+        Top = 87
         Width = 179
         Height = 25
         Caption = '공급자 인쇄 URL'
@@ -204,7 +204,7 @@ object frmExample: TfrmExample
       end
       object btnGetEPrintURL: TButton
         Left = 9
-        Top = 87
+        Top = 119
         Width = 179
         Height = 25
         Caption = '공급받는자 인쇄 URL'
@@ -213,7 +213,7 @@ object frmExample: TfrmExample
       end
       object btnGetMassPrintURL: TButton
         Left = 9
-        Top = 118
+        Top = 150
         Width = 179
         Height = 25
         Caption = '현금영수증 대량 인쇄 URL'
@@ -221,9 +221,9 @@ object frmExample: TfrmExample
         OnClick = btnGetMassPrintURLClick
       end
       object btnGetMailURL: TButton
-        Left = 9
-        Top = 149
-        Width = 179
+        Left = 201
+        Top = 53
+        Width = 192
         Height = 25
         Caption = '현금영수증 메일링크 URL'
         TabOrder = 4
@@ -237,6 +237,15 @@ object frmExample: TfrmExample
         Caption = '현금영수증 PDF 다운로드 URL'
         TabOrder = 5
         OnClick = Button1Click
+      end
+      object btnGetViewURL: TButton
+        Left = 9
+        Top = 56
+        Width = 179
+        Height = 25
+        Caption = '현금영수증 보기 URL (버튼x)'
+        TabOrder = 6
+        OnClick = btnGetViewURLClick
       end
     end
     object GroupBox11: TGroupBox
@@ -530,7 +539,7 @@ object frmExample: TfrmExample
     Top = 258
     Width = 161
     Height = 25
-    Caption = '관리번호 사용여부 확인'
+    Caption = '문서번호 사용여부 확인'
     TabOrder = 8
     OnClick = btnCheckMgtkeyInUseClick
   end
@@ -629,5 +638,14 @@ object frmExample: TfrmExample
       TabOrder = 1
       OnClick = btnGetPartnerURL_CHRGClick
     end
+  end
+  object txtURL: TEdit
+    Left = 528
+    Top = 16
+    Width = 121
+    Height = 21
+    ImeName = '한국어 입력 시스템 (IME 2000)'
+    TabOrder = 16
+    Text = 'txtURL'
   end
 end
