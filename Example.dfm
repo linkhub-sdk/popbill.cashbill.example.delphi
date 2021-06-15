@@ -1,6 +1,6 @@
 object frmExample: TfrmExample
-  Left = 272
-  Top = 120
+  Left = 672
+  Top = 227
   AutoScroll = False
   Caption = '팝빌 현금영수증 API SDK Delphi Example'
   ClientHeight = 708
@@ -34,9 +34,9 @@ object frmExample: TfrmExample
   end
   object GroupBox7: TGroupBox
     Left = 24
-    Top = 216
+    Top = 224
     Width = 1073
-    Height = 465
+    Height = 457
     Caption = '현금영수증 관련 기능'
     TabOrder = 13
     object Label3: TLabel
@@ -365,7 +365,7 @@ object frmExample: TfrmExample
     Left = 23
     Top = 49
     Width = 1074
-    Height = 160
+    Height = 176
     Caption = '팝빌 기본 API'
     TabOrder = 6
     object GroupBox6: TGroupBox
@@ -380,7 +380,7 @@ object frmExample: TfrmExample
       Left = 784
       Top = 19
       Width = 145
-      Height = 125
+      Height = 150
       Caption = '담당자 관련'
       TabOrder = 1
       object btnRegistContact: TButton
@@ -394,7 +394,7 @@ object frmExample: TfrmExample
       end
       object btnListContact: TButton
         Left = 11
-        Top = 56
+        Top = 88
         Width = 124
         Height = 25
         Caption = '담당자 목록 확인'
@@ -403,12 +403,21 @@ object frmExample: TfrmExample
       end
       object btnUpdateContact: TButton
         Left = 11
-        Top = 88
+        Top = 120
         Width = 124
         Height = 25
         Caption = '담당자 정보 수정'
         TabOrder = 2
         OnClick = btnUpdateContactClick
+      end
+      object btnGetContactInfo: TButton
+        Left = 11
+        Top = 56
+        Width = 124
+        Height = 25
+        Caption = '담당자 정보 확인'
+        TabOrder = 3
+        OnClick = btnGetContactInfoClick
       end
     end
     object GroupBox13: TGroupBox
@@ -588,16 +597,16 @@ object frmExample: TfrmExample
     end
   end
   object GroupBox12: TGroupBox
-    Left = 328
+    Left = 320
     Top = 68
-    Width = 139
-    Height = 125
+    Width = 153
+    Height = 149
     Caption = '연동과금 포인트'
     TabOrder = 14
     object btnGetBalance: TButton
       Left = 12
       Top = 23
-      Width = 116
+      Width = 125
       Height = 25
       Caption = '잔여포인트 확인'
       TabOrder = 0
@@ -606,11 +615,29 @@ object frmExample: TfrmExample
     object btnGetChargeURL: TButton
       Left = 12
       Top = 55
-      Width = 115
+      Width = 125
       Height = 25
       Caption = '포인트 충전 URL'
       TabOrder = 1
       OnClick = btnGetChargeURLClick
+    end
+    object btnGetPaymentURL: TButton
+      Left = 12
+      Top = 88
+      Width = 125
+      Height = 25
+      Caption = '포인트 결제내역 URL'
+      TabOrder = 2
+      OnClick = btnGetPaymentURLClick
+    end
+    object btnGetUseHistoryURL: TButton
+      Left = 12
+      Top = 120
+      Width = 125
+      Height = 25
+      Caption = '포인트 사용내역 URL'
+      TabOrder = 3
+      OnClick = btnGetUseHistoryURLClick
     end
   end
   object GroupBox15: TGroupBox
