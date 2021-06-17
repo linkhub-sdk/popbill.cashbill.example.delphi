@@ -274,7 +274,7 @@ begin
 
         cashbill := TCashbill.Create;
 
-        // [필수] 문서 관리번호 1~24자리, 영문, 숫자, '-', '_' 조합하여 구성
+        // [필수] 문서번호 1~24자리, 영문, 숫자, '-', '_' 조합하여 구성
         // 사업자별로 중복되지 않도록 구성
         cashbill.MgtKey := txtMgtKey.Text;
 
@@ -760,7 +760,7 @@ begin
         end
         else
         begin
-                tmp := tmp +'itemKey (팝빌 관리번호) : ' +  cashbillInfo.itemKey + #13;
+                tmp := tmp +'itemKey (팝빌번호) : ' +  cashbillInfo.itemKey + #13;
                 tmp := tmp +'mgtKey (문서번호) : ' +  cashbillInfo.mgtKey + #13;
                 tmp := tmp +'tradeDate (거래일자) : ' +  cashbillInfo.tradeDate + #13;
                 tmp := tmp +'tradeType (문서형태) : ' +  cashbillInfo.tradeType + #13;
@@ -1258,7 +1258,7 @@ begin
         begin
                 for i := 0 to Length(InfoList) -1 do
                 begin
-                        tmp := tmp +'itemKey (팝빌 관리번호) : ' +  InfoList[i].itemKey + #13;
+                        tmp := tmp +'itemKey (팝빌번호) : ' +  InfoList[i].itemKey + #13;
                         tmp := tmp +'mgtKey (문서번호) : ' +  InfoList[i].mgtKey + #13;
                         tmp := tmp +'tradeDate (거래일자) : ' +  InfoList[i].tradeDate + #13;
                         tmp := tmp +'tradeType (문서형태) : ' +  InfoList[i].tradeType + #13;
