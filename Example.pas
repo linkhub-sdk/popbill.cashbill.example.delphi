@@ -230,7 +230,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL : ' + #13 + resultURL);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
+        
 end;
 
 
@@ -253,7 +261,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnRegisterClick(Sender: TObject);
@@ -362,7 +377,14 @@ begin
                 end;
         end;
 
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        end;
 end;
 
 
@@ -427,7 +449,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnUpdateCorpInfoClick(Sender: TObject);
@@ -465,7 +494,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        end;
+                
 end;
 
 procedure TfrmExample.btnGetBalanceClick(Sender: TObject);
@@ -486,7 +523,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('잔여포인트 : ' + FloatToStr(balance));
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('잔여포인트 : ' + FloatToStr(balance));
+        end;
+        
 end;
 
 procedure TfrmExample.btnUnitCostClick(Sender: TObject);
@@ -502,8 +547,14 @@ begin
                 end;
         end;
 
-        ShowMessage('현금영수증 발행단가 : '+ FloatToStr(unitcost));
-
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('현금영수증 발행단가 : '+ FloatToStr(unitcost));
+        end;
 end;
 
 procedure TfrmExample.btnGetChargeURLClick(Sender: TObject);
@@ -525,7 +576,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL : ' + #13 + resultURL);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end;
 end;
 
 procedure TfrmExample.btnGetPartnerBalanceClick(Sender: TObject);
@@ -547,8 +605,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('잔여포인트 : ' + FloatToStr(balance));
-
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('잔여포인트 : ' + FloatToStr(balance));
+        end;
 end;
 
 procedure TfrmExample.btnCheckMgtkeyInUseClick(Sender: TObject);
@@ -682,7 +746,14 @@ begin
                 end;
         end;
 
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnIssueClick(Sender: TObject);
@@ -707,7 +778,14 @@ begin
                 end;
         end;
 
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnCancelIssueClick(Sender: TObject);
@@ -732,7 +810,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnGetInfoClick(Sender: TObject);
@@ -1060,7 +1145,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnSendSMSClick(Sender: TObject);
@@ -1095,7 +1187,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnSendEmailClick(Sender: TObject);
@@ -1119,7 +1218,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnGetDetailInfoClick(Sender: TObject);
@@ -1304,7 +1410,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnRegistContactClick(Sender: TObject);
@@ -1349,7 +1462,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnUpdateContactClick(Sender: TObject);
@@ -1393,7 +1513,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnCancelIssue_riClick(Sender: TObject);
@@ -1418,7 +1545,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;  
 end;
 
 procedure TfrmExample.btnDelete_riClick(Sender: TObject);
@@ -1437,7 +1571,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;  
 end;
 
 procedure TfrmExample.btnRegistIssueClick(Sender: TObject);
@@ -1549,7 +1690,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end;   
+        
 end;
 
 procedure TfrmExample.btnGetCorpInfoClick(Sender: TObject);
@@ -1571,12 +1720,19 @@ begin
                 end;
         end;
 
-        tmp := 'CorpName (상호) : ' + corpInfo.CorpName + #13;
-        tmp := tmp + 'CeoName (대표자 성명) : ' + corpInfo.CeoName + #13;
-        tmp := tmp + 'BizType (업태) : ' + corpInfo.BizType + #13;
-        tmp := tmp + 'BizClass (종목) : ' + corpInfo.BizClass + #13;
-        tmp := tmp + 'Addr (주소) : ' + corpInfo.Addr + #13;
-        ShowMessage(tmp);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'CorpName (상호) : ' + corpInfo.CorpName + #13;
+                tmp := tmp + 'CeoName (대표자 성명) : ' + corpInfo.CeoName + #13;
+                tmp := tmp + 'BizType (업태) : ' + corpInfo.BizType + #13;
+                tmp := tmp + 'BizClass (종목) : ' + corpInfo.BizClass + #13;
+                tmp := tmp + 'Addr (주소) : ' + corpInfo.Addr + #13;
+                ShowMessage(tmp);
+        end;   
 end;
 
 procedure TfrmExample.btnListContactClick(Sender: TObject);
@@ -1599,23 +1755,30 @@ begin
                 end;
         end;
 
-        tmp := 'id(아이디) | email(이메일) | hp(휴대폰) | personName(성명) | searchRole(담당자 조회 권한) | ';
-        tmp := tmp + 'tel(연락처) | fax(팩스) | mgrYN(관리자 여부) | regDT(등록일시) | state(상태)' + #13;
-
-        for i := 0 to Length(InfoList) -1 do
+        if cashbillService.LastErrCode <> 0 then
         begin
-            tmp := tmp + InfoList[i].id + ' | ';
-            tmp := tmp + InfoList[i].email + ' | ';
-            tmp := tmp + InfoList[i].hp + ' | ';
-            tmp := tmp + InfoList[i].personName + ' | ';
-            tmp := tmp + InfoList[i].searchRole + ' | ';
-            tmp := tmp + InfoList[i].tel + ' | ';
-            tmp := tmp + InfoList[i].fax + ' | ';
-            tmp := tmp + BoolToStr(InfoList[i].mgrYN) + ' | ';
-            tmp := tmp + InfoList[i].regDT + ' | ';
-            tmp := tmp + IntToStr(InfoList[i].state) + #13;
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'id(아이디) | email(이메일) | hp(휴대폰) | personName(성명) | searchRole(담당자 조회 권한) | ';
+                tmp := tmp + 'tel(연락처) | fax(팩스) | mgrYN(관리자 여부) | regDT(등록일시) | state(상태)' + #13;
+
+                for i := 0 to Length(InfoList) -1 do
+                begin
+                        tmp := tmp + InfoList[i].id + ' | ';
+                        tmp := tmp + InfoList[i].email + ' | ';
+                        tmp := tmp + InfoList[i].hp + ' | ';
+                tmp := tmp + InfoList[i].personName + ' | ';
+                tmp := tmp + InfoList[i].searchRole + ' | ';
+                tmp := tmp + InfoList[i].tel + ' | ';
+                tmp := tmp + InfoList[i].fax + ' | ';
+                tmp := tmp + BoolToStr(InfoList[i].mgrYN) + ' | ';
+                tmp := tmp + InfoList[i].regDT + ' | ';
+                tmp := tmp + IntToStr(InfoList[i].state) + #13;
+                end;
+                ShowMessage(tmp);
         end;
-        ShowMessage(tmp);
 end;
 
 
@@ -1637,7 +1800,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        end;
 end;
 
 procedure TfrmExample.btnGetUnitCostClick(Sender: TObject);
@@ -1741,52 +1911,59 @@ begin
                 end;
         end;
 
-        tmp := 'code(응답 결과코드) : '+IntToStr(SearchList.code) + #13;
-        tmp := tmp + 'total(총 검색결과 건수) : '+ IntToStr(SearchList.total) + #13;
-        tmp := tmp + 'perPage(페이지당 검색개수) : '+ IntToStr(SearchList.perPage) + #13;
-        tmp := tmp + 'pageNum(페이지 번호) : '+ IntToStr(SearchList.pageNum) + #13;
-        tmp := tmp + 'pageCount(페이지 개수) : '+ IntToStr(SearchList.pageCount) + #13;
-        tmp := tmp + 'message(응답 메시지) : '+ SearchList.message + #13#13;
-
-        tmp := tmp + 'itemKey(팝빌 관리번호) | mgtKey(문서번호) | tradeDate(거래일자) | tradeType(문서형태) | '
-                   + 'tradeUsage(거래구분) | tradeOpt(거래유형) | taxationType(과세형태) | totalAmount(거래금액) | '
-                   + 'issueDT(발행일시) | regDT(등록일시) | stateMemo(상태메모) | stateCode(상태코드) | '
-                   + 'stateDT(상태변경일시) | identityNum(식별번호)  | itemName(주문상품명) | '
-                   + 'customerName(주문자명) | confirmNum(국세청승인번호) | orgConfirmNum(원본 현금영수증 국세청승인번호) |'
-                   + 'orgTradeDate(원본 현금영수증 거래일자) | ntssendDT(국세청 전송일시) | ntsresult(국세청 처리결과) | '
-                   + 'ntsresultDT(국세청 처리결과 수신일시) | ntsresultCode(국세청 처리결과 상태코드) | '
-                   + 'ntsresultMessage(국세청 처리결과 메시지) | printYN(인쇄여부)  ' + #13#13;
-
-        for i := 0 to Length(SearchList.list) -1 do
+        if cashbillService.LastErrCode <> 0 then
         begin
-                tmp := tmp + SearchList.list[i].itemKey + ' | ';
-                tmp := tmp + SearchList.list[i].mgtKey +' | ';
-                tmp := tmp + SearchList.list[i].tradeDate + ' | ';
-                tmp := tmp + SearchList.list[i].tradeType + ' | ';
-                tmp := tmp + SearchList.list[i].tradeUsage + ' | ';
-                tmp := tmp + SearchList.list[i].tradeOpt + ' | ';
-                tmp := tmp + SearchList.list[i].taxationType + ' | ';
-                tmp := tmp + SearchList.list[i].totalAmount + ' | ';
-                tmp := tmp + SearchList.list[i].issueDT + ' | ';
-                tmp := tmp + SearchList.list[i].regDT + ' | ';
-                tmp := tmp + SearchList.list[i].stateMemo + ' | ';
-                tmp := tmp + IntToStr(SearchList.list[i].stateCode) + ' | ';
-                tmp := tmp + SearchList.list[i].stateDT + ' | ';
-                tmp := tmp + SearchList.list[i].identityNum + ' | ';
-                tmp := tmp + SearchList.list[i].itemName + ' | ';
-                tmp := tmp + SearchList.list[i].customerName +' | ';
-                tmp := tmp + SearchList.list[i].confirmNum + ' | ';
-                tmp := tmp + SearchList.list[i].orgConfirmNum + ' | ';
-                tmp := tmp + SearchList.list[i].orgTradeDate + ' | ';
-                tmp := tmp + SearchList.list[i].ntssendDT + ' | ';
-                tmp := tmp + SearchList.list[i].ntsresult + ' | ';
-                tmp := tmp + SearchList.list[i].ntsresultDT + ' | ';
-                tmp := tmp + SearchList.list[i].ntsresultCode + ' | ';
-                tmp := tmp + SearchList.list[i].ntsresultMessage + ' | ';
-                tmp := tmp + IfThen(SearchList.list[i].printYN,'true','false') +#13;
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                tmp := 'code(응답 결과코드) : '+IntToStr(SearchList.code) + #13;
+                tmp := tmp + 'total(총 검색결과 건수) : '+ IntToStr(SearchList.total) + #13;
+                tmp := tmp + 'perPage(페이지당 검색개수) : '+ IntToStr(SearchList.perPage) + #13;
+                tmp := tmp + 'pageNum(페이지 번호) : '+ IntToStr(SearchList.pageNum) + #13;
+                tmp := tmp + 'pageCount(페이지 개수) : '+ IntToStr(SearchList.pageCount) + #13;
+                tmp := tmp + 'message(응답 메시지) : '+ SearchList.message + #13#13;
+
+                tmp := tmp + 'itemKey(팝빌 관리번호) | mgtKey(문서번호) | tradeDate(거래일자) | tradeType(문서형태) | '
+                        + 'tradeUsage(거래구분) | tradeOpt(거래유형) | taxationType(과세형태) | totalAmount(거래금액) | '
+                        + 'issueDT(발행일시) | regDT(등록일시) | stateMemo(상태메모) | stateCode(상태코드) | '
+                        + 'stateDT(상태변경일시) | identityNum(식별번호)  | itemName(주문상품명) | '
+                        + 'customerName(주문자명) | confirmNum(국세청승인번호) | orgConfirmNum(원본 현금영수증 국세청승인번호) |'
+                        + 'orgTradeDate(원본 현금영수증 거래일자) | ntssendDT(국세청 전송일시) | ntsresult(국세청 처리결과) | '
+                        + 'ntsresultDT(국세청 처리결과 수신일시) | ntsresultCode(국세청 처리결과 상태코드) | '
+                        + 'ntsresultMessage(국세청 처리결과 메시지) | printYN(인쇄여부)  ' + #13#13;
+
+                for i := 0 to Length(SearchList.list) -1 do
+                begin
+                        tmp := tmp + SearchList.list[i].itemKey + ' | ';
+                        tmp := tmp + SearchList.list[i].mgtKey +' | ';
+                        tmp := tmp + SearchList.list[i].tradeDate + ' | ';
+                        tmp := tmp + SearchList.list[i].tradeType + ' | ';
+                        tmp := tmp + SearchList.list[i].tradeUsage + ' | ';
+                        tmp := tmp + SearchList.list[i].tradeOpt + ' | ';
+                        tmp := tmp + SearchList.list[i].taxationType + ' | ';
+                        tmp := tmp + SearchList.list[i].totalAmount + ' | ';
+                        tmp := tmp + SearchList.list[i].issueDT + ' | ';
+                        tmp := tmp + SearchList.list[i].regDT + ' | ';
+                        tmp := tmp + SearchList.list[i].stateMemo + ' | ';
+                        tmp := tmp + IntToStr(SearchList.list[i].stateCode) + ' | ';
+                        tmp := tmp + SearchList.list[i].stateDT + ' | ';
+                        tmp := tmp + SearchList.list[i].identityNum + ' | ';
+                        tmp := tmp + SearchList.list[i].itemName + ' | ';
+                        tmp := tmp + SearchList.list[i].customerName +' | ';
+                        tmp := tmp + SearchList.list[i].confirmNum + ' | ';
+                        tmp := tmp + SearchList.list[i].orgConfirmNum + ' | ';
+                        tmp := tmp + SearchList.list[i].orgTradeDate + ' | ';
+                        tmp := tmp + SearchList.list[i].ntssendDT + ' | ';
+                        tmp := tmp + SearchList.list[i].ntsresult + ' | ';
+                        tmp := tmp + SearchList.list[i].ntsresultDT + ' | ';
+                        tmp := tmp + SearchList.list[i].ntsresultCode + ' | ';
+                        tmp := tmp + SearchList.list[i].ntsresultMessage + ' | ';
+                        tmp := tmp + IfThen(SearchList.list[i].printYN,'true','false') +#13;
+                end;
+                SearchList.Free;
+                ShowMessage(tmp);
         end;
-        SearchList.Free;
-        ShowMessage(tmp);
 end;
 
 procedure TfrmExample.btnGetChargeInfoClick(Sender: TObject);
@@ -1819,8 +1996,6 @@ begin
                 tmp := tmp + 'rateSystem (과금제도) : ' + chargeInfo.rateSystem + #13;
                 ShowMessage(tmp);
         end;
-
-
 end;
 
 procedure TfrmExample.btnRevokeRegistIssueClick(Sender: TObject);
@@ -1864,7 +2039,15 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        end; 
+        
 end;
 
 procedure TfrmExample.btnGetPartnerURL_CHRGClick(Sender: TObject);
@@ -1886,7 +2069,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL : ' + #13 + resultURL);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL : ' + #13 + resultURL);
+        end; 
 end;
 
 procedure TfrmExample.btnRevokeRegistIssue_partClick(Sender: TObject);
@@ -1950,7 +2140,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        end; 
 end;
 
 procedure TfrmExample.btnListEmailConfigClick(Sender: TObject);
@@ -2023,7 +2220,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        end;    
 end;
 
 procedure TfrmExample.Button1Click(Sender: TObject);
@@ -2081,7 +2285,15 @@ begin
                 end;
         end;
         
-        ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+ cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+        end
+        
 end;
 
 procedure TfrmExample.btnGetViewURLClick(Sender: TObject);
@@ -2132,7 +2344,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL :  ' + #13 + resultURL);
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+ cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL :  ' + #13 + resultURL);
+        end
 end;
 
 procedure TfrmExample.btnGetUseHistoryURLClick(Sender: TObject);
@@ -2153,8 +2372,14 @@ begin
                         Exit;
                 end;
         end;
-        ShowMessage('URL :  ' + #13 + resultURL);
-
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : ' + IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+ cashbillService.LastErrMessage);
+        end
+        else
+        begin
+                ShowMessage('URL :  ' + #13 + resultURL);
+        end
 end;
 
 procedure TfrmExample.btnGetContactInfoClick(Sender: TObject);
@@ -2199,3 +2424,4 @@ begin
 end;
 
 end.
+
