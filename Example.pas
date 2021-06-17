@@ -1236,10 +1236,10 @@ begin
 
         // 현금영수증 문서번호 배열 (최대 1000건)
         SetLength(KeyList,4);
-        KeyList[0] := '20190115-001';
-        KeyList[1] := '20190115-002';
-        KeyList[2] := '20190115-003';
-        KeyList[3] := '20190115-004';
+        KeyList[0] := '20210615-001';
+        KeyList[1] := '20210615-002';
+        KeyList[2] := '20210615-003';
+        KeyList[3] := '20210615-004';
 
         try
                 InfoList := cashbillService.getInfos(txtCorpNum.text,KeyList);
@@ -1685,10 +1685,10 @@ begin
         DType := 'R';
 
         // [필수] 검색 시작일자, 작성형태(yyyyMMdd)
-        SDate := '20190101';
+        SDate := '20210601';
 
         // [필수] 검색 종료일자, 작성형태(yyyyMMdd)
-        EDate := '20190115';
+        EDate := '20210615';
 
         // 전송상태값 배열. 미기재시 전체조회, 문서상태 값 3자리의 배열, 2,3번째 자리 와일드 카드 사용가능
         // 전송상태값 테이블은 "[현금영수증 연동매뉴얼] > 5.2 현금영수증 상태코드 테이블" 참조
@@ -1846,7 +1846,7 @@ begin
 
         // 원본현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-        orgTradeDate := '20190110';
+        orgTradeDate := '20210605';
 
         // 발행안내문자 전송여부
         smssendYN := False;
@@ -1913,7 +1913,7 @@ begin
 
         // 원본현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-        orgTradeDate := '20190110';
+        orgTradeDate := '20210610';
 
         // 발행안내문자 전송여부
         smssendYN := False;
@@ -2068,7 +2068,7 @@ begin
 
         // 문서번호, 숫자, 영문, '-', '_' 조합으로 최대 24자리 구성.
         // 사업자번호별로 중복없는 고유번호 할당.
-        mgtKey := '20200722-22';
+        mgtKey := '20210615-22';
 
         try
                 response := cashbillService.AssignMgtKey(txtCorpNum.text, itemKey, mgtKey);
