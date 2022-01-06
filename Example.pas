@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : https://docs.popbill.com/cashbill/tutorial/delphi }
-{ - 업데이트 일자 : 2021-11-29                                                 }
+{ - 업데이트 일자 : 2022-01-06                                                 }
 { - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
 { - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
 {                                                                              }
@@ -763,7 +763,7 @@ end;
 
 procedure TfrmExample.btnIssueClick(Sender: TObject);
 var
-        response : TResponse;
+        response : TCBIssueResponse;
         memo : String;
 begin
         {**********************************************************************}
@@ -789,7 +789,7 @@ begin
         end
         else
         begin
-                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message + #10#13 + '국세청승인번호 : ' + response.confirmNum + #10#13 + '거래일자 : ' + response.tradeDate);
         end;
 end;
 
@@ -1068,10 +1068,10 @@ begin
 
         // 인쇄할 현금영수증 문서번호 배열 (최대 100건)
         SetLength(KeyList,4);
-        KeyList[0] := '20190115-001';
-        KeyList[1] := '20190115-002';
-        KeyList[2] := '20190115-003';
-        KeyList[3] := '20190115-004';
+        KeyList[0] := '20220105-001';
+        KeyList[1] := '20220105-002';
+        KeyList[2] := '20220105-003';
+        KeyList[3] := '20220105-004';
 
         try
                 resultURL := cashbillService.getMassPrintURL(txtCorpNum.text, KeyList);
@@ -1348,10 +1348,10 @@ begin
 
         // 현금영수증 문서번호 배열 (최대 1000건)
         SetLength(KeyList,4);
-        KeyList[0] := '20210615-001';
-        KeyList[1] := '20210615-002';
-        KeyList[2] := '20210615-003';
-        KeyList[3] := '20210615-004';
+        KeyList[0] := '20220106-001';
+        KeyList[1] := '20220106-002';
+        KeyList[2] := '20220106-003';
+        KeyList[3] := '20220106-004';
 
         try
                 InfoList := cashbillService.getInfos(txtCorpNum.text,KeyList);
@@ -1590,7 +1590,7 @@ end;
 procedure TfrmExample.btnRegistIssueClick(Sender: TObject);
 var
         cashbill : TCashbill;
-        response : TResponse;
+        response : TCBIssueResponse;
         memo, emailSubject : String;
 
 begin
@@ -1704,7 +1704,7 @@ begin
         end
         else
         begin
-                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message + #10#13 + '국세청승인번호 : ' + response.confirmNum + #10#13 + '거래일자 : ' + response.tradeDate);
         end;   
         
 end;
@@ -1863,10 +1863,10 @@ begin
         DType := 'R';
 
         // [필수] 검색 시작일자, 작성형태(yyyyMMdd)
-        SDate := '20210601';
+        SDate := '20220106';
 
         // [필수] 검색 종료일자, 작성형태(yyyyMMdd)
-        EDate := '20210615';
+        EDate := '20220130';
 
         // 전송상태값 배열. 미기재시 전체조회, 문서상태 값 3자리의 배열, 2,3번째 자리 와일드 카드 사용가능
         // 전송상태값 테이블은 "[현금영수증 연동매뉴얼] > 5.2 현금영수증 상태코드 테이블" 참조
@@ -2008,7 +2008,7 @@ end;
 
 procedure TfrmExample.btnRevokeRegistIssueClick(Sender: TObject);
 var
-        response : TResponse;
+        response : TCBIssueResponse;
         memo, mgtKey, orgConfirmNum, orgTradeDate : String;
         smssendYN : Boolean;
 begin
@@ -2052,7 +2052,7 @@ begin
         end
         else
         begin
-                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message + #10#13 + '국세청승인번호 : ' + response.confirmNum + #10#13 + '거래일자 : ' + response.tradeDate);
         end; 
         
 end;
@@ -2088,7 +2088,7 @@ end;
 
 procedure TfrmExample.btnRevokeRegistIssue_partClick(Sender: TObject);
 var
-        response : TResponse;
+        response : TCBIssueResponse;
         memo, mgtKey, orgConfirmNum, orgTradeDate, supplyCost, tax, serviceFee, totalAmount : String;
         cancelType: Integer;
         isPartCancel, smssendYN : Boolean;
@@ -2105,11 +2105,11 @@ begin
 
         // 원본현금영수증 국세청 승인번호
         // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
-        orgConfirmNum := '548757045';
+        orgConfirmNum := 'TB0000367';
 
         // 원본현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-        orgTradeDate := '20210610';
+        orgTradeDate := '20220105';
 
         // 발행안내문자 전송여부
         smssendYN := False;
@@ -2152,7 +2152,7 @@ begin
         end
         else
         begin
-                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message + #10#13 + '국세청승인번호 : ' + response.confirmNum + #10#13 + '거래일자 : ' + response.tradeDate);
         end; 
 end;
 
@@ -2280,7 +2280,7 @@ begin
 
         // 문서번호, 숫자, 영문, '-', '_' 조합으로 최대 24자리 구성.
         // 사업자번호별로 중복없는 고유번호 할당.
-        mgtKey := '20210615-22';
+        mgtKey := '20220105-22';
 
         try
                 response := cashbillService.AssignMgtKey(txtCorpNum.text, itemKey, mgtKey);
