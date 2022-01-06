@@ -327,6 +327,9 @@ begin
         // [필수] 가맹점 사업자번호, '-' 제외 10자리
         cashbill.franchiseCorpNum := txtCorpNum.Text;
 
+        // 가맹점 종사업장 식별번호
+        cashbill.franchiseTaxRegID := '';
+
         // 가맹점 상호
         cashbill.franchiseCorpName := '발행자상호';
 
@@ -695,6 +698,9 @@ begin
 
         // [필수] 가맹점 사업자번호, '-' 제외 10자리
         cashbill.franchiseCorpNum := txtCorpNum.Text;
+
+        // 가맹점 종사업장 식별번호
+        cashbill.franchiseTaxRegID := '';
 
         // 가맹점 상호
         cashbill.franchiseCorpName := '발행자상호_수정';
@@ -1267,6 +1273,7 @@ begin
                 tmp := tmp +'tax (부가세) : ' +  cashbill.tax + #13;
                 tmp := tmp +'serviceFee (봉사료) : ' +  cashbill.serviceFee + #13;
                 tmp := tmp +'franchiseCorpNum (가맹점 사업자번호) : ' +  cashbill.franchiseCorpNum + #13;
+                tmp := tmp +'franchiseTaxRegID (가맹점 종사업장 식별번호) : ' +  cashbill.franchiseTaxRegID + #13;
                 tmp := tmp +'franchiseCorpName (가맹점 상호) : ' +  cashbill.franchiseCorpName + #13;
                 tmp := tmp +'franchiseCEOName (가맹점 대표자 성명) : ' +  cashbill.franchiseCEOName + #13;
                 tmp := tmp +'franchiseAddr (가맹점 주소) : ' +  cashbill.franchiseAddr + #13;
@@ -1633,6 +1640,9 @@ begin
 
         // [필수] 가맹점 사업자번호, '-' 제외 10자리
         cashbill.franchiseCorpNum := txtCorpNum.Text;
+
+        // 가맹점 종사업장 식별번호
+        cashbill.franchiseTaxRegID := '';
 
         // 가맹점 상호
         cashbill.franchiseCorpName := '발행자상호';
