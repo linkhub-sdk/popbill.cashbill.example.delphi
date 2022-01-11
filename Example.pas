@@ -3,13 +3,12 @@
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : https://docs.popbill.com/cashbill/tutorial/delphi }
 { - 업데이트 일자 : 2022-01-06                                                 }
-{ - 연동 기술지원 연락처 : 1600-9854 / 070-4304-2991                           }
-{ - 연동 기술지원 이메일 : code@linkhub.co.kr                                  }
+{ - 연동 기술지원 연락처 : 1600-9854                                           }
+{ - 연동 기술지원 이메일 : code@linkhubcorp.com                                }
 {                                                                              }
 { <테스트 연동개발 준비사항>                                                   }
-{ (1) 32, 35번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를          }
+{ (1) 31, 34번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를          }
 {    링크허브 가입시 메일로 발급받은 인증정보로 수정                           }
-{ (2) 팝빌 개발용 사이트(test.popbill.com)에 연동회원으로 가입                 }
 {                                                                              }
 {******************************************************************************}
 
@@ -1869,7 +1868,6 @@ begin
         EDate := '20220130';
 
         // 전송상태값 배열. 미기재시 전체조회, 문서상태 값 3자리의 배열, 2,3번째 자리 와일드 카드 사용가능
-        // 전송상태값 테이블은 "[현금영수증 연동매뉴얼] > 5.2 현금영수증 상태코드 테이블" 참조
         SetLength(State, 3);
         State[0] := '100';
         State[1] := '3**';
@@ -1932,7 +1930,7 @@ begin
                 tmp := tmp + 'pageCount(페이지 개수) : '+ IntToStr(SearchList.pageCount) + #13;
                 tmp := tmp + 'message(응답 메시지) : '+ SearchList.message + #13#13;
 
-                tmp := tmp + 'itemKey(팝빌 관리번호) | mgtKey(문서번호) | tradeDate(거래일자) | tradeType(문서형태) | '
+                tmp := tmp + 'itemKey(팝빌번호) | mgtKey(문서번호) | tradeDate(거래일자) | tradeType(문서형태) | '
                         + 'tradeUsage(거래구분) | tradeOpt(거래유형) | taxationType(과세형태) | totalAmount(거래금액) | '
                         + 'issueDT(발행일시) | regDT(등록일시) | stateMemo(상태메모) | stateCode(상태코드) | '
                         + 'stateDT(상태변경일시) | identityNum(식별번호)  | itemName(주문상품명) | '
@@ -2028,7 +2026,7 @@ begin
 
         // 원본현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-        orgTradeDate := '20210605';
+        orgTradeDate := '20220101';
 
         // 발행안내문자 전송여부
         smssendYN := False;

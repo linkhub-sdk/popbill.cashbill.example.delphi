@@ -44,7 +44,7 @@ object frmExample: TfrmExample
       Top = 46
       Width = 120
       Height = 13
-      Caption = '문서관리번호(MgtKey) :'
+      Caption = '문서번호(MgtKey) :'
     end
     object Label4: TLabel
       Left = 656
