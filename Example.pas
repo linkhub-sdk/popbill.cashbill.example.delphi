@@ -282,7 +282,6 @@ begin
         { - 임시저장과 발행을 한번의 호출로 처리하는 즉시발행(RegistIssue API)
         {   프로세스를 권장합니다.
         { - 현금영수증 국세청 전송 정책 : https://docs.popbill.com/cashbill/ntsSendPolicy?lang=delphi
-        { - https://docs.popbill.com/cashbill/delphi/api#Register
         {**********************************************************************}
 
         cashbill := TCashbill.Create;
@@ -539,6 +538,10 @@ procedure TfrmExample.btnUnitCostClick(Sender: TObject);
 var
         unitcost : Single;
 begin
+        {**********************************************************************}
+        { 현금영수증 발행시 과금되는 포인트 단가를 확인합니다.
+        { - https://docs.popbill.com/cashbill/delphi/api#GetUnitCost
+        {**********************************************************************}
         try
                 unitcost := cashbillService.GetUnitCost(txtCorpNum.text);
         except
@@ -654,7 +657,6 @@ var
 begin
         {**********************************************************************}
         { [임시저장] 현금영수증의 기재항목을 수정합니다.                       
-        { - https://docs.popbill.com/cashbill/delphi/api#Update
         {**********************************************************************}
 
         cashbill := TCashbill.Create;
@@ -767,7 +769,6 @@ var
 begin
         {**********************************************************************}
         { [임시저장] 상태의 현금영수증을 [발행]처리 합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#CBIssue
         {**********************************************************************}
 
         // 메모
@@ -974,7 +975,7 @@ begin
         {**********************************************************************}
         { 1건의 현금영수증 보기 팝업 URL을 반환합니다.
         { - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetURL
+        { - https://docs.popbill.com/cashbill/delphi/api#GetPopUpURL
         {**********************************************************************}
 
         try
@@ -1032,7 +1033,6 @@ begin
        {**********************************************************************}
        { 1건의 현금영수증 인쇄(공급받는자) URL을 반환합니다.
        { - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-       { - https://docs.popbill.com/cashbill/delphi/api#GetPrintURL
        {**********************************************************************}
 
         try
@@ -1170,7 +1170,7 @@ begin
         { 알림문자를 전송합니다. (단문/SMS- 한글 최대 45자)
         { - 알림문자 전송시 포인트가 차감됩니다. (전송실패시 환불처리)
         { - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [문자] > [전송내역]
-        {   메뉴에서 전송결과를 확인할 수 있습니다.                            ㄴ
+        {   메뉴에서 전송결과를 확인할 수 있습니다.
         { - https://docs.popbill.com/cashbill/delphi/api#SendSMS
         {**********************************************************************}
 
