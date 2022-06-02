@@ -3,7 +3,7 @@ object frmExample: TfrmExample
   Top = 227
   AutoScroll = False
   Caption = '팝빌 현금영수증 API SDK Delphi Example'
-  ClientHeight = 708
+  ClientHeight = 756
   ClientWidth = 1115
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -32,17 +32,25 @@ object frmExample: TfrmExample
     AutoSize = False
     Caption = '팝빌회원 아이디 :'
   end
+  object Label7: TLabel
+    Left = 660
+    Top = 22
+    Width = 52
+    Height = 13
+    AutoSize = False
+    Caption = 'URL:'
+  end
   object GroupBox7: TGroupBox
     Left = 24
     Top = 224
     Width = 1073
-    Height = 457
+    Height = 521
     Caption = '현금영수증 관련 기능'
     TabOrder = 13
     object Label3: TLabel
       Left = 114
       Top = 46
-      Width = 120
+      Width = 96
       Height = 13
       Caption = '문서번호(MgtKey) :'
     end
@@ -64,15 +72,15 @@ object frmExample: TfrmExample
     end
     object GroupBox8: TGroupBox
       Left = 12
-      Top = 264
-      Width = 151
-      Height = 185
+      Top = 289
+      Width = 154
+      Height = 215
       Caption = '문서 정보'
       TabOrder = 0
       object btnSearch: TButton
         Left = 9
         Top = 117
-        Width = 130
+        Width = 137
         Height = 25
         Caption = '목록 조회'
         TabOrder = 0
@@ -81,7 +89,7 @@ object frmExample: TfrmExample
       object btnGetInfo: TButton
         Left = 9
         Top = 24
-        Width = 130
+        Width = 137
         Height = 25
         Caption = '상태 확인'
         TabOrder = 1
@@ -90,7 +98,7 @@ object frmExample: TfrmExample
       object btnGetInfos: TButton
         Left = 9
         Top = 55
-        Width = 130
+        Width = 137
         Height = 25
         Caption = '상태 대량 확인'
         TabOrder = 2
@@ -99,7 +107,7 @@ object frmExample: TfrmExample
       object btnGetLogs: TButton
         Left = 9
         Top = 151
-        Width = 130
+        Width = 137
         Height = 25
         Caption = '상태 변경이력 확인'
         TabOrder = 3
@@ -108,18 +116,27 @@ object frmExample: TfrmExample
       object btnGetDetailInfo: TButton
         Left = 9
         Top = 86
-        Width = 130
+        Width = 137
         Height = 25
         Caption = '상세정보 확인'
         TabOrder = 4
         OnClick = btnGetDetailInfoClick
       end
+      object Button2: TButton
+        Left = 8
+        Top = 184
+        Width = 137
+        Height = 25
+        Caption = '초대량 접수결과 확인'
+        TabOrder = 5
+        OnClick = btnGetBulkResultClick
+      end
     end
     object GroupBox9: TGroupBox
       Left = 173
-      Top = 264
+      Top = 289
       Width = 324
-      Height = 185
+      Height = 215
       Caption = '부가 기능'
       TabOrder = 1
       object btnSendEmail: TButton
@@ -179,9 +196,9 @@ object frmExample: TfrmExample
     end
     object GroupBox10: TGroupBox
       Left = 503
-      Top = 264
+      Top = 289
       Width = 402
-      Height = 185
+      Height = 215
       Caption = 'URL 관련'
       TabOrder = 2
       object btnGetPopUpURL: TButton
@@ -250,9 +267,9 @@ object frmExample: TfrmExample
     end
     object GroupBox11: TGroupBox
       Left = 912
-      Top = 264
+      Top = 289
       Width = 129
-      Height = 185
+      Height = 215
       Caption = '기타 URL'
       TabOrder = 3
       object btnGetURL_TBOX: TButton
@@ -285,9 +302,9 @@ object frmExample: TfrmExample
     end
     object GroupBox14: TGroupBox
       Left = 120
-      Top = 88
+      Top = 78
       Width = 217
-      Height = 153
+      Height = 155
       Caption = '즉시발행 프로세스 '
       TabOrder = 4
       object Shape1: TShape
@@ -336,6 +353,38 @@ object frmExample: TfrmExample
         Caption = '삭제'
         TabOrder = 2
         OnClick = btnDelete_riClick
+      end
+    end
+    object GroupBox16: TGroupBox
+      Left = 119
+      Top = 236
+      Width = 521
+      Height = 41
+      Caption = '초대량 발행'
+      TabOrder = 5
+      object Label6: TLabel
+        Left = 26
+        Top = 18
+        Width = 112
+        Height = 13
+        Caption = '제출아이디(SubmitID) '
+      end
+      object txtSubmitID: TEdit
+        Left = 148
+        Top = 13
+        Width = 229
+        Height = 21
+        ImeName = 'Microsoft IME 2010'
+        TabOrder = 0
+      end
+      object btnBulkSubmit: TButton
+        Left = 388
+        Top = 11
+        Width = 116
+        Height = 25
+        Caption = '초대량 발행 접수'
+        TabOrder = 1
+        OnClick = btnBulkSubmitClick
       end
     end
   end
@@ -604,36 +653,36 @@ object frmExample: TfrmExample
     Caption = '연동과금 포인트'
     TabOrder = 14
     object btnGetBalance: TButton
-      Left = 12
+      Left = 11
       Top = 23
-      Width = 125
+      Width = 134
       Height = 25
       Caption = '잔여포인트 확인'
       TabOrder = 0
       OnClick = btnGetBalanceClick
     end
     object btnGetChargeURL: TButton
-      Left = 12
+      Left = 11
       Top = 55
-      Width = 125
+      Width = 134
       Height = 25
       Caption = '포인트 충전 URL'
       TabOrder = 1
       OnClick = btnGetChargeURLClick
     end
     object btnGetPaymentURL: TButton
-      Left = 12
+      Left = 11
       Top = 88
-      Width = 125
+      Width = 134
       Height = 25
       Caption = '포인트 결제내역 URL'
       TabOrder = 2
       OnClick = btnGetPaymentURLClick
     end
     object btnGetUseHistoryURL: TButton
-      Left = 12
+      Left = 11
       Top = 120
-      Width = 125
+      Width = 134
       Height = 25
       Caption = '포인트 사용내역 URL'
       TabOrder = 3
@@ -667,12 +716,11 @@ object frmExample: TfrmExample
     end
   end
   object txtURL: TEdit
-    Left = 528
+    Left = 704
     Top = 16
-    Width = 121
+    Width = 377
     Height = 21
     ImeName = '한국어 입력 시스템 (IME 2000)'
     TabOrder = 16
-    Text = 'txtURL'
   end
 end

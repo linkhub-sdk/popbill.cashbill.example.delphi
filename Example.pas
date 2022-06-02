@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : https://docs.popbill.com/cashbill/tutorial/delphi }
-{ - 업데이트 일자 : 2022-04-07                                                 }
+{ - 업데이트 일자 : 2022-06-02                                                 }
 { - 연동 기술지원 연락처 : 1600-9854                                           }
 { - 연동 기술지원 이메일 : code@linkhubcorp.com                                }
 {                                                                              }
@@ -107,10 +107,16 @@ type
     Button1: TButton;
     btnAssignMgtKey: TButton;
     btnGetViewURL: TButton;
-    txtURL: TEdit;
     btnGetPaymentURL: TButton;
     btnGetUseHistoryURL: TButton;
     btnGetContactInfo: TButton;
+    GroupBox16: TGroupBox;
+    Label6: TLabel;
+    txtSubmitID: TEdit;
+    btnBulkSubmit: TButton;
+    Button2: TButton;
+    txtURL: TEdit;
+    Label7: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender:TObject; var Action:TCloseAction);
     procedure btnRegisterClick(Sender: TObject);
@@ -164,6 +170,8 @@ type
     procedure btnGetPaymentURLClick(Sender: TObject);
     procedure btnGetUseHistoryURLClick(Sender: TObject);
     procedure btnGetContactInfoClick(Sender: TObject);
+    procedure btnBulkSubmitClick(Sender: TObject);
+    procedure btnGetBulkResultClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -223,6 +231,7 @@ begin
 
         try
                 resultURL := cashbillService.getAccessURL(txtCorpNum.Text, txtUserID.Text);
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -564,6 +573,7 @@ begin
         
         try
                 resultURL := cashbillService.getChargeURL(txtCorpNum.Text, txtUserID.Text);
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -882,6 +892,7 @@ begin
 
         try
                 resultURL := cashbillService.GetURL(txtCorpNum.Text, 'TBOX');
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -911,6 +922,7 @@ begin
 
         try
                 resultURL := cashbillService.GetURL(txtCorpNum.Text, 'PBOX');
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -941,6 +953,7 @@ begin
 
         try
                 resultURL := cashbillService.GetURL(txtCorpNum.Text, 'WRITE');
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -970,6 +983,7 @@ begin
 
         try
                 resultURL := cashbillService.getPopupURL(txtCorpNum.Text, txtMgtKey.Text);
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -999,6 +1013,7 @@ begin
 
         try
                 resultURL := cashbillService.getPrintURL(txtCorpNum.Text, txtMgtKey.Text);
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1027,6 +1042,7 @@ begin
 
         try
                 resultURL := cashbillService.getEPrintURL(txtCorpNum.Text, txtMgtKey.Text);
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1064,6 +1080,7 @@ begin
 
         try
                 resultURL := cashbillService.getMassPrintURL(txtCorpNum.text, KeyList);
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -1094,6 +1111,7 @@ begin
 
         try
                 resultURL := cashbillService.getMailURL(txtCorpNum.Text, txtMgtKey.Text);
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -2046,6 +2064,7 @@ begin
         
         try
                 resultURL := cashbillService.getPartnerURL(txtCorpNum.Text, 'CHRG');
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -2226,6 +2245,7 @@ begin
 
         try
                 resultURL := cashbillService.getPDFURL(txtCorpNum.Text, txtMgtKey.Text);
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
@@ -2322,6 +2342,7 @@ begin
 
         try
                 resultURL := cashbillService.getPaymentURL(txtCorpNum.Text);
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : ' + IntToStr(le.code) + #10#13 +'응답메시지 : '+ le.Message);
@@ -2350,6 +2371,7 @@ begin
 
         try
                 resultURL := cashbillService.getUseHistoryURL(txtCorpNum.Text);
+                txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : ' + IntToStr(le.code) + #10#13 +'응답메시지 : '+ le.Message);
@@ -2403,6 +2425,164 @@ begin
                 tmp := tmp + 'state (계정상태) : ' + inttostr(contactInfo.state) + #13;
                 ShowMessage(tmp);
         end
+end;
+
+procedure TfrmExample.btnBulkSubmitClick(Sender: TObject);
+var
+        SubmitID : string;
+        CashbillList : Array of TCashbill;
+        Cashbill : TCashbill;
+        i : integer;
+        response : TCBBulkResponse;
+begin
+        {**********************************************************************}
+        { 최대 100건의 현금영수증 발행을 한번의 요청으로 접수합니다.
+        { - https://docs.popbill.com/cashbill/delphi/api#BulkSubmit
+        {**********************************************************************}
+        SetLength(CashbillList, 10);
+
+        for i :=0 to Length(CashbillList) -1 do
+        begin
+                // 세금계산서 객체 생성
+                CashbillList[i] := TCashbill.Create;
+
+                // [필수] 문서 문서번호 1~24자리, 영문, 숫자, '-', '_' 조합하여 구성
+                // 사업자별로 중복되지 않도록 구성
+                CashbillList[i].MgtKey := txtSubmitID.Text + inttostr(i);
+
+                // [필수] 문서형태, [승인거래, 취소거래] 중 기재
+                CashbillList[i].tradeType := '승인거래';
+                
+                // [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
+                CashbillList[i].tradeUsage := '소득공제용';
+
+                // 거래유형, [일반, 도서공연, 대중교통] 중 기재
+                CashbillList[i].tradeOpt := '일반';
+
+                // [필수] 과세형태, [과세, 비과세] 중 기재
+                CashbillList[i].taxationType := '과세';
+
+                // [필수] 거래금액
+                CashbillList[i].totalAmount := '11000';
+
+                // [필수] 공급가액
+                CashbillList[i].supplycost := '10000';
+
+                // [필수] 부가세
+                CashbillList[i].tax := '1000';
+
+                // [필수] 봉사료
+                CashbillList[i].serviceFee := '0';
+
+                // [필수] 가맹점 사업자번호, '-' 제외 10자리
+                CashbillList[i].franchiseCorpNum := txtCorpNum.Text;
+
+                // 가맹점 종사업장 식별번호
+                CashbillList[i].franchiseTaxRegID := '';
+
+                // 가맹점 상호
+                CashbillList[i].franchiseCorpName := '발행자상호';
+
+                // 가맹점 대표자 성명
+                CashbillList[i].franchiseCEOName := '발행자 대표자';
+
+                // 가맹점 주소
+                CashbillList[i].franchiseAddr := '발행자 주소';
+
+                // 가맹점 전화번호
+                CashbillList[i].franchiseTEL := '07043042991';
+
+                // [필수] 식별번호
+                // 거래구분(tradeUsage)이 '소득공제용'인 경우 [주민등록/휴대폰/카드]번호로 발행가능
+                // 거래구분(traseUsage)이 '지출증빙용'인 경우 [주민등록/휴대폰/카드/사업자]번호로 발행가능
+                CashbillList[i].identityNum := '0101112222';
+
+                // 주문자명
+                CashbillList[i].customerName := '고객명';
+
+                // 주문상품명
+                CashbillList[i].itemName := '상품명';
+
+                // 주문번호
+                CashbillList[i].orderNumber := '주문번호';
+
+                // 주문자 이메일주소
+                CashbillList[i].email := 'test@test.com';
+
+                // 주문자 휴대폰번호
+                CashbillList[i].hp := '010-111-222';
+
+                // 주문자 팩스번호
+                CashbillList[i].fax := '777-444-333';
+
+                // 발행안내문자 전송여부
+                CashbillList[i].smssendYN := False;
+            
+        end;
+        
+        try
+                response := cashbillService.BulkSubmit(txtCorpNum.Text, txtSubmitID.Text, CashbillList);
+
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 +'응답메시지 : '+ response.Message + #10#13 +'접수아이디 : '+ response.receiptID);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage('응답코드 : ' + IntToStr(le.code) + #10#13 +'응답메시지 : '+ le.Message);
+                        Exit;
+                end;
+        end;
+end;
+
+procedure TfrmExample.btnGetBulkResultClick(Sender: TObject);
+var
+        SubmitID : string;
+        bulkCashbillResult : TBulkCashbillResult;
+        tmp : string;
+        i : Integer;
+begin
+        {**********************************************************************}
+        { 접수시 기재한 SubmitID를 사용하여 현금영수증 접수결과를 확인합니다.
+        { - https://docs.popbill.com/cashbill/delphi/api#GetBulkResult
+        {**********************************************************************}
+        try
+            bulkCashbillResult := cashbillService.GetBulkResult(txtCorpNum.text, txtSubmitID.text, txtUserID.text);
+        except
+                on le : EPopbillException do begin
+                        ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
+                        Exit;
+                end;
+        end;
+
+        if cashbillService.LastErrCode <> 0 then
+        begin
+                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
+                Exit;
+        end
+        else
+        begin
+                tmp := 'code(코드) : ' +  IntToStr(bulkCashbillResult.code) + #13;
+                tmp := tmp + 'message (응답메시지) : ' + bulkCashbillResult.message + #13;
+                tmp := tmp + 'submitID (제출아이디) : ' + bulkCashbillResult.submitID + #13;
+                tmp := tmp + 'submitCount (세금계산서 접수 건수) : ' + IntToStr(bulkCashbillResult.submitCount) + #13;
+                tmp := tmp + 'successCount (세금계산서 발행 성공 건수) : ' + IntToStr(bulkCashbillResult.successCount) + #13;
+                tmp := tmp + 'failCount (세금계산서 발행 실패 건수) : ' + IntToStr(bulkCashbillResult.failCount) + #13;
+                tmp := tmp + 'txState (접수상태코드) : ' + IntToStr(bulkCashbillResult.txState) + #13;
+                tmp := tmp + 'txResultCode (접수 결과코드) : ' + IntToStr(bulkCashbillResult.txResultCode) + #13;
+                tmp := tmp + 'txStartDT (발행처리 시작일시) : ' + bulkCashbillResult.txStartDT + #13;
+                tmp := tmp + 'txEndDT (발행처리 완료일시) : ' + bulkCashbillResult.txEndDT + #13;
+                tmp := tmp + 'receiptDT (접수일시) : ' + bulkCashbillResult.receiptDT + #13;
+                tmp := tmp + 'receiptID (접수아이디) : ' + bulkCashbillResult.receiptID + #13#13;
+
+                tmp := tmp + 'code(코드) |  mgtKey (문서번호) |  confirmNum (국세청 승인번호) | tradeDate(거래일자)' + #13#13;
+                for i := 0 to Length(bulkCashbillResult.issueResult) -1 do
+                begin
+        	  tmp := tmp + IntToStr(bulkCashbillResult.issueResult[i].code) + ' | '
+                        + bulkCashbillResult.issueResult[i].mgtKey + ' | '
+                        + bulkCashbillResult.issueResult[i].confirmNum + ' | '
+                        + bulkCashbillResult.issueResult[i].tradeDate + #13#13;
+                end;
+                bulkCashbillResult.Free;
+                ShowMessage(tmp);
+        end;
 end;
 
 end.
