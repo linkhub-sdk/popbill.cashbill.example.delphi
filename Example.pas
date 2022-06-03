@@ -114,9 +114,9 @@ type
     Label6: TLabel;
     txtSubmitID: TEdit;
     btnBulkSubmit: TButton;
-    Button2: TButton;
     txtURL: TEdit;
     Label7: TLabel;
+    Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender:TObject; var Action:TCloseAction);
     procedure btnRegisterClick(Sender: TObject);

@@ -1,9 +1,9 @@
 object frmExample: TfrmExample
-  Left = 672
-  Top = 227
+  Left = 265
+  Top = 114
   AutoScroll = False
   Caption = '팝빌 현금영수증 API SDK Delphi Example'
-  ClientHeight = 756
+  ClientHeight = 729
   ClientWidth = 1115
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -44,27 +44,27 @@ object frmExample: TfrmExample
     Left = 24
     Top = 224
     Width = 1073
-    Height = 521
+    Height = 496
     Caption = '현금영수증 관련 기능'
     TabOrder = 13
     object Label3: TLabel
-      Left = 114
-      Top = 46
+      Left = 138
+      Top = 38
       Width = 96
       Height = 13
       Caption = '문서번호(MgtKey) :'
     end
     object Label4: TLabel
-      Left = 656
-      Top = 104
+      Left = 120
+      Top = 240
       Width = 321
       Height = 13
       AutoSize = False
       Caption = '국세청 전송이 완료된 현금영수증을 취소하기 위해서는'
     end
     object Label5: TLabel
-      Left = 656
-      Top = 120
+      Left = 120
+      Top = 256
       Width = 353
       Height = 13
       AutoSize = False
@@ -74,7 +74,7 @@ object frmExample: TfrmExample
       Left = 12
       Top = 289
       Width = 154
-      Height = 215
+      Height = 191
       Caption = '문서 정보'
       TabOrder = 0
       object btnSearch: TButton
@@ -122,21 +122,12 @@ object frmExample: TfrmExample
         TabOrder = 4
         OnClick = btnGetDetailInfoClick
       end
-      object Button2: TButton
-        Left = 8
-        Top = 184
-        Width = 137
-        Height = 25
-        Caption = '초대량 접수결과 확인'
-        TabOrder = 5
-        OnClick = btnGetBulkResultClick
-      end
     end
     object GroupBox9: TGroupBox
       Left = 173
       Top = 289
       Width = 324
-      Height = 215
+      Height = 191
       Caption = '부가 기능'
       TabOrder = 1
       object btnSendEmail: TButton
@@ -198,7 +189,7 @@ object frmExample: TfrmExample
       Left = 503
       Top = 289
       Width = 402
-      Height = 215
+      Height = 191
       Caption = 'URL 관련'
       TabOrder = 2
       object btnGetPopUpURL: TButton
@@ -269,7 +260,7 @@ object frmExample: TfrmExample
       Left = 912
       Top = 289
       Width = 129
-      Height = 215
+      Height = 191
       Caption = '기타 URL'
       TabOrder = 3
       object btnGetURL_TBOX: TButton
@@ -356,35 +347,44 @@ object frmExample: TfrmExample
       end
     end
     object GroupBox16: TGroupBox
-      Left = 119
-      Top = 236
-      Width = 521
-      Height = 41
+      Left = 663
+      Top = 78
+      Width = 168
+      Height = 155
       Caption = '초대량 발행'
       TabOrder = 5
       object Label6: TLabel
-        Left = 26
-        Top = 18
-        Width = 112
+        Left = 13
+        Top = 22
+        Width = 121
         Height = 13
-        Caption = '제출아이디(SubmitID) '
+        Caption = '제출아이디(SubmitID)  : '
       end
       object txtSubmitID: TEdit
-        Left = 148
-        Top = 13
-        Width = 229
+        Left = 13
+        Top = 39
+        Width = 142
         Height = 21
         ImeName = 'Microsoft IME 2010'
         TabOrder = 0
       end
       object btnBulkSubmit: TButton
-        Left = 388
-        Top = 11
-        Width = 116
+        Left = 12
+        Top = 66
+        Width = 142
         Height = 25
         Caption = '초대량 발행 접수'
         TabOrder = 1
         OnClick = btnBulkSubmitClick
+      end
+      object Button2: TButton
+        Left = 12
+        Top = 97
+        Width = 142
+        Height = 25
+        Caption = '초대량 접수결과 확인'
+        TabOrder = 2
+        OnClick = btnGetBulkResultClick
       end
     end
   end
