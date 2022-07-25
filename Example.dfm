@@ -50,7 +50,7 @@ object frmExample: TfrmExample
     object Label3: TLabel
       Left = 138
       Top = 38
-      Width = 96
+      Width = 92
       Height = 13
       Caption = '문서번호(MgtKey) :'
     end
@@ -356,7 +356,7 @@ object frmExample: TfrmExample
       object Label6: TLabel
         Left = 13
         Top = 22
-        Width = 121
+        Width = 116
         Height = 13
         Caption = '제출아이디(SubmitID)  : '
       end

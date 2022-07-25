@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : https://docs.popbill.com/cashbill/tutorial/delphi }
-{ - 업데이트 일자 : 2022-06-02                                                 }
+{ - 업데이트 일자 : 2022-07-25                                                 }
 { - 연동 기술지원 연락처 : 1600-9854                                           }
 { - 연동 기술지원 이메일 : code@linkhubcorp.com                                }
 {                                                                              }
@@ -2572,10 +2572,11 @@ begin
                 tmp := tmp + 'receiptDT (접수일시) : ' + bulkCashbillResult.receiptDT + #13;
                 tmp := tmp + 'receiptID (접수아이디) : ' + bulkCashbillResult.receiptID + #13#13;
 
-                tmp := tmp + 'code(코드) |  mgtKey (문서번호) |  confirmNum (국세청 승인번호) | tradeDate(거래일자)' + #13#13;
+                tmp := tmp + 'code(코드) | message (메시지) | mgtKey (문서번호) |  confirmNum (국세청 승인번호) | tradeDate(거래일자)' + #13#13;
                 for i := 0 to Length(bulkCashbillResult.issueResult) -1 do
                 begin
         	  tmp := tmp + IntToStr(bulkCashbillResult.issueResult[i].code) + ' | '
+                        + bulkCashbillResult.issueResult[i].message + ' | '
                         + bulkCashbillResult.issueResult[i].mgtKey + ' | '
                         + bulkCashbillResult.issueResult[i].confirmNum + ' | '
                         + bulkCashbillResult.issueResult[i].tradeDate + #13#13;
