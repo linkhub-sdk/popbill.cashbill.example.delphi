@@ -891,7 +891,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.GetURL(txtCorpNum.Text, 'TBOX');
+                resultURL := cashbillService.GetURL(txtCorpNum.Text, txtUserID.Text, 'TBOX');
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -921,7 +921,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.GetURL(txtCorpNum.Text, 'PBOX');
+                resultURL := cashbillService.GetURL(txtCorpNum.Text, txtUserID.Text, 'PBOX');
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -952,7 +952,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.GetURL(txtCorpNum.Text, 'WRITE');
+                resultURL := cashbillService.GetURL(txtCorpNum.Text, txtUserID.Text, 'WRITE');
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -982,7 +982,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getPopupURL(txtCorpNum.Text, txtMgtKey.Text);
+                resultURL := cashbillService.getPopupURL(txtCorpNum.Text, txtMgtKey.Text, txtUserID.Text);
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -1012,7 +1012,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getPrintURL(txtCorpNum.Text, txtMgtKey.Text);
+                resultURL := cashbillService.getPrintURL(txtCorpNum.Text, txtMgtKey.Text, txtUserID.Text);
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -1041,7 +1041,7 @@ begin
        {**********************************************************************}
 
         try
-                resultURL := cashbillService.getEPrintURL(txtCorpNum.Text, txtMgtKey.Text);
+                resultURL := cashbillService.getEPrintURL(txtCorpNum.Text, txtMgtKey.Text, txtUserID.Text);
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -1079,7 +1079,7 @@ begin
         KeyList[3] := '20220105-004';
 
         try
-                resultURL := cashbillService.getMassPrintURL(txtCorpNum.text, KeyList);
+                resultURL := cashbillService.getMassPrintURL(txtCorpNum.text, KeyList, txtUserID.Text);
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -1110,7 +1110,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getMailURL(txtCorpNum.Text, txtMgtKey.Text);
+                resultURL := cashbillService.getMailURL(txtCorpNum.Text, txtMgtKey.Text, txtUserID.Text);
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -2032,7 +2032,7 @@ begin
 
         try
                 response := cashbillService.RevokeRegistIssue(txtCorpNum.text,
-                        mgtKey, orgConfirmNum, orgTradeDate, smssendYN, memo, txtUserID.text);
+                        mgtKey, orgConfirmNum, orgTradeDate, smssendYN, memo);
 
         except
                 on le : EPopbillException do begin
@@ -2244,7 +2244,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getPDFURL(txtCorpNum.Text, txtMgtKey.Text);
+                resultURL := cashbillService.getPDFURL(txtCorpNum.Text, txtMgtKey.Text, txtUserID.Text);
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -2311,7 +2311,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getViewURL(txtCorpNum.Text, txtMgtKey.Text);
+                resultURL := cashbillService.getViewURL(txtCorpNum.Text, txtMgtKey.Text, txtUserID.Text);
                 txtURL.text := resultURL;                
         except
                 on le : EPopbillException do begin
@@ -2341,7 +2341,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getPaymentURL(txtCorpNum.Text);
+                resultURL := cashbillService.getPaymentURL(txtCorpNum.Text, txtUserID.Text);
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -2370,7 +2370,7 @@ begin
         {**********************************************************************}
 
         try
-                resultURL := cashbillService.getUseHistoryURL(txtCorpNum.Text);
+                resultURL := cashbillService.getUseHistoryURL(txtCorpNum.Text, txtUserID.Text);
                 txtURL.text := resultURL;
         except
                 on le : EPopbillException do begin
@@ -2544,7 +2544,7 @@ begin
         { - https://docs.popbill.com/cashbill/delphi/api#GetBulkResult
         {**********************************************************************}
         try
-            bulkCashbillResult := cashbillService.GetBulkResult(txtCorpNum.text, txtSubmitID.text, txtUserID.text);
+            bulkCashbillResult := cashbillService.GetBulkResult(txtCorpNum.text, txtSubmitID.text);
         except
                 on le : EPopbillException do begin
                         ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);

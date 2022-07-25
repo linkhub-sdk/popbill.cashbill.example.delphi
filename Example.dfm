@@ -1,6 +1,6 @@
 object frmExample: TfrmExample
-  Left = 265
-  Top = 114
+  Left = 876
+  Top = 203
   AutoScroll = False
   Caption = 'ÆËºô Çö±Ý¿µ¼öÁõ API SDK Delphi Example'
   ClientHeight = 729
