@@ -1,6 +1,6 @@
 object frmExample: TfrmExample
-  Left = 876
-  Top = 203
+  Left = 285
+  Top = 210
   AutoScroll = False
   Caption = '팝빌 현금영수증 API SDK Delphi Example'
   ClientHeight = 729
@@ -104,22 +104,13 @@ object frmExample: TfrmExample
         TabOrder = 2
         OnClick = btnGetInfosClick
       end
-      object btnGetLogs: TButton
-        Left = 9
-        Top = 151
-        Width = 137
-        Height = 25
-        Caption = '상태 변경이력 확인'
-        TabOrder = 3
-        OnClick = btnGetLogsClick
-      end
       object btnGetDetailInfo: TButton
         Left = 9
         Top = 86
         Width = 137
         Height = 25
         Caption = '상세정보 확인'
-        TabOrder = 4
+        TabOrder = 3
         OnClick = btnGetDetailInfoClick
       end
     end

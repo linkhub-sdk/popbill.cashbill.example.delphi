@@ -100,7 +100,6 @@ type
     btnSendFAX: TButton;
     btnGetInfo: TButton;
     btnGetInfos: TButton;
-    btnGetLogs: TButton;
     btnGetDetailInfo: TButton;
     btnListEmailConfig: TButton;
     btnUpdateEmailConfig: TButton;
@@ -119,7 +118,6 @@ type
     Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender:TObject; var Action:TCloseAction);
-    procedure btnRegisterClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
     procedure btnJoinMemberClick(Sender: TObject);
     procedure btnGetAccessURLClick(Sender: TObject);
@@ -144,7 +142,6 @@ type
     procedure btnSendSMSClick(Sender: TObject);
     procedure btnSendEmailClick(Sender: TObject);
     procedure btnGetDetailInfoClick(Sender: TObject);
-    procedure btnGetLogsClick(Sender: TObject);
     procedure btnGetInfosClick(Sender: TObject);
     procedure btnCheckIDClick(Sender: TObject);
     procedure btnRegistContactClick(Sender: TObject);
@@ -277,124 +274,6 @@ begin
                 ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
         end;
 end;
-
-procedure TfrmExample.btnRegisterClick(Sender: TObject);
-var
-        cashbill : TCashbill;
-        response : TResponse;
-begin
-        {**********************************************************************}
-        { 현금영수증 1건을 [임시저장] 합니다.
-        { - 현금영수증 임시저장(Register API) 호출후에는 발행(Issue API)을
-        {   호출해야만 국세청에 전송됩니다.
-        { - 임시저장과 발행을 한번의 호출로 처리하는 즉시발행(RegistIssue API)
-        {   프로세스를 권장합니다.
-        { - 현금영수증 국세청 전송 정책 : https://docs.popbill.com/cashbill/ntsSendPolicy?lang=delphi
-        {**********************************************************************}
-
-        cashbill := TCashbill.Create;
-
-        // [필수] 문서번호 1~24자리, 영문, 숫자, '-', '_' 조합하여 구성
-        // 사업자별로 중복되지 않도록 구성
-        cashbill.MgtKey := txtMgtKey.Text;
-
-        // [취소거래시 필수] 원본 현금영수증 국세청승인번호
-        // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
-        cashbill.orgConfirmNum := '';
-
-        // [취소거래시 필수] 원본 현금영수증 거래일자
-        // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-        cashbill.orgTradeDate := '';
-
-        // [필수] 문서형태, [승인거래, 취소거래] 중 기재
-        cashbill.tradeType := '승인거래';
-
-        // [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
-        cashbill.tradeUsage := '소득공제용';
-
-        // 거래유형, [일반, 도서공연, 대중교통] 중 기재
-        cashbill.tradeOpt := '일반';
-
-        // [필수] 과세형태, [과세, 비과세] 중 기재
-        cashbill.taxationType := '과세';
-
-        // [필수] 거래금액
-        cashbill.totalAmount := '11000';
-
-        // [필수] 공급가액
-        cashbill.supplycost := '10000';
-
-        // [필수] 부가세
-        cashbill.tax := '1000';
-
-        // [필수] 봉사료
-        cashbill.serviceFee := '0';
-
-        // [필수] 가맹점 사업자번호, '-' 제외 10자리
-        cashbill.franchiseCorpNum := txtCorpNum.Text;
-
-        // 가맹점 종사업장 식별번호
-        cashbill.franchiseTaxRegID := '';
-
-        // 가맹점 상호
-        cashbill.franchiseCorpName := '발행자상호';
-
-        // 가맹점 대표자 성명
-        cashbill.franchiseCEOName := '발행자 대표자';
-
-        // 가맹점 주소
-        cashbill.franchiseAddr := '발행자 주소';
-
-        // 가맹점 전화번호
-        cashbill.franchiseTEL := '07043042991';
-
-        // [필수] 식별번호
-        // 거래구분(tradeUsage)이 '소득공제용'인 경우 [주민등록/휴대폰/카드]번호로 발행가능
-        // 거래구분(traseUsage)이 '지출증빙용'인 경우 [주민등록/휴대폰/카드/사업자]번호로 발행가능
-        cashbill.identityNum := '01043245117';
-
-        // 주문자명
-        cashbill.customerName := '고객명';
-
-        // 주문상품명
-        cashbill.itemName := '상품명';
-
-        // 주문번호
-        cashbill.orderNumber := '주문번호';
-
-        // 주문자 이메일
-        cashbill.email := 'test@test.com';
-
-        // 주문자 휴대폰
-        cashbill.hp := '010-111-222';
-
-        // 주문자 팩스
-        cashbill.fax := '777-444-333';
-
-        // 발행안내문자 전송여부
-        cashbill.smssendYN := False;
-
-        try
-                response := cashbillService.Register(txtCorpNum.text, cashbill);
-                cashbill.Free;
-        except
-                on le : EPopbillException do begin
-                        cashbill.Free;
-                        ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
-                        Exit;
-                end;
-        end;
-
-        if cashbillService.LastErrCode <> 0 then
-        begin
-                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
-        end
-        else
-        begin
-                ShowMessage('응답코드 : '+ IntToStr(response.code) + #10#13 +'응답메시지 : '+  response.Message);
-        end;
-end;
-
 
 procedure TfrmExample.btnJoinMemberClick(Sender: TObject);
 var
@@ -1292,50 +1171,6 @@ begin
                 tmp := tmp +'cancelType (취소사유) : ' +  IntToStr(cashbill.cancelType) + #13;
                 ShowMessage(tmp);
         end;
-end;
-
-procedure TfrmExample.btnGetLogsClick(Sender: TObject);
-var
-        LogList : TCashbillLogList;
-        tmp : string;
-        i : Integer;
-begin
-        {**********************************************************************}
-        { 현금영수증의 상태에 대한 변경이력을 확인합니다.                             }
-        { - https://docs.popbill.com/cashbill/delphi/api#GetLogs
-        {**********************************************************************}
-
-        try
-                LogList := cashbillService.getLogs(txtCorpNum.text, txtMgtKey.Text);
-        except
-                on le : EPopbillException do begin
-                        ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
-                        Exit;
-                end;
-        end;
-
-        if cashbillService.LastErrCode <> 0 then
-        begin
-                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
-        end
-        else
-        begin
-                tmp := 'DocLogType(로그타입) | Log(이력정보) | ProcType(처리형태) | ProcMemo(처리메모) |';
-                tmp := tmp + 'RegDT(등록일시) | IP(아이피)' + #13;
-
-                for i := 0 to Length(LogList) -1 do
-                begin
-                    tmp := tmp + IntToStr(LogList[i].DocLogType) + ' | '
-                                + LogList[i].Log + ' | '
-                                + LogList[i].ProcType + ' | '
-                                + LogList[i].ProcMemo + ' | '
-                                + LogList[i].regDT  + ' | '
-                                + LogList[i].IP + ' | ' + #13;
-                end;
-                ShowMessage(tmp);
-        end;
-
-
 end;
 
 procedure TfrmExample.btnGetInfosClick(Sender: TObject);
