@@ -1,6 +1,6 @@
 object frmExample: TfrmExample
-  Left = 285
-  Top = 210
+  Left = 206
+  Top = 192
   AutoScroll = False
   Caption = '팝빌 현금영수증 API SDK Delphi Example'
   ClientHeight = 729
@@ -42,20 +42,20 @@ object frmExample: TfrmExample
   end
   object GroupBox7: TGroupBox
     Left = 24
-    Top = 224
+    Top = 232
     Width = 1073
     Height = 496
     Caption = '현금영수증 관련 기능'
     TabOrder = 13
     object Label3: TLabel
-      Left = 138
-      Top = 38
+      Left = 10
+      Top = 30
       Width = 92
       Height = 13
       Caption = '문서번호(MgtKey) :'
     end
     object Label4: TLabel
-      Left = 120
+      Left = 16
       Top = 240
       Width = 321
       Height = 13
@@ -63,7 +63,7 @@ object frmExample: TfrmExample
       Caption = '국세청 전송이 완료된 현금영수증을 취소하기 위해서는'
     end
     object Label5: TLabel
-      Left = 120
+      Left = 16
       Top = 256
       Width = 353
       Height = 13
@@ -283,8 +283,8 @@ object frmExample: TfrmExample
       end
     end
     object GroupBox14: TGroupBox
-      Left = 120
-      Top = 78
+      Left = 16
+      Top = 70
       Width = 217
       Height = 155
       Caption = '즉시발행 프로세스 '
@@ -319,7 +319,7 @@ object frmExample: TfrmExample
         end
       end
       object btnCancelIssue_ri: TButton
-        Left = 24
+        Left = 27
         Top = 104
         Width = 75
         Height = 25
@@ -338,8 +338,8 @@ object frmExample: TfrmExample
       end
     end
     object GroupBox16: TGroupBox
-      Left = 663
-      Top = 78
+      Left = 543
+      Top = 70
       Width = 168
       Height = 155
       Caption = '초대량 발행'
@@ -380,7 +380,7 @@ object frmExample: TfrmExample
     end
   end
   object GroupBox5: TGroupBox
-    Left = 389
+    Left = 269
     Top = 302
     Width = 273
     Height = 155
@@ -576,7 +576,7 @@ object frmExample: TfrmExample
     OnClick = btnGetAccessURLClick
   end
   object txtMgtKey: TEdit
-    Left = 268
+    Left = 136
     Top = 259
     Width = 149
     Height = 21
@@ -584,8 +584,8 @@ object frmExample: TfrmExample
     TabOrder = 7
   end
   object btnCheckMgtkeyInUse: TButton
-    Left = 428
-    Top = 258
+    Left = 300
+    Top = 256
     Width = 161
     Height = 25
     Caption = '문서번호 사용여부 확인'
@@ -593,7 +593,7 @@ object frmExample: TfrmExample
     OnClick = btnCheckMgtkeyInUseClick
   end
   object btnCancelIssue: TButton
-    Left = 412
+    Left = 296
     Top = 411
     Width = 77
     Height = 25
@@ -602,7 +602,7 @@ object frmExample: TfrmExample
     OnClick = btnCancelIssueClick
   end
   object btnDelete: TButton
-    Left = 525
+    Left = 421
     Top = 411
     Width = 60
     Height = 25
@@ -611,7 +611,7 @@ object frmExample: TfrmExample
     OnClick = btnDeleteClick
   end
   object Panel1: TPanel
-    Left = 400
+    Left = 280
     Top = 328
     Width = 249
     Height = 41
