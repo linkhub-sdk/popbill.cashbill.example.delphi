@@ -2180,7 +2180,11 @@ begin
 
                 // 발행안내문자 전송여부
                 CashbillList[i].smssendYN := False;
-            
+                
+                // 거래일시, 날짜(yyyyMMddHHmmss)
+                // 당일, 전일만 가능 미입력시 기본값 발행일시 처리
+                CashbillList[i].tradeDT := '';
+
         end;
         
         try
