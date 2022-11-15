@@ -46,7 +46,6 @@ type
     txtMgtKey: TEdit;
     btnCheckMgtkeyInUse: TButton;
     Panel1: TPanel;
-    btnCancelIssue: TButton;
     btnDelete: TButton;
     GroupBox5: TGroupBox;
     GroupBox6: TGroupBox;
@@ -68,12 +67,9 @@ type
     GroupBox14: TGroupBox;
     Panel2: TPanel;
     btnRegistIssue: TButton;
-    btnCancelIssue_ri: TButton;
     btnDelete_ri: TButton;
     Shape1: TShape;
     Shape2: TShape;
-    Shape3: TShape;
-    Shape4: TShape;
     btnGetUnitCost: TButton;
     btnSearch: TButton;
     btnGetChargeInfo: TButton;
@@ -126,7 +122,6 @@ type
     procedure btnGetChargeURLClick(Sender: TObject);
     procedure btnGetPartnerBalanceClick(Sender: TObject);
     procedure btnCheckMgtkeyInUseClick(Sender: TObject);
-    procedure btnCancelIssueClick(Sender: TObject);
     procedure btnGetInfoClick(Sender: TObject);
     procedure btnGetURL_TBOXClick(Sender: TObject);
     procedure btnGetURL_PBOXClick(Sender: TObject);
@@ -251,7 +246,7 @@ var
 begin
         {**********************************************************************}
         { 삭제 가능한 상태의 현금영수증을 삭제합니다.
-        { - 삭제 가능한 상태: "임시저장", "발행취소", "전송실패"
+        { - 삭제 가능한 상태: "전송실패"
         { - 현금영수증을 삭제하면 사용된 문서번호(mgtKey)를 재사용할 수 있습니다.
         { - https://docs.popbill.com/cashbill/delphi/api#Delete
         {**********************************************************************}
@@ -523,38 +518,6 @@ begin
         end;
 
 
-end;
-
-procedure TfrmExample.btnCancelIssueClick(Sender: TObject);
-var
-        response : TResponse;
-        memo : String;
-begin
-        {**********************************************************************}
-        { 국세청 전송 이전 "발행완료" 상태의 현금영수증을 "발행취소"하고 국세청 전송 대상에서 제외합니다.
-        { - Delete(삭제)함수를 호출하여 "발행취소" 상태의 현금영수증을 삭제하면, 문서번호 재사용이 가능합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#CancelIssue
-        {**********************************************************************}
-        
-        // 메모
-        memo := '발행취소 메모';
-        
-        try
-                response := cashbillService.CancelIssue(txtCorpNum.text, txtMgtKey.Text, memo);
-        except
-                on le : EPopbillException do begin
-                        ShowMessage('응답코드 : '+ IntToStr(le.code) + #10#13 +'응답메시지 : '+  le.Message);
-                        Exit;
-                end;
-        end;
-        if cashbillService.LastErrCode <> 0 then
-        begin
-                ShowMessage('응답코드 : '+ IntToStr(cashbillService.LastErrCode) + #10#13 +'응답메시지 : '+  cashbillService.LastErrMessage);
-        end
-        else
-        begin
-                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message);
-        end;
 end;
 
 procedure TfrmExample.btnGetInfoClick(Sender: TObject);
@@ -1251,7 +1214,7 @@ var
 begin
         {**********************************************************************}
         { 삭제 가능한 상태의 현금영수증을 삭제합니다.
-        { - 삭제 가능한 상태: "임시저장", "발행취소", "전송실패"
+        { - 삭제 가능한 상태: "전송실패"
         { - 현금영수증을 삭제하면 사용된 문서번호(mgtKey)를 재사용할 수 있습니다.                              
         { - https://docs.popbill.com/cashbill/delphi/api#Delete
         {**********************************************************************}
@@ -1283,7 +1246,6 @@ begin
         {**********************************************************************}
         { 작성된 현금영수증 데이터를 팝빌에 저장과 동시에 발행하여 "발행완료" 상태로 처리합니다.
         { - 현금영수증 국세청 전송 정책 [https://docs.popbill.com/cashbill/ntsSendPolicy?lang=delphi]
-        { - "발행완료"된 현금영수증은 국세청 전송 이전에 발행취소(CancelIssue API) 함수로 국세청 신고 대상에서 제외할 수 있습니다.
         { - https://docs.popbill.com/cashbill/delphi/api#RegistIssue
         {**********************************************************************}
 
@@ -1553,10 +1515,8 @@ begin
         EDate := '20220130';
 
         // 전송상태값 배열. 미기재시 전체조회, 문서상태 값 3자리의 배열, 2,3번째 자리 와일드 카드 사용가능
-        SetLength(State, 3);
-        State[0] := '100';
-        State[1] := '3**';
-        State[2] := '4**';
+        SetLength(State, 1);
+        State[0] := '3**';
 
         // 현금영수증 형태 배열, { N:일반 현금영수증 C:취소 현금영수증 }
         SetLength(TradeType, 2);
@@ -1698,7 +1658,6 @@ begin
         {**********************************************************************}
         { 취소 현금영수증 데이터를 팝빌에 저장과 동시에 발행하여 "발행완료" 상태로 처리합니다.
         { - 현금영수증 국세청 전송 정책 [https://docs.popbill.com/cashbill/ntsSendPolicy?lang=delphi]
-        { - "발행완료"된 취소 현금영수증은 국세청 전송 이전에 발행취소(cancelIssue API) 함수로 국세청 신고 대상에서 제외할 수 있습니다.
         { - https://docs.popbill.com/cashbill/delphi/api#RevokeRegistIssue
         {**********************************************************************}
 
@@ -1782,7 +1741,6 @@ begin
         { 작성된 (부분)취소 현금영수증 데이터를 팝빌에 저장과 동시에 발행하여 "발행완료" 상태로 처리합니다.
         { - 취소 현금영수증의 금액은 원본 금액을 넘을 수 없습니다.
         { - 현금영수증 국세청 전송 정책 [https://docs.popbill.com/cashbill/ntsSendPolicy?lang=delphi]
-        { - "발행완료"된 취소 현금영수증은 국세청 전송 이전에 발행취소(cancelIssue API) 함수로 국세청 신고 대상에서 제외할 수 있습니다.
         { - https://docs.popbill.com/cashbill/delphi/api#RevokeRegistIssue
         {**********************************************************************}
 

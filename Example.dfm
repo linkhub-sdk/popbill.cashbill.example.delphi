@@ -46,7 +46,7 @@ object frmExample: TfrmExample
     Width = 1073
     Height = 496
     Caption = '현금영수증 관련 기능'
-    TabOrder = 13
+    TabOrder = 12
     object Label3: TLabel
       Left = 10
       Top = 30
@@ -295,12 +295,6 @@ object frmExample: TfrmExample
         Width = 1
         Height = 57
       end
-      object Shape3: TShape
-        Left = 80
-        Top = 115
-        Width = 65
-        Height = 1
-      end
       object Panel2: TPanel
         Left = 11
         Top = 24
@@ -318,22 +312,13 @@ object frmExample: TfrmExample
           OnClick = btnRegistIssueClick
         end
       end
-      object btnCancelIssue_ri: TButton
-        Left = 27
-        Top = 104
-        Width = 75
-        Height = 25
-        Caption = '발행취소'
-        TabOrder = 1
-        OnClick = btnCancelIssue_riClick
-      end
       object btnDelete_ri: TButton
-        Left = 128
+        Left = 35
         Top = 104
         Width = 57
         Height = 25
         Caption = '삭제'
-        TabOrder = 2
+        TabOrder = 1
         OnClick = btnDelete_riClick
       end
     end
@@ -387,18 +372,12 @@ object frmExample: TfrmExample
     Caption = '취소현금영수증 즉시발행 프로세스'
     Color = clBtnFace
     ParentColor = False
-    TabOrder = 12
+    TabOrder = 11
     object Shape2: TShape
       Left = 64
       Top = 55
       Width = 1
       Height = 74
-    end
-    object Shape4: TShape
-      Left = 96
-      Top = 120
-      Width = 65
-      Height = 1
     end
   end
   object GroupBox4: TGroupBox
@@ -592,22 +571,13 @@ object frmExample: TfrmExample
     TabOrder = 8
     OnClick = btnCheckMgtkeyInUseClick
   end
-  object btnCancelIssue: TButton
-    Left = 296
-    Top = 411
-    Width = 77
-    Height = 25
-    Caption = '발행취소'
-    TabOrder = 10
-    OnClick = btnCancelIssueClick
-  end
   object btnDelete: TButton
-    Left = 421
+    Left = 303
     Top = 411
     Width = 60
     Height = 25
     Caption = '삭제'
-    TabOrder = 11
+    TabOrder = 10
     OnClick = btnDeleteClick
   end
   object Panel1: TPanel
@@ -642,7 +612,7 @@ object frmExample: TfrmExample
     Width = 153
     Height = 149
     Caption = '연동과금 포인트'
-    TabOrder = 14
+    TabOrder = 13
     object btnGetBalance: TButton
       Left = 11
       Top = 23
@@ -686,7 +656,7 @@ object frmExample: TfrmExample
     Width = 146
     Height = 125
     Caption = '파트너과금 포인트'
-    TabOrder = 15
+    TabOrder = 14
     object btnGetPartnerBalance: TButton
       Left = 9
       Top = 24
@@ -712,6 +682,6 @@ object frmExample: TfrmExample
     Width = 377
     Height = 21
     ImeName = '한국어 입력 시스템 (IME 2000)'
-    TabOrder = 16
+    TabOrder = 15
   end
 end
