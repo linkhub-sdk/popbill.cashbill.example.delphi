@@ -2,7 +2,7 @@
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
 { - 델파이 SDK 적용방법 안내 : https://docs.popbill.com/cashbill/tutorial/delphi }
-{ - 업데이트 일자 : 2022-09-26                                                 }
+{ - 업데이트 일자 : 2022-11-15                                                 }
 { - 연동 기술지원 연락처 : 1600-9854                                           }
 { - 연동 기술지원 이메일 : code@linkhubcorp.com                                }
 {                                                                              }
@@ -550,6 +550,7 @@ begin
                 tmp := tmp +'itemKey (팝빌번호) : ' +  cashbillInfo.itemKey + #13;
                 tmp := tmp +'mgtKey (문서번호) : ' +  cashbillInfo.mgtKey + #13;
                 tmp := tmp +'tradeDate (거래일자) : ' +  cashbillInfo.tradeDate + #13;
+                tmp := tmp +'tradeDT (거래일시) : ' +  cashbillInfo.tradeDT + #13;
                 tmp := tmp +'tradeType (문서형태) : ' +  cashbillInfo.tradeType + #13;
                 tmp := tmp +'tradeUsage (거래구분) : ' +  cashbillInfo.tradeUsage + #13;
                 tmp := tmp +'tradeOpt (거래유형) : ' +  cashbillInfo.tradeOpt + #13;
@@ -965,6 +966,7 @@ begin
                 tmp := tmp +'orgConfirmNum (원본 현금영수증 국세청승인번호) : ' +  cashbill.orgConfirmNum + #13;
                 tmp := tmp +'orgTradeDate (원본 현금영수증 거래일자) : ' +  cashbill.orgTradeDate + #13;
                 tmp := tmp +'tradeDate (거래일자) : ' +  cashbill.tradeDate + #13;
+                tmp := tmp +'tradeDT (거래일시) : ' +  cashbill.tradeDT + #13;
                 tmp := tmp +'tradeType (문서형태) : ' +  cashbill.tradeType + #13;
                 tmp := tmp +'tradeUsage (거래구분) : ' +  cashbill.tradeUsage + #13;
                 tmp := tmp +'tradeOpt (거래유형) : ' +  cashbill.tradeOpt + #13;
@@ -1007,8 +1009,8 @@ begin
 
         // 현금영수증 문서번호 배열 (최대 1000건)
         SetLength(KeyList,4);
-        KeyList[0] := '20220106-001';
-        KeyList[1] := '20220106-002';
+        KeyList[0] := '20221115_del_001';
+        KeyList[1] := '20221115_del_002';
         KeyList[2] := '20220106-003';
         KeyList[3] := '20220106-004';
 
@@ -1032,6 +1034,7 @@ begin
                         tmp := tmp +'itemKey (팝빌번호) : ' +  InfoList[i].itemKey + #13;
                         tmp := tmp +'mgtKey (문서번호) : ' +  InfoList[i].mgtKey + #13;
                         tmp := tmp +'tradeDate (거래일자) : ' +  InfoList[i].tradeDate + #13;
+                        tmp := tmp +'tradeDT (거래일시) : ' +  InfoList[i].tradeDT + #13;
                         tmp := tmp +'tradeType (문서형태) : ' +  InfoList[i].tradeType + #13;
                         tmp := tmp +'tradeUsage (거래구분) : ' +  InfoList[i].tradeUsage + #13;
                         tmp := tmp +'tradeOpt (거래유형) : ' +  InfoList[i].tradeOpt + #13;
@@ -1331,6 +1334,10 @@ begin
         // 발행안내문자 전송여부
         cashbill.smssendYN := False;
 
+        // 거래일시, 날짜(yyyyMMddHHmmss)
+        // 당일, 전일만 가능 미입력시 기본값 발행일시 처리
+        cashbill.tradeDT := '';
+
         // 메모
         memo := '즉시발행 현금영수증 메모';
 
@@ -1353,8 +1360,8 @@ begin
         end
         else
         begin
-                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message + #10#13 + '국세청승인번호 : ' + response.confirmNum + #10#13 + '거래일자 : ' + response.tradeDate);
-        end;   
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message + #10#13 + '국세청승인번호 : ' + response.confirmNum + #10#13 + '거래일자 : ' + response.tradeDate + #10#13 + '거래일시 : ' + response.tradeDT);
+        end;
         
 end;
 
@@ -1575,7 +1582,7 @@ begin
                 tmp := tmp + 'pageCount(페이지 개수) : '+ IntToStr(SearchList.pageCount) + #13;
                 tmp := tmp + 'message(응답 메시지) : '+ SearchList.message + #13#13;
 
-                tmp := tmp + 'itemKey(팝빌번호) | mgtKey(문서번호) | tradeDate(거래일자) | tradeType(문서형태) | '
+                tmp := tmp + 'itemKey(팝빌번호) | mgtKey(문서번호) | tradeDate(거래일자) | tradeDT(거래일시) | tradeType(문서형태) | '
                         + 'tradeUsage(거래구분) | tradeOpt(거래유형) | taxationType(과세형태) | totalAmount(거래금액) | '
                         + 'issueDT(발행일시) | regDT(등록일시) | stateMemo(상태메모) | stateCode(상태코드) | '
                         + 'stateDT(상태변경일시) | identityNum(식별번호)  | itemName(주문상품명) | '
@@ -1588,7 +1595,8 @@ begin
                 begin
                         tmp := tmp + SearchList.list[i].itemKey + ' | ';
                         tmp := tmp + SearchList.list[i].mgtKey +' | ';
-                        tmp := tmp + SearchList.list[i].tradeDate + ' | ';
+                        tmp := tmp + SearchList.list[i].tradeDate + ' | ';  
+                        tmp := tmp + SearchList.list[i].tradeDT + ' | ';
                         tmp := tmp + SearchList.list[i].tradeType + ' | ';
                         tmp := tmp + SearchList.list[i].tradeUsage + ' | ';
                         tmp := tmp + SearchList.list[i].tradeOpt + ' | ';
@@ -1667,11 +1675,11 @@ begin
 
         // 원본현금영수증 국세청 승인번호
         // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
-        orgConfirmNum := '548757045';
+        orgConfirmNum := 'TB0000178';
 
         // 원본현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-        orgTradeDate := '20220101';
+        orgTradeDate := '20221109';
 
         // 발행안내문자 전송여부
         smssendYN := False;
@@ -1695,7 +1703,7 @@ begin
         end
         else
         begin
-                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message + #10#13 + '국세청승인번호 : ' + response.confirmNum + #10#13 + '거래일자 : ' + response.tradeDate);
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message + #10#13 + '국세청승인번호 : ' + response.confirmNum + #10#13 + '거래일자 : ' + response.tradeDate + #10#13 + '거래일시 : ' + response.tradeDT);
         end; 
         
 end;
@@ -1733,7 +1741,7 @@ end;
 procedure TfrmExample.btnRevokeRegistIssue_partClick(Sender: TObject);
 var
         response : TCBIssueResponse;
-        memo, mgtKey, orgConfirmNum, orgTradeDate, supplyCost, tax, serviceFee, totalAmount : String;
+        memo, mgtKey, orgConfirmNum, orgTradeDate, supplyCost, tax, serviceFee, totalAmount, emailSubject, tradeDT : String;
         cancelType: Integer;
         isPartCancel, smssendYN : Boolean;
 begin
@@ -1750,11 +1758,11 @@ begin
 
         // 원본현금영수증 국세청 승인번호
         // 문서 정보 (GetInfo API) 응답항목중 국세청승인번호(confirmNum) 확인하여 기재.
-        orgConfirmNum := 'TB0000367';
+        orgConfirmNum := 'TB0000178';
 
         // 원본현금영수증 거래일자
         // 문서 정보 (GetInfo API) 응답항목중 거래일자(tradeDate) 확인하여 기재.
-        orgTradeDate := '20220105';
+        orgTradeDate := '20221109';
 
         // 발행안내문자 전송여부
         smssendYN := False;
@@ -1780,10 +1788,17 @@ begin
         // [취소] 거래금액
         totalAmount := '2200';
 
+        // 안내메일 제목, 공백처리시 기본양식으로 전송
+        emailSubject := '';
+
+        // 거래일시, 날짜(yyyyMMddHHmmss)
+        // 당일, 전일만 가능 미입력시 기본값 발행일시 처리
+        tradeDT := '';
+
         try
                 response := cashbillService.RevokeRegistIssue(txtCorpNum.text,
                         mgtKey, orgConfirmNum, orgTradeDate, smssendYN, memo, txtUserID.text,
-                        isPartCancel, cancelType, supplyCost, tax, serviceFee, totalAmount);
+                        isPartCancel, cancelType, supplyCost, tax, serviceFee, totalAmount, emailSubject, tradeDT);
 
         except
                 on le : EPopbillException do begin
@@ -1797,7 +1812,7 @@ begin
         end
         else
         begin
-                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message + #10#13 + '국세청승인번호 : ' + response.confirmNum + #10#13 + '거래일자 : ' + response.tradeDate);
+                ShowMessage('응답코드 : ' + IntToStr(response.code) + #10#13 + '응답메시지 : ' + response.Message + #10#13 + '국세청승인번호 : ' + response.confirmNum + #10#13 + '거래일자 : ' + response.tradeDate + #10#13 + '거래일시 : ' + response.tradeDT);
         end; 
 end;
 
@@ -2220,14 +2235,15 @@ begin
                 tmp := tmp + 'receiptDT (접수일시) : ' + bulkCashbillResult.receiptDT + #13;
                 tmp := tmp + 'receiptID (접수아이디) : ' + bulkCashbillResult.receiptID + #13#13;
 
-                tmp := tmp + 'code(코드) | message (메시지) | mgtKey (문서번호) |  confirmNum (국세청 승인번호) | tradeDate(거래일자)' + #13#13;
+                tmp := tmp + 'code(코드) | message (메시지) | mgtKey (문서번호) |  confirmNum (국세청 승인번호) | tradeDate(거래일자) | tradeDT(거래일시)' + #13#13;
                 for i := 0 to Length(bulkCashbillResult.issueResult) -1 do
                 begin
         	  tmp := tmp + IntToStr(bulkCashbillResult.issueResult[i].code) + ' | '
                         + bulkCashbillResult.issueResult[i].message + ' | '
                         + bulkCashbillResult.issueResult[i].mgtKey + ' | '
                         + bulkCashbillResult.issueResult[i].confirmNum + ' | '
-                        + bulkCashbillResult.issueResult[i].tradeDate + #13#13;
+                        + bulkCashbillResult.issueResult[i].tradeDate + ' | '
+                        + bulkCashbillResult.issueResult[i].tradeDT + #13#13;
                 end;
                 bulkCashbillResult.Free;
                 ShowMessage(tmp);
