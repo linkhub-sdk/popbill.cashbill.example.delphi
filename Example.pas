@@ -1,7 +1,7 @@
 {******************************************************************************}
 { 팝빌 현금영수증 API Delphi SDK Example                                       }
 {                                                                              }
-{ - 델파이 SDK 적용방법 안내 : https://docs.popbill.com/cashbill/tutorial/delphi }
+{ - 델파이 SDK 적용방법 안내 : https://developers.popbill.com/guide/cashbill/delphi/getting-started/tutorial }
 { - 업데이트 일자 : 2022-11-15                                                 }
 { - 연동 기술지원 연락처 : 1600-9854                                           }
 { - 연동 기술지원 이메일 : code@linkhubcorp.com                                }
@@ -216,7 +216,7 @@ begin
         {**********************************************************************
         { 팝빌 사이트에 로그인 상태로 접근할 수 있는 페이지의 팝업 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetAccessURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/member#GetAccessURL
         {**********************************************************************}
 
         try
@@ -248,7 +248,7 @@ begin
         { 삭제 가능한 상태의 현금영수증을 삭제합니다.
         { - 삭제 가능한 상태: "전송실패"
         { - 현금영수증을 삭제하면 사용된 문서번호(mgtKey)를 재사용할 수 있습니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#Delete
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/issue#Delete
         {**********************************************************************}
         try
                 response := cashbillService.Delete(txtCorpNum.text, txtMgtKey.Text);
@@ -275,7 +275,7 @@ var
 begin
         {**********************************************************************}
         { 사용자를 연동회원으로 가입처리합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#JoinMember
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/member#JoinMember
         {**********************************************************************}
 
         // 링크아이디
@@ -339,7 +339,7 @@ var
 begin
         {**********************************************************************}
         { 연동회원의 회사정보를 수정합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#UpdateCorpInfo
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/member#UpdateCorpInfo
         {**********************************************************************}
 
         corpInfo := TCorpInfo.Create;
@@ -384,7 +384,7 @@ var
 begin
         {**********************************************************************}
         { 연동회원의 잔여포인트를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetBalance
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/point#GetBalance
         {**********************************************************************}
         try
                 balance := cashbillService.GetBalance(txtCorpNum.text);
@@ -411,7 +411,7 @@ var
 begin
         {**********************************************************************}
         { 현금영수증 발행시 과금되는 포인트 단가를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetUnitCost
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/point#GetUnitCost
         {**********************************************************************}
         try
                 unitcost := cashbillService.GetUnitCost(txtCorpNum.text);
@@ -440,7 +440,7 @@ begin
         {**********************************************************************}
         { 연동회원 포인트 충전을 위한 페이지의 팝업 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetChargeURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/point#GetChargeURL
         {**********************************************************************}
         
         try
@@ -468,7 +468,7 @@ var
 begin
         {**********************************************************************}
         { 파트너의 잔여포인트를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetPartnerBalance
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/point#GetPartnerBalance
         {**********************************************************************}
         
         try
@@ -496,7 +496,7 @@ begin
         {***********************************************************************}
         { 파트너가 현금영수증 관리 목적으로 할당하는 문서번호 사용여부를 확인합니다.
         { - 이미 사용 중인 문서번호는 중복 사용이 불가하고, 현금영수증이 삭제된 경우에만 문서번호의 재사용이 가능합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#CheckMgtKeyInUse
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/info#CheckMgtKeyInUse
         {***********************************************************************}
         
         try
@@ -528,8 +528,8 @@ begin
         {**********************************************************************}
         { 현금영수증 1건의 상태 및 요약정보를 확인합니다.
         { - 리턴값 'TCashbillInfo'의 변수 'stateCode'를 통해 현금영수증의 상태코드를 확인합니다.
-        { - 현금영수증 상태코드 [https://docs.popbill.com/cashbill/stateCode?lang=delphi]
-        { - https://docs.popbill.com/cashbill/delphi/api#GetInfo
+        { - 현금영수증 상태코드 [https://developers.popbill.com/reference/cashbill/delphi/response-code#state-code]
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/info#GetInfo
         {**********************************************************************}
 
         try
@@ -585,7 +585,7 @@ begin
         {**********************************************************************}
         { 로그인 상태로 팝빌 사이트의 현금영수증 임시 문서함 메뉴에 접근할 수 있는 페이지의 팝업 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/info#GetURL
         {**********************************************************************}
 
         try
@@ -615,7 +615,7 @@ begin
         {**********************************************************************}
         { 로그인 상태로 팝빌 사이트의 현금영수증 발행 문서함 메뉴에 접근할 수 있는 페이지의 팝업 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/info#GetURL
         {**********************************************************************}
 
         try
@@ -646,7 +646,7 @@ begin
         {**********************************************************************}
         { 로그인 상태로 팝빌 사이트의 현금영수증 문서 작성 메뉴에 접근할 수 있는 페이지의 팝업 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/info#GetURL
         {**********************************************************************}
 
         try
@@ -676,7 +676,7 @@ begin
         {**********************************************************************}
         { 현금영수증 1건의 상세 정보 페이지의 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetPopUpURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/view#GetPopUpURL
         {**********************************************************************}
 
         try
@@ -706,7 +706,7 @@ begin
         {**********************************************************************}
         { 현금영수증 1건을 인쇄하기 위한 페이지의 팝업 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetPrintURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/view#GetPrintURL
         {**********************************************************************}
 
         try
@@ -766,7 +766,7 @@ begin
        {**********************************************************************}
        { 다수건의 현금영수증을 인쇄하기 위한 페이지의 팝업 URL을 반환합니다. (최대 100건)
        { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-       { - https://docs.popbill.com/cashbill/delphi/api#GetMassPrintURL
+       { - https://developers.popbill.com/reference/cashbill/delphi/api/view#GetMassPrintURL
        {**********************************************************************}
 
         // 인쇄할 현금영수증 문서번호 배열 (최대 100건)
@@ -804,7 +804,7 @@ begin
         {**********************************************************************}
         { 현금영수증 안내메일의 상세보기 링크 URL을 반환합니다.
         { - 함수 호출로 반환 받은 URL에는 유효시간이 없습니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetMailURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/view#GetMailURL
         {**********************************************************************}
 
         try
@@ -836,7 +836,7 @@ begin
         {**********************************************************************}
         { 현금영수증을 팩스로 전송하는 함수로, 팝빌 사이트 [문자·팩스] > [팩스] > [전송내역] 메뉴에서 전송결과를 확인 할 수 있습니다.
         { - 함수 호출 시 포인트가 과금됩니다. (전송실패시 환불처리)
-        { - https://docs.popbill.com/cashbill/delphi/api#SendFAX
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/etc#SendFAX
         {**********************************************************************}
 
         //팩스 발신번호
@@ -874,7 +874,7 @@ begin
         { 현금영수증과 관련된 안내 SMS(단문) 문자를 재전송하는 함수로, 팝빌 사이트 [문자·팩스] > [문자] > [전송내역] 메뉴에서 전송결과를 확인 할 수 있습니다.
         { - 메시지는 최대 90byte까지 입력 가능하고, 초과한 내용은 자동으로 삭제되어 전송합니다. (한글 최대 45자)
         { - 함수 호출 시 포인트가 과금됩니다. (전송실패시 환불처리)
-        { - https://docs.popbill.com/cashbill/delphi/api#SendSMS
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/etc#SendSMS
         {**********************************************************************}
 
         //발신번호
@@ -911,7 +911,7 @@ var
 begin
         {***************************************************************}
         { 현금영수증과 관련된 안내 메일을 재전송 합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#SendEmail
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/etc#SendEmail
         {***************************************************************}
 
         // 수신자 이메일주소
@@ -942,7 +942,7 @@ var
 begin
         {**********************************************************************}
         { 현금영수증 1건의 상세정보를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetDetailInfo                    
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/info#GetDetailInfo
         {**********************************************************************}
 
         try
@@ -1003,8 +1003,8 @@ begin
         {**********************************************************************}
         { 다수건의 현금영수증 상태 및 요약 정보를 확인합니다. (1회 호출 시 최대 1,000건 확인 가능)
         { - 리턴값 'TCashbillInfo'의 변수 'stateCode'를 통해 현금영수증의 상태코드를 확인합니다.
-        { - 현금영수증 상태코드 [https://docs.popbill.com/cashbill/stateCode?lang=delphi]     
-        { - https://docs.popbill.com/cashbill/delphi/api#GetInfo
+        { - 현금영수증 상태코드 [https://developers.popbill.com/reference/cashbill/delphi/response-code#state-code]     
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/info#GetInfo
         {**********************************************************************}
 
         // 현금영수증 문서번호 배열 (최대 1000건)
@@ -1067,7 +1067,7 @@ var
 begin
         {**********************************************************************}
         { 사용하고자 하는 아이디의 중복여부를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#CheckID
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/member#CheckID
         {**********************************************************************}
 
         try
@@ -1095,7 +1095,7 @@ var
 begin
         {***************************************************************}
         { 연동회원 사업자번호에 담당자(팝빌 로그인 계정)를 추가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#RegistContact
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/member#RegistContact
         {***************************************************************}
 
         // [필수] 담당자 아이디 (6자 이상 50자 미만)
@@ -1141,7 +1141,7 @@ var
 begin
         {**********************************************************************}
         { 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 정보를 수정합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#UpdateContact
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/member#UpdateContact
         {**********************************************************************}
 
         contactInfo := TContactInfo.Create;
@@ -1187,7 +1187,6 @@ begin
         {**********************************************************************}
         { 국세청 전송 이전 "발행완료" 상태의 현금영수증을 "발행취소"하고 국세청 전송 대상에서 제외합니다.
         { - Delete(삭제)함수를 호출하여 "발행취소" 상태의 현금영수증을 삭제하면, 문서번호 재사용이 가능합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#CancelIssue
         {**********************************************************************}
 
         // 메모
@@ -1219,7 +1218,7 @@ begin
         { 삭제 가능한 상태의 현금영수증을 삭제합니다.
         { - 삭제 가능한 상태: "전송실패"
         { - 현금영수증을 삭제하면 사용된 문서번호(mgtKey)를 재사용할 수 있습니다.                              
-        { - https://docs.popbill.com/cashbill/delphi/api#Delete
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/issue#Delete
         {**********************************************************************}
         try
                 response := cashbillService.Delete(txtCorpNum.text, txtMgtKey.Text);
@@ -1248,8 +1247,8 @@ var
 begin
         {**********************************************************************}
         { 작성된 현금영수증 데이터를 팝빌에 저장과 동시에 발행하여 "발행완료" 상태로 처리합니다.
-        { - 현금영수증 국세청 전송 정책 [https://docs.popbill.com/cashbill/ntsSendPolicy?lang=delphi]
-        { - https://docs.popbill.com/cashbill/delphi/api#RegistIssue
+        { - 현금영수증 국세청 전송 정책 [https://developers.popbill.com/guide/cashbill/delphi/introduction/policy-of-send-to-nts]
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/issue#RegistIssue
         {**********************************************************************}
 
         cashbill := TCashbill.Create;
@@ -1372,7 +1371,7 @@ var
 begin
         {**********************************************************************}
         { 연동회원의 회사정보를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetCorpInfo
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/member#GetCorpInfo
         {**********************************************************************}
 
         try
@@ -1407,7 +1406,7 @@ var
 begin
         {**********************************************************************}
         { 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 목록을 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#ListContact
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/member#ListContact
         {**********************************************************************}
 
         try
@@ -1450,7 +1449,7 @@ var
 begin
         {**********************************************************************}
         { 사업자번호를 조회하여 연동회원 가입여부를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#CheckIsMember     
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/member#CheckIsMember
         {**********************************************************************}
         
         try
@@ -1477,7 +1476,7 @@ var
 begin
         {**********************************************************************}
         { 현금영수증 발행시 과금되는 포인트 단가를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetUnitCost
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/point#GetUnitCost
         {**********************************************************************}
 
         try
@@ -1509,7 +1508,7 @@ var
 begin
         {**********************************************************************}
         { 검색조건에 해당하는 현금영수증을 조회합니다 (조회기간 단위 : 최대 6개월).
-        { - https://docs.popbill.com/cashbill/delphi/api#Search
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/info#Search
         {**********************************************************************}
 
         // [필수] 일자유형 { R: 등록일자, T:거래일자, I:발행일자 }
@@ -1632,7 +1631,7 @@ var
 begin
         {**********************************************************************}
         { 팝빌 현금영수증 API 서비스 과금정보를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetChargeInfo
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/point#GetChargeInfo
         {**********************************************************************}
 
         try
@@ -1665,8 +1664,8 @@ var
 begin
         {**********************************************************************}
         { 취소 현금영수증 데이터를 팝빌에 저장과 동시에 발행하여 "발행완료" 상태로 처리합니다.
-        { - 현금영수증 국세청 전송 정책 [https://docs.popbill.com/cashbill/ntsSendPolicy?lang=delphi]
-        { - https://docs.popbill.com/cashbill/delphi/api#RevokeRegistIssue
+        { - 현금영수증 국세청 전송 정책 [https://developers.popbill.com/guide/cashbill/delphi/introduction/policy-of-send-to-nts]
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/issue#RevokeRegistIssue
         {**********************************************************************}
 
         // [필수] 문서 문서번호 1~24자리, 영문, 숫자, '-', '_' 조합하여 구성
@@ -1716,7 +1715,7 @@ begin
         {**********************************************************************}
         { 파트너 포인트 충전을 위한 페이지의 팝업 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetPartnerURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/point#GetPartnerURL
         {**********************************************************************}
         
         try
@@ -1748,8 +1747,8 @@ begin
         {**********************************************************************}
         { 작성된 (부분)취소 현금영수증 데이터를 팝빌에 저장과 동시에 발행하여 "발행완료" 상태로 처리합니다.
         { - 취소 현금영수증의 금액은 원본 금액을 넘을 수 없습니다.
-        { - 현금영수증 국세청 전송 정책 [https://docs.popbill.com/cashbill/ntsSendPolicy?lang=delphi]
-        { - https://docs.popbill.com/cashbill/delphi/api#RevokeRegistIssue
+        { - 현금영수증 국세청 전송 정책 [https://developers.popbill.com/guide/cashbill/delphi/introduction/policy-of-send-to-nts]
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/issue#RevokeRegistIssue
         {**********************************************************************}
 
         // [필수] 문서번호 1~24자리, 영문, 숫자, '-', '_' 조합하여 구성
@@ -1824,7 +1823,7 @@ var
 begin
         {**********************************************************************}
         { 현금영수증 관련 메일 항목에 대한 발송설정을 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#ListEmailConfig
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/etc#ListEmailConfig
         {**********************************************************************}
 
         try
@@ -1865,7 +1864,7 @@ var
 begin
         {**********************************************************************}
         { 현금영수증 관련 메일 항목에 대한 발송설정을 수정합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#UpdateEmailConfig
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/etc#UpdateEmailConfig
         {
         { 메일전송유형
         {  CSH_ISSUE : 고객에게 현금영수증이 발행 되었음을 알려주는 메일
@@ -1903,7 +1902,7 @@ begin
         {**********************************************************************}
         { 현금영수증 PDF 파일을 다운 받을 수 있는 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetPDFURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/view#GetPDFURL
         {**********************************************************************}
 
         try
@@ -1933,7 +1932,7 @@ var
 begin
         {**********************************************************************}
         { 팝빌 사이트를 통해 발행하여 문서번호가 부여되지 않은 현금영수증에 문서번호를 할당합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#AssignMgtKey
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/etc#AssignMgtKey
         {**********************************************************************}
 
         // 현금영수증 아이템키 (Search) API의 반환항목중 ItemKey 참조
@@ -1970,7 +1969,7 @@ begin
         {**********************************************************************}
         { 현금영수증 1건의 상세 정보 페이지(사이트 상단, 좌측 메뉴 및 버튼 제외)의 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetViewURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/view#GetViewURL
         {**********************************************************************}
 
         try
@@ -2000,7 +1999,7 @@ begin
         {**********************************************************************}
         { 연동회원 포인트 결제내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetPaymentURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/point#GetPaymentURL
         {**********************************************************************}
 
         try
@@ -2029,7 +2028,7 @@ begin
         {**********************************************************************}
         { 연동회원 포인트 사용내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
         { - 반환되는 URL은 보안 정책상 30초 동안 유효하며, 시간을 초과한 후에는 해당 URL을 통한 페이지 접근이 불가합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetUseHistoryURL
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/point#GetUseHistoryURL
         {**********************************************************************}
 
         try
@@ -2059,7 +2058,7 @@ var
 begin
         {**********************************************************************}
         { 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 정보를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetContactInfo
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/member#GetContactInfo
         {**********************************************************************}
 
         contactID := 'testkorea';
@@ -2100,7 +2099,7 @@ var
 begin
         {**********************************************************************}
         { 최대 100건의 현금영수증 발행을 한번의 요청으로 접수합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#BulkSubmit
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/issue#BulkSubmit
         {**********************************************************************}
         SetLength(CashbillList, 10);
 
@@ -2208,7 +2207,7 @@ var
 begin
         {**********************************************************************}
         { 접수시 기재한 SubmitID를 사용하여 현금영수증 접수결과를 확인합니다.
-        { - https://docs.popbill.com/cashbill/delphi/api#GetBulkResult
+        { - https://developers.popbill.com/reference/cashbill/delphi/api/issue#GetBulkResult
         {**********************************************************************}
         try
             bulkCashbillResult := cashbillService.GetBulkResult(txtCorpNum.text, txtSubmitID.text);
